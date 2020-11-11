@@ -1,0 +1,16 @@
+.category {
+    width: 240px;
+    height: auto;
+    margin: 0 30px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.category-summary {
+    border-radius: 5px !important;
+    background-color: #62AFF7 !important;
+    color: rgb(245, 245, 245) !important;
+}
+
+.category>.list-item {
+    width: 100%;
+}

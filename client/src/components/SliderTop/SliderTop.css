@@ -1,0 +1,8 @@
+.slider {
+    width: 100%;
+}
+
+.slide-inner {
+    display: grid;
+    place-items: center;
+}
