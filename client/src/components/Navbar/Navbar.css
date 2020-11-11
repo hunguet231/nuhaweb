@@ -8,9 +8,9 @@
 .navbar {
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 15px;
 }
 
 .navbar-top {
@@ -31,7 +31,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 3px;
 }
 
 .navbar-bottom__info {

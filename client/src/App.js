@@ -9,9 +9,13 @@ function App() {
       <div className="header">
         <Navbar />
       </div>
-      <div className="body">
+      <div className="slider">
         <SliderTop />
-        <ProductsList title="Sản phẩm mới nhất" />
+      </div>
+      <div className="wrapper">
+        <div className="showcase">
+          <ProductsList title="Tất cả sản phẩm" />
+        </div>
       </div>
     </div>
   );

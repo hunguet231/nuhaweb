@@ -7,7 +7,7 @@ function Product({
     <>
       <div className="product-item">
         <img src={photo_url} />
-        <h1>{title}</h1>
+        <h4>{title}</h4>
         <p>{prices}</p>
       </div>
     </>

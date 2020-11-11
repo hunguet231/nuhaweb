@@ -5,10 +5,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.body {
+.wrapper {
+    background-color: rgb(244, 244, 244);
+}
+
+.showcase {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 15px;
 }

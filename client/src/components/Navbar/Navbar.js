@@ -1,8 +1,8 @@
 import React from "react";
 import { IconButton, Button, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import SmsRoundedIcon from "@material-ui/icons/SmsRounded";
-import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
+import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
+import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
 import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
 import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     border: 0,
     color: "white",
     height: 35,
-    padding: "0 30px",
+    padding: "0 22px",
     boxShadow: "0 1px 2px #7CC0FF",
   },
   label: {
@@ -35,13 +35,13 @@ function Navbar() {
           <div className="navbar-top__option">
             <div className="option">
               <Button classes={{ label: classes.label }}>
-                <SmsRoundedIcon />
+                <SmsOutlinedIcon />
                 <Typography variant="caption"> Chat</Typography>
               </Button>
             </div>
             <div className="option">
               <Button classes={{ label: classes.label }}>
-                <NotificationsRoundedIcon />
+                <NotificationsNoneRoundedIcon />
                 <Typography variant="caption"> Thông báo</Typography>
               </Button>
             </div>
