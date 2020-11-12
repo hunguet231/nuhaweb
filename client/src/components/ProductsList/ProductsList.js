@@ -19,9 +19,9 @@ function ProductsList({ title }) {
     <div className="products-list">
       <h3>{title}</h3>
       <div className="list-items">
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {products.map((product) => (
-            <Grid key={product._id} item xs={6} md={4} lg={2}>
+            <Grid key={product._id} item xs={6} sm={4} lg={3}>
               <Product product={product} />
             </Grid>
           ))}

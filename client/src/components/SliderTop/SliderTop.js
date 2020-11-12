@@ -13,14 +13,14 @@ function SliderTop() {
       button: "More",
     },
     {
-      image: "https://i.imgur.com/DCdBXcq.jpg",
-      title: "First item",
+      image: "https://i.imgur.com/DvmN8Hx.jpg",
+      title: "Second item",
       description: "Lorem ipsum",
       button: "More",
     },
     {
-      image: "https://i.imgur.com/DvmN8Hx.jpg",
-      title: "First item",
+      image: "https://i.imgur.com/ZXBtVw7.jpg",
+      title: "Third item",
       description: "Lorem ipsum",
       button: "More",
     },

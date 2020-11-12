@@ -3,7 +3,9 @@
     flex-direction: column;
     width: 100%;
     max-width: 1000px;
+    height: 280px;
     margin: 0 auto;
+    padding-bottom: 10px;
 }
 
 .slide-inner {

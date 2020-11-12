@@ -1,0 +1,29 @@
+.product-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.product-item:hover {
+    box-shadow: rgba(100, 100, 111, 0.28) 0px 7px 29px 0px;
+}
+
+.product-item-header:hover img {
+    transform: scale(1.2);
+}
+
+.product-item-header .inner {
+    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.product-item-header img {
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.product-item-body {
+    padding: 5px 8px;
+}

@@ -55,8 +55,9 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  avg_ratings: {
+  num_reviews: {
     type: Number,
+    default: 0,
   },
   detail: {
     type: String,

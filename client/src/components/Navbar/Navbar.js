@@ -5,13 +5,14 @@ import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
 import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
 import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
+import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Navbar.css";
 import logo from "./logo.PNG";
 
 const useStyles = makeStyles({
   root: {
-    background: "linear-gradient( 135deg, #72EDF2 10%, #5151E5 100%)",
+    background: "#1247a0",
     border: 0,
     color: "white",
     height: 35,
@@ -29,27 +30,22 @@ function Navbar() {
     <div className="navbar-wrapper">
       <div className="navbar">
         <div className="navbar-top">
-          <a href="#">
+          {/* <a href="#">
             <img src={logo} alt="Logo" className="logo" />
-          </a>
+          </a> */}
+          <h1 style={{ color: "white" }}>NUHA</h1>
           <div className="navbar-top__option">
             <div className="option">
-              <Button classes={{ label: classes.label }}>
-                <SmsOutlinedIcon />
-                <Typography variant="caption"> Chat</Typography>
-              </Button>
+              <SmsOutlinedIcon />
+              <Typography variant="caption"> Chat</Typography>
             </div>
             <div className="option">
-              <Button classes={{ label: classes.label }}>
-                <NotificationsNoneRoundedIcon />
-                <Typography variant="caption"> Thông báo</Typography>
-              </Button>
+              <NotificationsNoneRoundedIcon />
+              <Typography variant="caption"> Thông báo</Typography>
             </div>
             <div className="option">
-              <Button classes={{ label: classes.label }}>
-                <HelpOutlineRoundedIcon />
-                <Typography variant="caption"> Trợ giúp</Typography>
-              </Button>
+              <HelpOutlineRoundedIcon />
+              <Typography variant="caption"> Trợ giúp</Typography>
             </div>
           </div>
         </div>
@@ -62,16 +58,17 @@ function Navbar() {
           </div>
 
           <div className="navbar-bottom__info">
-            <Button
+            {/* <Button
               variant="contained"
               classes={{ root: classes.root, label: classes.label }}
             >
               <PostAddRoundedIcon />
               Bắt đầu bán
-            </Button>
-            <Button classes={{ label: classes.label }}>
-              <Typography variant="caption"> Đăng nhập / Đăng ký</Typography>
-            </Button>
+            </Button> */}
+            <div className="option">
+              <PersonAddOutlinedIcon />
+              <Typography variant="caption"> Đăng nhập</Typography>
+            </div>
           </div>
         </div>
       </div>
