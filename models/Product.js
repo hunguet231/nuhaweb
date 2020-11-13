@@ -44,6 +44,7 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: [true, "Price is required"],
   },
+  reviews: [reviewSchema],
   created_at: {
     type: Date,
     default: Date.now,

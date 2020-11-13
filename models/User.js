@@ -4,6 +4,19 @@ const config = require("config");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
+
 const UserSchema = new mongoose.Schema({
   first_name: {
     type: String,
@@ -69,6 +82,7 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  reviews: [reviewSchema],
   website: {
     type: String,
   },
