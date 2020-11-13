@@ -8,13 +8,19 @@ function SkeletonProductDetail({ theme }) {
   return (
     <div className={`skeleton-wrapper ${themeClass}`}>
       <Grid container spacing={3}>
-        <Grid item align="center" xs={12} sm={6}>
-          <SkeletonElement type="thumbnail" />
+        <Grid item xs={12} sm={6}>
+          <Grid container align="center">
+            <Grid item xs={12}>
+              <SkeletonElement type="thumbnail" />
+            </Grid>
+          </Grid>
+
+          <SkeletonElement type="title" />
+          <SkeletonElement type="title" />
+          <SkeletonElement type="title" />
+          <SkeletonElement type="title" />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <SkeletonElement type="title" />
-          <SkeletonElement type="title" />
-          <SkeletonElement type="title" />
           <SkeletonElement type="title" />
           <SkeletonElement type="textArea" />
         </Grid>

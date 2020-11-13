@@ -13,10 +13,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
+  shop_name: {
     type: String,
     unique: true,
-    required: [true, "Please add a username"],
+    required: true,
   },
   email: {
     type: String,
@@ -43,17 +43,21 @@ const UserSchema = new mongoose.Schema({
   profile: {
     type: String,
   },
-  avatar: {
+  avatar_user: {
     type: String,
     default: "default_avt.png",
   },
-  company_name: {
+  avatar_shop: {
     type: String,
+    default: "default_avt.png",
   },
   phone_number: {
     type: String,
   },
-  create_at: {
+  address: {
+    type: String,
+  },
+  created_at: {
     type: Date,
     default: Date.now,
   },
@@ -65,15 +69,8 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  address: {
-    type: String,
-  },
   website: {
     type: String,
-  },
-  cart: {
-    type: Array,
-    default: [],
   },
   wishlist: {
     type: Array,

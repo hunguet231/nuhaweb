@@ -1,6 +1,19 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
+
 const ProductSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -21,7 +34,7 @@ const ProductSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Man", "Woman"],
+    required: true,
   },
   quantity: {
     type: Number,
@@ -30,14 +43,6 @@ const ProductSchema = new mongoose.Schema({
   prices: {
     type: String,
     required: [true, "Price is required"],
-  },
-  prices_discount: {
-    type: Number,
-    default: 0,
-  },
-  is_paid: {
-    type: Boolean,
-    default: false,
   },
   created_at: {
     type: Date,
@@ -51,16 +56,13 @@ const ProductSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  num_ratings: {
+  avg_stars: {
     type: Number,
     default: 0,
   },
   num_reviews: {
     type: Number,
     default: 0,
-  },
-  detail: {
-    type: String,
   },
 });
 

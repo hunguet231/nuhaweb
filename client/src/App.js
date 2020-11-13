@@ -6,6 +6,7 @@ import "./App.css";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
+import Review from "./components/Review/Review";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <div className="app">
         <div className="header">
           <Navbar />
-          <Breadcrumbs />
+          {/* <Breadcrumbs /> */}
         </div>
         <Route
           path="/"
@@ -32,7 +33,8 @@ function App() {
           exact
         />
 
-        <Route path="/products/:slug" component={ProductDetail} />
+        <Route path="/products/:slug" component={ProductDetail} exact />
+        <Route path="/products/:slug/reviews" component={Review} exact />
       </div>
     </Router>
   );

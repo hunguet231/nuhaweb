@@ -1,9 +1,45 @@
 .product-detail {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0 8px;
 }
 
 .save-fav .MuiSvgIcon-root {
     margin-right: 40px;
     cursor: pointer;
+    color: palevioletred;
+}
+
+.phone,
+.mess {
+    display: flex;
+    align-items: center;
+}
+
+.phone .MuiSvgIcon-root {
+    color: #f1c40f;
+    margin-right: 5px;
+}
+
+.mess .MuiSvgIcon-root {
+    color: #27ae60;
+    margin-right: 5px;
+}
+
+.share .MuiSvgIcon-root {
+    cursor: pointer;
+}
+
+.fb-icon {
+    color: #fff;
+    margin-right: 20px;
+    background-color: #3B5998;
+}
+
+.link-icon {
+    color: rgb(245, 245, 245);
+    background-color: slategrey;
+    border-radius: 50%;
 }
