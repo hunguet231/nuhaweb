@@ -71,6 +71,10 @@
     box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.05);
 }
 
+.dark .shimmer {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 @keyframes loading {
     0% {
         transform: translateX(0);

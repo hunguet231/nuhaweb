@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import Rating from "../Rating/Rating";
 import "./Product.css";
 
@@ -41,6 +43,7 @@ function Product({
             </Link>
           </Typography>
           <h4 style={{ color: "#078DDC" }}>{prices * 1000} VNĐ</h4>
+
           <Rating value={3.5} text={`(12 đánh giá)`} id={_id} />
         </div>
       </div>

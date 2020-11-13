@@ -1,0 +1,11 @@
+.breadcrumbs {
+    width: 100%;
+    max-width: 1000px;
+    margin: 3px auto;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.MuiLink-root {
+    color: dodgerblue;
+}

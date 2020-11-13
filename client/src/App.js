@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import ProductsList from "./components/ProductsList/ProductsList";
 import SliderTop from "./components/SliderTop/SliderTop";
 import "./App.css";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import ShowList from "./components/ShowList/ShowList";
+import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <div className="app">
         <div className="header">
           <Navbar />
+          <Breadcrumbs />
         </div>
         <Route
           path="/"
@@ -22,7 +24,7 @@ function App() {
               </div>
               <div className="wrapper">
                 <div className="showcase">
-                  <ProductsList title="Tất cả sản phẩm" />
+                  <ShowList title="Tất cả sản phẩm" />
                 </div>
               </div>
             </>
