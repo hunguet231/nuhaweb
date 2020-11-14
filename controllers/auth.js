@@ -7,16 +7,15 @@ const config = require("config");
 // @route   POST /api/v1/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req, res, next) => {
-  const { last_name, first_name, username, email, password, role } = req.body;
+  const { lastName, firstName, shopName, email, password } = req.body;
 
   // create user
   const user = await User.create({
-    last_name,
-    first_name,
-    username,
+    lastName,
+    firstName,
+    shopName,
     email,
     password,
-    role,
   });
 
   sendTokenResponse(user, 200, res);
@@ -26,17 +25,15 @@ exports.register = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   // validate username and password
-  if (!username || !password) {
-    return next(
-      new ErrorResponse("Please provide an username and password", 400)
-    );
+  if (!email || !password) {
+    return next(new ErrorResponse("Please provide an email and password", 400));
   }
 
   // check for user
-  const user = await User.findOne({ username }).select("+password");
+  const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
     return next(new ErrorResponse("Invalid credentials", 401));

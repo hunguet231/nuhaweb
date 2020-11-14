@@ -18,7 +18,22 @@ const { protect, authorize } = require("../middlewares/auth");
 router
   .route("/")
   .get(
-    advancedResults(Product, { path: "created_by", select: "first_name" }),
+    advancedResults(Product, {
+      path: "user",
+      select: [
+        "firstName",
+        "lastName",
+        "phoneNumber",
+        "reviews",
+        "email",
+        "address",
+        "shopName",
+        "numReviews",
+        "avgStars",
+        "avatarShop",
+        "avatarUser",
+      ],
+    }),
     getProducts
   )
   .post(protect, authorize("publisher", "admin"), createProduct);

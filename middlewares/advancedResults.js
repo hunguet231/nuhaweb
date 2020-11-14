@@ -17,7 +17,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
 
   // finding resource
   if (req.params.userId) {
-    query = model.find({ created_by: req.params.userId });
+    query = model.find({ user: req.params.userId });
   } else {
     query = model.find(JSON.parse(queryStr));
   }
@@ -33,7 +33,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     const sortBy = req.query.sort.split(",").join(" ");
     query = query.sort(sortBy);
   } else {
-    query = query.sort("-updated_at");
+    query = query.sort("-updatedAt");
   }
 
   // pagination

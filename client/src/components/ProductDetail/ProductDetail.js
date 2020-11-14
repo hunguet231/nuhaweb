@@ -35,10 +35,10 @@ const ProductDetail = ({ match }) => {
     photo,
     title,
     prices,
-    num_reviews,
-    phone_num,
+    numReviews,
+    numRatings,
     description,
-    created_by,
+    user,
     slug,
     _id,
   } = product;
@@ -57,7 +57,7 @@ const ProductDetail = ({ match }) => {
 
   return (
     <div className="product-detail">
-      {!loading && (
+      {!loading && user && (
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Grid container align="center">
@@ -67,8 +67,12 @@ const ProductDetail = ({ match }) => {
             </Grid>
 
             <h3>{title}</h3>
-            <Rating value={num_reviews} text={`(12 đánh giá)`} id={_id} />
-            <h4 style={{ color: "#078DDC" }}>{prices * 1000} VNĐ</h4>
+            <Rating
+              value={numRatings}
+              text={`(${numReviews} đánh giá)`}
+              id={_id}
+            />
+            <h4 style={{ color: "#078DDC" }}>{prices} VNĐ</h4>
             <br />
             <div className="save-fav">
               {/* Favorite */}
@@ -84,11 +88,7 @@ const ProductDetail = ({ match }) => {
             <br />
             <Typography color="textSecondary" variant="subtitle2">
               Nhà cung cấp:{" "}
-              {created_by && (
-                <Link to={`/users/${created_by._id}`}>
-                  {created_by.first_name}
-                </Link>
-              )}
+              {user && <Link to={`/users/${user._id}`}>{user.firstName}</Link>}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -105,12 +105,12 @@ const ProductDetail = ({ match }) => {
               <div className="contact">
                 <div className="phone">
                   <PhoneInTalkIcon />
-                  <a href={`tel:${phone_num}`}>{phone_num}</a>
+                  <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
                   <span>(Bấm vào số để gọi)</span>
                 </div>
                 <div className="mess">
                   <TelegramIcon />
-                  <a href={`sms://${phone_num}?body=`}>Nhắn tin ngay</a>
+                  <a href={`sms://${user.phoneNumber}?body=`}>Nhắn tin ngay</a>
                 </div>
               </div>
             </Typography>

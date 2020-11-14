@@ -9,63 +9,60 @@ const reviewSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const ProductSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, "Please add a name"],
-    trim: true,
-    maxlength: [200, "Name cannot be more than 200 characters"],
+const ProductSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Please add a name"],
+      trim: true,
+      maxlength: [200, "Name cannot be more than 200 characters"],
+    },
+    slug: {
+      type: String,
+    },
+    photo: {
+      type: String,
+      default: "https://loremflickr.com/200/200/cat",
+    },
+    description: {
+      type: String,
+      required: [true, "Please add a description"],
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      default: 0,
+    },
+    prices: {
+      type: String,
+      required: [true, "Price is required"],
+    },
+    reviews: [reviewSchema],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    avgStars: {
+      type: Number,
+      default: 0,
+    },
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
   },
-  slug: {
-    type: String,
-  },
-  photo: {
-    type: String,
-    default: "https://loremflickr.com/200/200/cat",
-  },
-  description: {
-    type: String,
-    required: [true, "Please add a description"],
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    default: 0,
-  },
-  prices: {
-    type: String,
-    required: [true, "Price is required"],
-  },
-  reviews: [reviewSchema],
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  updated_at: {
-    type: Date,
-    default: Date.now,
-  },
-  created_by: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  avg_stars: {
-    type: Number,
-    default: 0,
-  },
-  num_reviews: {
-    type: Number,
-    default: 0,
-  },
-});
+  { timestamps: true }
+);
 
 // create product slug from the title
 ProductSchema.pre("save", function (next) {

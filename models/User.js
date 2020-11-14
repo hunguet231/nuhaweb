@@ -17,80 +17,84 @@ const reviewSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const UserSchema = new mongoose.Schema({
-  first_name: {
-    type: String,
-    required: true,
+const UserSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    shopName: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      match: [
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "Please add a valid email",
+      ],
+      required: true,
+    },
+    role: {
+      type: String,
+      default: "publisher",
+    },
+    password: {
+      type: String,
+      required: [true, "Please add a password"],
+      minlength: 6,
+      select: false,
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
+    profile: {
+      type: String,
+    },
+    avatarUser: {
+      type: String,
+      default: "default_avt.png",
+    },
+    avatarShop: {
+      type: String,
+      default: "default_avt.png",
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    avgStars: {
+      type: Number,
+      default: 0,
+    },
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
+    reviews: [reviewSchema],
+    website: {
+      type: String,
+    },
+    wishlist: {
+      type: Array,
+      default: [],
+    },
+    saveList: {
+      type: Array,
+      default: [],
+    },
   },
-  last_name: {
-    type: String,
-    required: true,
-  },
-  shop_name: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    match: [
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please add a valid email",
-    ],
-    required: true,
-  },
-  role: {
-    type: String,
-    enum: ["customer", "wholesaler"],
-    default: "customer",
-  },
-  password: {
-    type: String,
-    required: [true, "Please add a password"],
-    minlength: 6,
-    select: false,
-  },
-  resetPasswordToken: String,
-  resetPasswordExpire: Date,
-  profile: {
-    type: String,
-  },
-  avatar_user: {
-    type: String,
-    default: "default_avt.png",
-  },
-  avatar_shop: {
-    type: String,
-    default: "default_avt.png",
-  },
-  phone_number: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  avg_stars: {
-    type: Number,
-    default: 0,
-  },
-  num_reviews: {
-    type: Number,
-    default: 0,
-  },
-  reviews: [reviewSchema],
-  website: {
-    type: String,
-  },
-  wishlist: {
-    type: Array,
-    default: [],
-  },
-});
+  { timestamps: true }
+);
 
 // Encrypt password using bcrypt
 UserSchema.pre("save", async function (next) {

@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import Rating from "../Rating/Rating";
 import "./Product.css";
 
@@ -12,12 +10,12 @@ function Product({
     photo,
     title,
     prices,
-    created_by,
+    user,
     quantity,
-    num_ratings,
-    num_reviews,
+    numRatings,
+    numReviews,
     slug,
-    updated_at,
+    updatedAt,
   },
 }) {
   return (
@@ -37,14 +35,15 @@ function Product({
 
           <Typography variant="subtitle2" color="textSecondary">
             Đăng bởi:
-            <Link to={`/users/${created_by._id}`}>
-              {" "}
-              {created_by.first_name}
-            </Link>
+            <Link to={`/users/${user._id}`}> {user.firstName}</Link>
           </Typography>
-          <h4 style={{ color: "#078DDC" }}>{prices * 1000} VNĐ</h4>
+          <h4 style={{ color: "#078DDC" }}>{prices} VNĐ</h4>
 
-          <Rating value={3.5} text={`(12 đánh giá)`} id={_id} />
+          <Rating
+            value={numRatings}
+            text={`(${numReviews} đánh giá)`}
+            id={_id}
+          />
         </div>
       </div>
     </>

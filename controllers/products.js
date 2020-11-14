@@ -17,8 +17,20 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 // @access  Public
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const product = await Product.findById(req.params.id).populate({
-    path: "created_by",
-    select: "first_name",
+    path: "user",
+    select: [
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "reviews",
+      "email",
+      "address",
+      "shopName",
+      "numReviews",
+      "avgStars",
+      "avatarShop",
+      "avatarUser",
+    ],
   });
 
   if (!product) {
@@ -38,10 +50,10 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.createProduct = asyncHandler(async (req, res, next) => {
   // Add user to req.body
-  req.body.created_by = req.user.id;
+  req.body.user = req.user.id;
 
   // Check for published product
-  const publishedProduct = await Product.findOne({ created_by: req.user.id });
+  const publishedProduct = await Product.findOne({ user: req.user.id });
 
   if (publishedProduct && req.user.role !== "admin") {
     return next(
@@ -73,10 +85,7 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
   }
 
   // make sure user is product owner
-  if (
-    product.created_by.toString() !== req.user.id &&
-    req.user.role !== "admin"
-  ) {
+  if (product.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this product`,
@@ -110,10 +119,7 @@ exports.deleteProduct = asyncHandler(async (req, res, next) => {
   }
 
   // make sure user is product owner
-  if (
-    product.created_by.toString() !== req.user.id &&
-    req.user.role !== "admin"
-  ) {
+  if (product.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to delete this product`,
@@ -144,10 +150,7 @@ exports.productPhotoUpload = asyncHandler(async (req, res, next) => {
   }
 
   // make sure user is product owner
-  if (
-    product.created_by.toString() !== req.user.id &&
-    req.user.role !== "admin"
-  ) {
+  if (product.user.toString() !== req.user.id && req.user.role !== "admin") {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this product`,
@@ -193,5 +196,43 @@ exports.productPhotoUpload = asyncHandler(async (req, res, next) => {
       success: true,
       data: file.name,
     });
+  });
+});
+
+// @desc    Create new review
+// @route   POST /api/v1/products/:id/reviews
+// @access  Private
+exports.createProductReview = asyncHandler(async (req, res, next) => {
+  const { rating, comment } = req.body;
+
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(
+      new ErrorResponse(`Product not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  const review = {
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+    user: req.user._id,
+  };
+
+  product.reviews.push(review);
+
+  product.numReviews = product.reviews.length;
+
+  product.rating =
+    product.reviews.reduce((acc, item) => {
+      item.rating + acc;
+    }, 0) / product.reviews.length;
+
+  await product.save();
+
+  res.status(201).json({
+    success: true,
+    msg: "Review added",
   });
 });
