@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Rating from "../Rating/Rating";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Grid, Tooltip, Typography } from "@material-ui/core";
+import { Grid, Tooltip, Typography, TextField } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
@@ -13,6 +13,7 @@ import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import LinkIcon from "@material-ui/icons/Link";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
@@ -58,10 +59,11 @@ const ProductDetail = ({ match }) => {
   return (
     <div className="product-detail">
       {!loading && user && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+        <Grid container>
+          <Grid item xs={12} sm={8}>
             <Grid container align="center">
               <Grid item xs={12}>
+                <br />
                 <img src={photo} />
               </Grid>
             </Grid>
@@ -88,16 +90,17 @@ const ProductDetail = ({ match }) => {
             <br />
             <Typography color="textSecondary" variant="subtitle2">
               Nhà cung cấp:{" "}
-              {user && <Link to={`/users/${user._id}`}>{user.firstName}</Link>}
+              {user && <Link to={`/users/${user._id}`}>{user.shopName}</Link>}
             </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
             <Typography color="textSecondary" variant="subtitle2">
+              <br />
               Chi tiết sản phẩm:
             </Typography>
             <Typography color="textPrimary" variant="inherit">
               {description}
             </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <Typography color="textSecondary" variant="subtitle2">
               <br />
               Thông tin liên hệ:
@@ -138,7 +141,14 @@ const ProductDetail = ({ match }) => {
             {/* Comment */}
             <Typography color="textSecondary" variant="subtitle2">
               <br />
-              Đánh giá về sản phẩm:
+              Để lại đánh giá của bạn:
+              <br />
+            </Typography>
+            <AccountCircle />
+            <TextField fullWidth label={"Hung Nguyen"} />
+            <Typography color="textSecondary" variant="subtitle2">
+              <br />
+              Tất cả đánh giá:
               <Link to={`/products/${slug}/reviews`}> Xem tất cả</Link>
             </Typography>
           </Grid>

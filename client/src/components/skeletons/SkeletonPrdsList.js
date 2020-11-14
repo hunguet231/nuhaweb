@@ -1,6 +1,5 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import Shimmer from "./Shimmer";
 import SkeletonElement from "./SkeletonElement";
 
 function SkeletonPrdsList({ theme }) {
@@ -15,7 +14,6 @@ function SkeletonPrdsList({ theme }) {
           </Grid>
         ))}
       </Grid>
-      <Shimmer />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 import Review from "./components/Review/Review";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -33,8 +34,11 @@ function App() {
           exact
         />
 
-        <Route path="/products/:slug" component={ProductDetail} exact />
-        <Route path="/products/:slug/reviews" component={Review} exact />
+        <div className="wrapper">
+          <Route path="/products/:slug" component={ProductDetail} exact />
+          <Route path="/products/:slug/reviews" component={Review} exact />
+        </div>
+        <Footer />
       </div>
     </Router>
   );
