@@ -12,7 +12,7 @@ import SkeletonProductDetail from "../skeletons/SkeletonProductDetail";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import LinkIcon from "@material-ui/icons/Link";
+import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const ProductDetail = ({ match }) => {
@@ -132,7 +132,10 @@ const ProductDetail = ({ match }) => {
                 </a>
 
                 <Tooltip title="Sao chép liên kết">
-                  <LinkIcon className="link-icon" onClick={copyToClipboard} />
+                  <FileCopyOutlinedIcon
+                    className="link-icon"
+                    onClick={copyToClipboard}
+                  />
                 </Tooltip>
                 <p>{copySucess !== "" && copySucess}</p>
               </div>

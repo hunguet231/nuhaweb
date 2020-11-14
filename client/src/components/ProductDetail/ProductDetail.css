@@ -6,6 +6,10 @@
     background-color: #fff;
 }
 
+.product-detail h3 {
+    text-overflow: ellipsis;
+}
+
 .save-fav .MuiSvgIcon-root {
     margin-right: 40px;
     cursor: pointer;
@@ -36,10 +40,4 @@
     color: #fff;
     margin-right: 20px;
     background-color: #3B5998;
-}
-
-.link-icon {
-    color: rgb(245, 245, 245);
-    background-color: slategrey;
-    border-radius: 50%;
 }
