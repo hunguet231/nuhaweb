@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
 import Product from "../Product/Product";
 import "./ShowList.css";
 import SkeletonPrdsList from "../skeletons/SkeletonPrdsList";
+import { listProducts } from "../../actions/productActions";
 
 function ShowList({ title }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      const { data } = await axios.get("/api/v1/products");
+    dispatch(listProducts());
+  }, [dispatch]);
 
-      setProducts(data.data);
-      setLoading(false);
-    };
-    fetchProducts();
-  }, []);
   return (
     <div className="products-list">
       {!loading && (
