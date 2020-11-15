@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { Grid } from "@material-ui/core";
 import Product from "../Product/Product";
 import "./ShowList.css";

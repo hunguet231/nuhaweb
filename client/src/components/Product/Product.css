@@ -27,3 +27,26 @@
 .product-item-body {
     padding: 5px 8px;
 }
+
+.title {
+    margin-bottom: 6px;
+}
+
+.time,
+.author {
+    display: flex;
+    align-items: center;
+}
+
+.time .MuiSvgIcon-root,
+.author .MuiSvgIcon-root {
+    margin-right: 5px;
+    margin-bottom: -4px;
+    font-size: large;
+    color: #4C83FF;
+}
+
+.prices {
+    margin-top: 6px;
+    color: #e74c3c;
+}

@@ -142,18 +142,18 @@ const ProductDetail = ({ match }) => {
             </Typography>
 
             {/* Comment */}
-            <Typography color="textSecondary" variant="subtitle2">
+            {/* <Typography color="textSecondary" variant="subtitle2">
               <br />
               Để lại đánh giá của bạn:
               <br />
             </Typography>
             <AccountCircle />
-            <TextField fullWidth label={"Hung Nguyen"} />
-            <Typography color="textSecondary" variant="subtitle2">
+            <TextField fullWidth label={"Hung Nguyen"} /> */}
+            {/* <Typography color="textSecondary" variant="subtitle2">
               <br />
               Tất cả đánh giá:
               <Link to={`/products/${slug}/reviews`}> Xem tất cả</Link>
-            </Typography>
+            </Typography> */}
           </Grid>
         </Grid>
       )}

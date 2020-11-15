@@ -59,11 +59,11 @@ function Rating({ value, text, color, id }) {
         <span>{value}</span>
       </div>
       <div className="text">
-        <Link to={`/products/${id}/reviews`}>
-          <Typography variant="caption">
-            <span> {text && text}</span>
-          </Typography>
-        </Link>
+        {/* <Link to={`/products/${id}/reviews`}> */}
+        <Typography variant="caption">
+          <span> {text && text}</span>
+        </Typography>
+        {/* </Link> */}
       </div>
     </div>
   );

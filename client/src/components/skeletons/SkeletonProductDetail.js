@@ -22,9 +22,6 @@ function SkeletonProductDetail({ theme }) {
           <SkeletonElement type="title" />
           <SkeletonElement type="title" />
           <SkeletonElement type="title" />
-          <br />
-          <SkeletonElement type="title" />
-          <SkeletonElement type="textArea" />
         </Grid>
       </Grid>
     </div>

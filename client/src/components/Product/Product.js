@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import PortraitIcon from "@material-ui/icons/Portrait";
 import Rating from "../Rating/Rating";
 import "./Product.css";
 
@@ -18,6 +20,10 @@ function Product({
     updatedAt,
   },
 }) {
+  const { DateTime } = require("luxon");
+  const date = DateTime.local().setLocale("vi");
+  let dur = Date.now() - Date.parse(updatedAt);
+
   return (
     <>
       <div className="product-item">
@@ -30,20 +36,36 @@ function Product({
         </div>
         <div className="product-item-body">
           <Link to={`/products/${slug}`}>
-            <h4>{title}</h4>
+            <h4 className="title">{title}</h4>
           </Link>
+          <div className="author">
+            <Typography variant="subtitle2" color="textSecondary">
+              <PortraitIcon />
+            </Typography>
 
-          <Typography variant="subtitle2" color="textSecondary">
-            Đăng bởi:
-            <Link to={`/users/${user._id}`}> {user.firstName}</Link>
-          </Typography>
-          <h4 style={{ color: "#078DDC" }}>{prices} VNĐ</h4>
+            <Typography variant="subtitle2" color="textSecondary">
+              Đăng bởi:
+              <Link to={`/users/${user._id}`}> {user.firstName}</Link>
+            </Typography>
+          </div>
+          {/* Display time relative to a now */}
+          <div className="time">
+            <Typography variant="subtitle2" color="textSecondary">
+              <AccessTimeIcon />
+            </Typography>
+            <Typography variant="subtitle2" color="textSecondary">
+              {date.minus(dur).toRelative()}
+            </Typography>
+          </div>
+          <div className="prices">
+            <h4>{prices} VNĐ</h4>
+          </div>
 
-          <Rating
+          {/* <Rating
             value={numRatings}
             text={`(${numReviews} đánh giá)`}
             id={_id}
-          />
+          /> */}
         </div>
       </div>
     </>
