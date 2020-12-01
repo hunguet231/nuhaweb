@@ -1,33 +1,35 @@
 .navbar-wrapper {
-    padding-bottom: 10px;
-    box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
-    background-color: #1e90ff;
-    position: sticky;
+    padding-bottom: 14px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 5px 10px 0px;
+    background-color: #74b9ff;
+    position: fixed;
     top: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 .navbar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 8px;
+    position: relative;
 }
 
-.navbar-top {
+.navbar-left {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    flex: 2;
 }
 
-.navbar-top__option {
-    display: flex;
+.navbar-left h2 {
+    color: white;
 }
 
 .option {
     cursor: pointer;
-    margin-left: 42px;
     display: flex;
     align-items: center;
 }
@@ -36,23 +38,28 @@
     opacity: 0.6;
 }
 
-.option-login {
-    margin-left: 0;
-}
-
 .option>.MuiSvgIcon-root {
     margin-right: 3px;
+    margin-top: -2px;
 }
 
-.navbar-bottom {
+.navbar-right {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    flex: 1.2;
+    margin-left: 15px;
+}
+
+.navbar-right__top,
+.navbar-right__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3px;
 }
 
-.navbar-bottom__info {
-    display: flex;
+.navbar-right__bottom {
+    margin-top: 8px;
 }
 
 .logo {
@@ -64,9 +71,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 3px 5px;
-    width: 60%;
-    background-color: #F5F5F5;
-    border-radius: 999px;
+    margin-right: 5px;
+    background-color: #eeeeee;
+    border-radius: 6px;
+}
+
+.search-box:hover {
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 
 .search-box>input {
@@ -77,12 +88,142 @@
     background-color: transparent;
 }
 
+.search-box:hover {
+    background-color: #fff;
+}
+
 .search-box>input::-webkit-search-cancel-button {
     position: relative;
     font-size: 24px;
     background-color: #A09F9F;
 }
 
+.user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 ::placeholder {
-    color: #A09F9F;
+    color: rgb(124, 124, 124);
+}
+
+#nav-toggle {
+    position: absolute;
+    top: -100px
+}
+
+.icon-burger {
+    position: absolute;
+    right: 8px;
+    top: 6px;
+    display: none;
+    cursor: pointer;
+}
+
+.icon-burger .line {
+    width: 21px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    border-radius: 3px;
+    transition: all .3s ease-in-out;
+}
+
+
+/* Responsive Navbar*/
+
+@media (max-width: 810px) {
+    .navbar-left {
+        flex: 1
+    }
+    .navbar-right {
+        flex: 1
+    }
+}
+
+@media (max-width: 610px) {
+    .navbar-left {
+        flex: 0.85
+    }
+    .navbar-right {
+        flex: 1
+    }
+}
+
+@media (max-width: 510px) {
+    .icon-burger {
+        display: block;
+    }
+    .navbar-right :checked~.icon-burger .line:nth-child(1) {
+        transform: translateY(8px) rotate(225deg);
+    }
+    .navbar-right :checked~.icon-burger .line:nth-child(3) {
+        transform: translateY(-6px) rotate(-225deg);
+    }
+    .navbar-right :checked~.icon-burger .line:nth-child(2) {
+        opacity: 0;
+    }
+    .navbar-right__top {
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        right: 0;
+        top: 144px;
+        transform: translateX(600px);
+        bottom: 0;
+        overflow: hidden;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: auto;
+        transition: all 0.4s ease-in-out;
+    }
+    .user {
+        position: fixed;
+        justify-content: center;
+        z-index: 999;
+        left: 0;
+        right: 0;
+        top: 82px;
+        transform: translateX(600px);
+        bottom: 0;
+        overflow: hidden;
+        width: auto;
+        height: 64px;
+        transition: all 0.4s ease-in-out;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.322);
+    }
+    .option {
+        color: rgb(37, 37, 37);
+        margin-top: 20px;
+        padding-bottom: 20px;
+        width: 100%;
+        justify-content: center;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.322);
+    }
+    .option .MuiTypography-root {
+        font-size: 14px;
+    }
+    .navbar-right :checked~.navbar-right__top,
+    .navbar-right :checked~.navbar-right__bottom .user {
+        background-color: rgba(255, 255, 255, 0.95);
+        transform: translateX(0);
+    }
+    .navbar-right {
+        justify-content: flex-end;
+        flex: 0.65;
+        margin-left: 5px;
+    }
+    .navbar-left {
+        flex: 1;
+    }
+    .navbar-right__bottom {
+        justify-content: flex-end;
+    }
+     ::placeholder {
+        font-size: 12px;
+    }
+    .sell-btn p {
+        font-size: 13px;
+    }
 }

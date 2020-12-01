@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
+const short = require("short-uuid");
 
 const reviewSchema = mongoose.Schema(
   {
@@ -20,15 +21,13 @@ const ProductSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please add a name"],
-      trim: true,
-      maxlength: [200, "Name cannot be more than 200 characters"],
     },
     slug: {
       type: String,
     },
-    photo: {
-      type: String,
-      default: "https://loremflickr.com/200/200/cat",
+    photos: {
+      type: Array,
+      default: [],
     },
     description: {
       type: String,
@@ -60,13 +59,17 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    loves: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
 
 // create product slug from the title
 ProductSchema.pre("save", function (next) {
-  this.slug = slugify(this.title, { lower: true });
+  this.slug = slugify(this.title, { lower: true }) + "." + short.generate();
   next();
 });
 

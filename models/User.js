@@ -1,6 +1,5 @@
 const crypto = require("crypto");
 const mongoose = require("mongoose");
-const config = require("config");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -30,7 +29,6 @@ const UserSchema = new mongoose.Schema(
     shopName: {
       type: String,
       unique: true,
-      required: true,
     },
     email: {
       type: String,
@@ -45,10 +43,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "publisher",
     },
+    isSeller: {
+      type: Boolean,
+      default: false,
+    },
     password: {
       type: String,
-      required: [true, "Please add a password"],
-      minlength: 6,
+      required: true,
+      minlength: [6, "Mật khẩu phải ít nhất 6 ký tự"],
       select: false,
     },
     resetPasswordToken: String,
@@ -58,19 +60,24 @@ const UserSchema = new mongoose.Schema(
     },
     avatarUser: {
       type: String,
-      default: "default_avt.png",
     },
     avatarShop: {
       type: String,
-      default: "default_avt.png",
     },
     phoneNumber: {
       type: String,
-      required: true,
     },
     address: {
       type: String,
-      required: true,
+    },
+    city: {
+      type: String,
+    },
+    zalo: {
+      type: String,
+    },
+    facebook: {
+      type: String,
     },
     avgStars: {
       type: Number,
@@ -108,8 +115,8 @@ UserSchema.pre("save", async function (next) {
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, config.get("JWT_SECRET"), {
-    expiresIn: config.get("JWT_EXPIRE"),
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
   });
 };
 

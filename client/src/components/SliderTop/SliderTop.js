@@ -1,49 +1,37 @@
-import { Button } from "@material-ui/core";
 import React from "react";
-import Slider from "react-animated-slider";
-import "react-animated-slider/build/horizontal.css";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 import "./SliderTop.css";
 
 function SliderTop() {
-  const slides = [
+  const images = [
     {
-      image: "https://i.imgur.com/ZXBtVw7.jpg",
-      title: "First item",
-      description: "Lorem ipsum",
-      button: "More",
+      original: "/banner-1.PNG",
+      thumbnail: "/banner-1.PNG",
     },
     {
-      image: "https://i.imgur.com/DvmN8Hx.jpg",
-      title: "Second item",
-      description: "Lorem ipsum",
-      button: "More",
+      original: "/banner-2.PNG",
+      thumbnail: "/banner-2.PNG",
     },
     {
-      image: "https://i.imgur.com/ZXBtVw7.jpg",
-      title: "Third item",
-      description: "Lorem ipsum",
-      button: "More",
+      original: "/banner-1.PNG",
+      thumbnail: "/banner-1.PNG",
     },
   ];
-
   return (
-    <div className="slider">
-      <Slider autoplay={3000} infinite>
-        {slides.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              background: `url('${item.image}') no-repeat center center`,
-            }}
-          >
-            <div className="slide-inner">
-              <h1>{item.title}</h1>
-              <p>{item.description}</p>
-              <Button className="button">{item.button}</Button>
-            </div>
-          </div>
-        ))}
-      </Slider>
+    <div className="slider-top">
+      <ImageGallery
+        autoPlay
+        showPlayButton={false}
+        showFullscreenButton={false}
+        showThumbnails={false}
+        showBullets
+        swipingTransitionDuration={3000}
+        infinite
+        lazyLoad
+        showNav={false}
+        items={images}
+      />
     </div>
   );
 }

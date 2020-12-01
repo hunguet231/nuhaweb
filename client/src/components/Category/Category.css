@@ -1,0 +1,9 @@
+.category {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto 20px;
+    padding: 0 15px;
+    background-color: #fff;
+}

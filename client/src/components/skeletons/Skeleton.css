@@ -1,57 +1,16 @@
-.skeleton {
-    background: #ddd;
-    margin: 10px 0;
-    border-radius: 4px;
-    animation: loading 1.8s infinite;
+.row {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
 }
 
-.skeleton.text {
-    width: 100%;
-    height: 12px;
+.row .circle {
+    margin-top: -8px;
+    margin-right: 3px;
 }
 
-.skeleton.textArea {
-    width: 100%;
-    height: 300px;
-}
-
-.skeleton.title {
-    width: 20%;
-    height: 20px;
-    margin-bottom: 15px;
-}
-
-.skeleton.avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
-.skeleton.thumbnail {
-    width: 200px;
-    height: 200px;
-}
-
-.skeleton-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 8px;
-    background-color: #fff;
-}
-
-
-/* animation */
-
-@keyframes loading {
-    0% {
-        background-color: rgb(177, 177, 177);
-    }
-    50% {
-        background: #ddd;
-    }
-    100% {
-        background-color: rgb(177, 177, 177);
-    }
+.col {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }

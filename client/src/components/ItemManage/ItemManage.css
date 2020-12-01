@@ -1,0 +1,41 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.item .photo {
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.item .photo .inner {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(194, 194, 194);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.item .text h4 {
+    color: rgb(78, 78, 78);
+    font-weight: 500;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.item .text h4:hover {
+    text-decoration: underline;
+}

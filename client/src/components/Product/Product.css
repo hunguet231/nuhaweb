@@ -9,44 +9,90 @@
     box-shadow: rgba(100, 100, 111, 0.28) 0px 7px 29px 0px;
 }
 
-.product-item-header:hover img {
-    transform: scale(1.2);
-}
-
-.product-item-header .inner {
+.product-item-header {
+    width: 100%;
+    height: 200px;
     overflow: hidden;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.product-item-header img {
+.product-item-header .img {
     width: 100%;
-    transition: all 0.2s;
+    height: 100%;
+    background-color: rgb(194, 194, 194);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+}
+
+.product-item-header:hover .img {
+    transform: scale(1.2);
 }
 
 .product-item-body {
     padding: 5px 8px;
 }
 
-.title {
-    margin-bottom: 6px;
+.product-item-body .title {
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #474747;
+    text-shadow: .2px .2px .65px #474747;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 18px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-item-body .title:hover {
+    text-decoration: underline;
 }
 
 .time,
-.author {
+.author,
+.city {
     display: flex;
     align-items: center;
 }
 
+.author .name {
+    font-size: 15px;
+    color: rgb(61, 61, 61);
+}
+
 .time .MuiSvgIcon-root,
-.author .MuiSvgIcon-root {
+.author .MuiSvgIcon-root,
+.city .MuiSvgIcon-root {
     margin-right: 5px;
     margin-bottom: -4px;
     font-size: large;
-    color: #4C83FF;
+    /* color: #4C83FF; */
 }
 
 .prices {
-    margin-top: 6px;
     color: #e74c3c;
+    font-size: 18px;
+    text-shadow: .2px .1px .8px #e74c3c;
+}
+
+@media (max-width: 510px) {
+    .prices {
+        font-size: 14px;
+        text-shadow: .2px .1px .8px #e74c3c;
+    }
+    .product-item-body .title {
+        text-shadow: .2px .1px .9px #474747;
+        font-size: 12px;
+    }
+    .author .MuiTypography-root,
+    .city .MuiTypography-root {
+        font-size: 12px;
+    }
 }

@@ -1,35 +1,72 @@
 .product-detail {
     width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 15px;
+    margin: 20px auto;
+    padding: 25px 15px;
     background-color: #fff;
+    border-radius: 5px;
+}
+
+.product-detail .MuiTypography-subtitle2 {
+    font-size: 15px;
 }
 
 .product-detail h3 {
-    text-overflow: ellipsis;
+    font-weight: 500;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+
+.product-detail h4 {
+    font-size: 18px;
 }
 
 .save-fav .MuiSvgIcon-root {
-    margin-right: 40px;
+    margin-right: 20px;
     cursor: pointer;
     color: palevioletred;
 }
 
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .phone,
-.mess {
+.mess,
+.web,
+.zalo,
+.facebook {
     display: flex;
     align-items: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    margin-right: 9px;
+    margin-top: 9px;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .phone .MuiSvgIcon-root {
-    color: #f1c40f;
     margin-right: 5px;
 }
 
 .mess .MuiSvgIcon-root {
-    color: #27ae60;
     margin-right: 5px;
+}
+
+.web .MuiSvgIcon-root {
+    margin-right: 5px;
+}
+
+.facebook .MuiSvgIcon-root {
+    margin-right: 5px;
+}
+
+.zalo img,
+.facebook img {
+    margin-right: 5px;
+    width: 25px;
 }
 
 .share .MuiSvgIcon-root {
@@ -37,7 +74,7 @@
 }
 
 .fb-icon {
-    color: #fff;
     margin-right: 20px;
-    background-color: #3B5998;
+    margin-bottom: -3px;
+    width: 30px;
 }

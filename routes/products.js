@@ -5,7 +5,6 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  productPhotoUpload,
 } = require("../controllers/products");
 
 const Product = require("../models/Product");
@@ -32,6 +31,10 @@ router
         "avgStars",
         "avatarShop",
         "avatarUser",
+        "website",
+        "city",
+        "zalo",
+        "facebook",
       ],
     }),
     getProducts
@@ -43,9 +46,5 @@ router
   .get(getProduct)
   .put(protect, authorize("publisher", "admin"), updateProduct)
   .delete(protect, authorize("publisher", "admin"), deleteProduct);
-
-router
-  .route("/:id/photo")
-  .put(protect, authorize("publisher", "admin"), productPhotoUpload);
 
 module.exports = router;

@@ -2,10 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.wrapper {
+.header {
+    margin-bottom: 81px;
+}
+
+.wrapper,
+.body {
     background-color: rgb(244, 244, 244);
 }
 

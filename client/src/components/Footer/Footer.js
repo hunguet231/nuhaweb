@@ -17,23 +17,28 @@ function Footer() {
           <Typography variant="subtitle2">Liên hệ hỗ trợ</Typography>
         </Grid>
         <Grid item xs={6} sm={4}>
-          <h5>VỀ NUHA</h5>
+          <h5>VỀ BABU</h5>
           <br />
           <Typography variant="subtitle2">Giới thiệu</Typography>
-          <Typography variant="subtitle2">Nguồn lực</Typography>
           <Typography variant="subtitle2">Blog</Typography>
         </Grid>
         <Grid item xs={6} sm={4}>
           <h5>LIÊN KẾT XÃ HỘI</h5>
           <br />
-          <FacebookIcon style={{ color: "#3B5998", marginRight: "10px" }} />
-          <PlayCircleFilledIcon style={{ color: "#ff3f34" }} />
+          <img width="32" src="/facebook.svg" />
+          <img width="32" src="/instagram.svg" />
+          <img width="32" src="/twitter.svg" />
         </Grid>
       </Grid>
       <Grid container>
         <Grid align="center" item xs={12}>
-          <Typography variant="caption" style={{ color: "gray" }}>
-            &copy;Copyright 2020 - NUHA. Phiên bản thử nghiệm
+          <Typography
+            variant="caption"
+            style={{ color: "gray", lineHeight: "1" }}
+          >
+            GD Plus Team | UEB Business Challenges
+            <br />
+            &copy;Copyright 2020 - BABU. Phiên bản thử nghiệm
           </Typography>
         </Grid>
       </Grid>

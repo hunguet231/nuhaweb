@@ -1,0 +1,138 @@
+.register {
+    width: 90%;
+    max-width: 980px;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff;
+}
+
+.slogan {
+    color: gray;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 0 20px;
+}
+
+.register img.register-img {
+    width: 80%;
+    animation: moving 4s infinite;
+}
+
+.register img {
+    width: 32px;
+    margin-left: 25px;
+}
+
+.register .name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.register .name input {
+    width: 48%;
+}
+
+.register .city {
+    align-self: flex-start;
+    margin-top: 20px;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+.register .city .title {
+    color: #7a7a7a;
+    margin-right: 10px;
+}
+
+.fb,
+.google {
+    display: flex;
+    align-items: center;
+    border: 1px solid hsl(0, 0%, 78%);
+    margin: 20px 5px;
+    padding: 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.fb p,
+.google p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register form input {
+    margin-top: 20px;
+    height: 40px;
+    padding: 0 15px;
+    outline: none;
+    border: 0;
+    background-color: ghostwhite;
+}
+
+form button {
+    margin-top: 20px;
+    border-radius: 999px;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    background-image: linear-gradient( 135deg, #72EDF2 10%, #5151E5 100%);
+    background-size: 200%;
+    transition: background-position .5s;
+}
+
+form button:hover {
+    background-position: center;
+}
+
+#label-avt {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 6px;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#userAvatar,
+#shopAvatar {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.imgUp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.imgUp p {
+    font-size: 14px;
+}
+
+@keyframes moving {
+    0% {
+        transform: translateY(5px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(5px)
+    }
+}

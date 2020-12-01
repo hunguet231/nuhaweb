@@ -1,0 +1,24 @@
+.update-shop {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 25px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-shop h3 {
+    margin-left: 5px;
+}
+
+.update-shop .MuiTextField-root {
+    margin-top: 20px;
+}

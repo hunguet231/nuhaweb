@@ -1,0 +1,110 @@
+.add-product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    max-width: 1000px;
+    margin: 10px auto 50px;
+    padding: 20px 15px 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.add-product .MuiTextField-root,
+.add-product p {
+    margin-top: 20px;
+}
+
+.add-product input {
+    margin-top: 10px;
+}
+
+.add-product .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3b3b3b;
+}
+
+.add-product form button[type="submit"] {
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 999px;
+    height: 40px;
+    background-image: linear-gradient( 135deg, #69FF97 10%, #00E4FF 100%);
+    cursor: pointer;
+    background-size: 200%;
+    transition: background-position 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-product button:hover {
+    background-position: center;
+}
+
+.upload__image-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.drop-zone {
+    border: 2px dashed gray;
+    border-radius: 5px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.remove {
+    position: absolute;
+    top: -8px;
+    left: 94px;
+    background-color: #fff;
+    border-radius: 50%;
+    color: rgb(85, 85, 85);
+    width: 15px;
+    height: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+}
+
+.update {
+    position: absolute;
+    top: 50%;
+    left: 38px;
+    transform: translateY(-50%);
+    background-color: rgba(235, 235, 235, 0.644);
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgb(85, 85, 85);
+    padding: 3px;
+}
+
+.remove-all {
+    cursor: pointer;
+    color: #fb7878;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.image-item .img {
+    position: relative;
+}

@@ -1,0 +1,91 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #F0F9FF;
+    border-radius: 10px;
+}
+
+.banner .text {
+    margin-left: 15px;
+    margin-top: 20px;
+    margin-right: 8px;
+}
+
+.banner .text p {
+    color: gray;
+}
+
+.banner .text span {
+    color: #23A4D1;
+}
+
+h4 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.banner img {
+    width: 250px;
+    height: auto;
+    animation: moving 4s infinite;
+}
+
+.over-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: 150px;
+    height: 120px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.box .num {
+    font-size: 26px;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+.box.customer {
+    background-color: #47DE90;
+    box-shadow: 0px 8px 18px rgba(16, 173, 76, 0.431);
+    cursor: pointer;
+}
+
+.box.view {
+    background-color: #CF60FF;
+    box-shadow: 0px 8px 18px rgba(161, 12, 154, 0.431);
+}
+
+.box.fav {
+    background-color: #FF9F9F;
+    box-shadow: 0px 8px 18px rgba(173, 16, 42, 0.431);
+}
+
+.box.product {
+    background-color: #50CFF3;
+    box-shadow: 0px 8px 18px rgba(16, 115, 173, 0.431);
+    cursor: pointer;
+}
