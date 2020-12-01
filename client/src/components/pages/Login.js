@@ -65,7 +65,7 @@ function Login({ location, history }) {
             </button>
           </form>
           <br />
-          <p>Hoặc đăng nhập với</p>
+          <p className="text-sm">Hoặc đăng nhập với</p>
           <div className="fb">
             <img src="/facebook.svg" />
             <p>Facebook</p>
@@ -74,9 +74,10 @@ function Login({ location, history }) {
             <img src="/google.svg" />
             <p>Google</p>
           </div>
-          <p>
+          <p className="text-sm">
             Bạn chưa có tài khoản?{" "}
             <Link
+              style={{ color: "dodgerblue" }}
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
             >
               Đăng ký

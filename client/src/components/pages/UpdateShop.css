@@ -22,3 +22,9 @@
 .update-shop .MuiTextField-root {
     margin-top: 20px;
 }
+
+@media (max-width: 510px) {
+    .update-shop {
+        font-size: 85%;
+    }
+}

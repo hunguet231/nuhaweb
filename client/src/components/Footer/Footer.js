@@ -7,7 +7,7 @@ import "./Footer.css";
 function Footer() {
   return (
     <div className="footer">
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={6} sm={4}>
           <h5>HỖ TRỢ KHÁCH HÀNG</h5>
           <br />
@@ -32,10 +32,7 @@ function Footer() {
       </Grid>
       <Grid container>
         <Grid align="center" item xs={12}>
-          <Typography
-            variant="caption"
-            style={{ color: "gray", lineHeight: "1" }}
-          >
+          <Typography variant="caption" className="text-bottom">
             GD Plus Team | UEB Business Challenges
             <br />
             &copy;Copyright 2020 - BABU. Phiên bản thử nghiệm

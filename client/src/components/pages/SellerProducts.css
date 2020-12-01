@@ -63,3 +63,13 @@
 .main {
     margin-top: 20px;
 }
+
+@media (max-width: 510px) {
+    .products {
+        font-size: 85%;
+    }
+    .products .MuiSelect-root {
+        font-size: 13px;
+        padding: 3px;
+    }
+}

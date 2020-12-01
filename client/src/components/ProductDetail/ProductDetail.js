@@ -115,7 +115,11 @@ const ProductDetail = ({ match }) => {
               <br />
               Chi tiết sản phẩm:
             </Typography>
-            <Typography color="textPrimary" variant="inherit">
+            <Typography
+              className="description"
+              color="textPrimary"
+              variant="inherit"
+            >
               {description}
             </Typography>
           </Grid>

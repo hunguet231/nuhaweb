@@ -223,7 +223,14 @@
      ::placeholder {
         font-size: 12px;
     }
+    .search-box>input {
+        padding: 0;
+    }
     .sell-btn p {
         font-size: 11px;
+    }
+    .sell-btn .MuiSvgIcon-root {
+        font-size: 17px;
+        margin-top: -2px;
     }
 }

@@ -181,7 +181,7 @@ function Register({ location, history }) {
             </button>
           </form>
           <br />
-          <p>Hoặc đăng ký với</p>
+          <p className="text-sm">Hoặc đăng ký với</p>
           <div className="fb">
             <img src="/facebook.svg" />
             <p>Facebook</p>
@@ -190,9 +190,12 @@ function Register({ location, history }) {
             <img src="/google.svg" />
             <p>Google</p>
           </div>
-          <p>
+          <p className="text-sm">
             Bạn đã có tài khoản?{" "}
-            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+            <Link
+              style={{ color: "dodgerblue" }}
+              to={redirect ? `/login?redirect=${redirect}` : "/login"}
+            >
               Đăng nhập
             </Link>
           </p>

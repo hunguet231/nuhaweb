@@ -90,3 +90,17 @@ form button:hover {
         transform: translateY(5px)
     }
 }
+
+@media (max-width: 510px) {
+    .slogan {
+        font-size: 16px !important;
+    }
+    .login form input {
+        margin-top: 14px;
+    }
+    .login p.text-sm,
+    .fb,
+    .google {
+        font-size: 14px;
+    }
+}

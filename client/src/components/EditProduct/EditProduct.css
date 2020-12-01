@@ -108,3 +108,9 @@
 .image-item .img {
     position: relative;
 }
+
+@media (max-width: 510px) {
+    .edit-product {
+        font-size: 85%;
+    }
+}

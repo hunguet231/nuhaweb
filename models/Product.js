@@ -38,8 +38,8 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
     quantity: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: "0",
     },
     prices: {
       type: String,
