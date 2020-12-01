@@ -24,11 +24,10 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.10.11",
         "short-uuid": "^4.1.0",
-        "slugify": "^1.4.6"
-    },
-    "devDependencies": {
+        "slugify": "^1.4.6",
         "colors": "^1.4.0",
         "concurrently": "^5.3.0",
         "nodemon": "^2.0.6"
-    }
+    },
+    "devDependencies": {}
 }
