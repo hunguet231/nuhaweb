@@ -211,7 +211,7 @@
     }
     .navbar-right {
         justify-content: flex-end;
-        flex: 0.65;
+        flex: 0.7;
         margin-left: 5px;
     }
     .navbar-left {
@@ -224,6 +224,6 @@
         font-size: 12px;
     }
     .sell-btn p {
-        font-size: 13px;
+        font-size: 11px;
     }
 }
