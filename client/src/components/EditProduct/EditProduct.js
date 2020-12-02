@@ -207,7 +207,6 @@ function EditProduct({ history, match }) {
         <p>Ảnh sản phẩm</p>
         <ImageUploading
           multiple
-          acceptType={["jpg", "gif", "png"]}
           value={images}
           onChange={onImgsChange}
           dataURLKey="data_url"
