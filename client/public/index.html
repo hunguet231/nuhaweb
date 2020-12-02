@@ -14,6 +14,15 @@
 
 <body>
     <div id="root"></div>
+    <script>
+        var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+
+        if (isSafari) {
+            document.querySelector("input").removeAttr("multiple");
+        }
+    </script>
 </body>
 
 </html>
