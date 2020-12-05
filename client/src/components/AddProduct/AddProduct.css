@@ -61,6 +61,7 @@
     align-items: center;
     cursor: pointer;
     padding: 10px;
+    color: rgb(110, 110, 110) !important;
 }
 
 .remove {
@@ -91,8 +92,9 @@
 .remove-all {
     cursor: pointer;
     color: #fb7878;
-    padding: 3px;
+    margin-top: -20px;
     margin-bottom: 5px;
+    margin-left: -2px;
 }
 
 .preview {
@@ -109,9 +111,30 @@
     position: relative;
 }
 
+.wrapper-editor {
+    margin-top: 5px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 4px;
+}
+
+.wrapper-editor button {
+    color: rgba(0, 0, 0, 0.787) !important;
+    margin-top: 0;
+}
+
+.content-editor {
+    min-height: 150px;
+    padding: 0 10px;
+}
+
+.prices-text {
+    color: rgb(255, 166, 1) !important;
+    font-weight: 600;
+}
+
 @media (max-width: 510px) {
     .add-product,
      ::placeholder {
-        font-size: 85%;
+        font-size: 85% !important;
     }
 }

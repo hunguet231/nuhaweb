@@ -6,6 +6,7 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import ReactHtmlParser from "react-html-parser";
 
 const styles = (theme) => ({
   root: {
@@ -56,7 +57,7 @@ export default function ViewPrdModal({ openModal, toggleModal, product }) {
     createdAt,
   } = product;
   return (
-    <div>
+    <>
       <Dialog
         onClose={toggleModal}
         aria-labelledby="customized-dialog-title"
@@ -66,17 +67,15 @@ export default function ViewPrdModal({ openModal, toggleModal, product }) {
           Xem sản phẩm
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            <img src={photos[0]} width="350" />
-            <h4>Tên sản phẩm: </h4> {title}
-            <h4>Số lượng còn lại: </h4> {quantity}
-            <h4>Giá: </h4> {prices} đ<h4>Danh mục: </h4> {category}
-            <h4>Cập nhật lần cuối: </h4> {new Date(updatedAt).toLocaleString()}
-            <h4>Ngày tạo: </h4> {new Date(createdAt).toLocaleString()}
-            <h4>Chi tiết: </h4> {description}
-          </Typography>
+          <img src={photos[0]} width="350" />
+          <h4>Tên sản phẩm: </h4> {title}
+          <h4>Số lượng còn lại: </h4> {quantity}
+          <h4>Giá: </h4> {prices} đ<h4>Danh mục: </h4> {category}
+          <h4>Cập nhật lần cuối: </h4> {new Date(updatedAt).toLocaleString()}
+          <h4>Ngày tạo: </h4> {new Date(createdAt).toLocaleString()}
+          <h4>Chi tiết: </h4> {ReactHtmlParser(description)}
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }

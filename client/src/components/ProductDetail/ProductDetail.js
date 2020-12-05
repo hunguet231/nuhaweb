@@ -13,6 +13,7 @@ import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import "./ProductDetail.css";
 import { useSelector } from "react-redux";
 import CarouselPrdsDetail from "../CarouselPrdsDetail";
+import ReactHtmlParser from "react-html-parser";
 import Axios from "axios";
 
 const ProductDetail = ({ match }) => {
@@ -120,7 +121,7 @@ const ProductDetail = ({ match }) => {
               color="textPrimary"
               variant="inherit"
             >
-              {description}
+              {ReactHtmlParser(description)}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>

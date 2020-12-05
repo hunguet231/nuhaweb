@@ -18,6 +18,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductCreate } from "../../actions/productActions";
 import swal from "@sweetalert/with-react";
 import ImageUploading from "react-images-uploading";
+import { Editor } from "react-draft-wysiwyg";
+import { convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import editorLabels from "../../ultils/draft-wysiwyg-vi";
+import readNumber from "read-vn-number";
 import "./AddProduct.css";
 
 function AddProduct({ history }) {
@@ -88,16 +94,16 @@ function AddProduct({ history }) {
     setTitle(e.target.value);
   };
 
-  const handleDetailChange = (e) => {
-    setDescription(e.target.value);
-  };
-
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
   const handlePriceChange = (e) => {
-    setPrices(e.target.value);
+    const addCommas = (num) =>
+      num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
+
+    setPrices(addCommas(removeNonNumeric(e.target.value)));
   };
 
   const handleAdd = (e) => {
@@ -138,7 +144,6 @@ function AddProduct({ history }) {
         <NoteAddOutlinedIcon />
         <h3>Thêm sản phẩm</h3>
       </div>
-      <p>* Bắt buộc</p>
       {error && <Alert severity="error">{error}</Alert>}
       <form onSubmit={handleAdd}>
         <TextField
@@ -146,30 +151,57 @@ function AddProduct({ history }) {
           label="Tên sản phẩm"
           onChange={handleTitleChange}
           required
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={title}
-        />
-        <TextField
-          label="Mô tả chi tiết"
-          multiline
-          rows={10}
-          variant="outlined"
-          onChange={handleDetailChange}
-          required
-          value={description}
         />
         <TextField
           variant="outlined"
           label="Số lượng"
           onChange={handleQuantityChange}
           required
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={quantity}
         />
         <TextField
           variant="outlined"
-          label="Giá(đơn vị VNĐ) Ví dụ 1000000"
+          label="Đơn giá"
           onChange={handlePriceChange}
           required
+          inputProps={{ maxLength: 16 }}
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={prices}
+        />
+        <p>
+          Giá bằng chữ:{" "}
+          <span className="prices-text">
+            {prices
+              ? `${readNumber(parseInt(prices.split(".").join("")))} đồng`
+              : ""}
+          </span>
+        </p>
+
+        <p>Mô tả chi tiết</p>
+        <Editor
+          wrapperClassName="wrapper-editor"
+          editorClassName="content-editor"
+          localization={{ locale: "vi", translations: editorLabels }}
+          onEditorStateChange={(state) => {
+            setDescription(
+              draftToHtml(convertToRaw(state.getCurrentContent()))
+            );
+          }}
         />
         <p>Danh mục</p>
         <FormControl>
@@ -198,11 +230,11 @@ function AddProduct({ history }) {
             // write your building UI
             <div className="upload__image-wrapper">
               <div className="remove-all" onClick={onImageRemoveAll}>
-                Xoá tất cả
+                Xoá tất cả ảnh
               </div>
               <div
                 className="drop-zone"
-                style={isDragging ? { border: "2px dashed dodgerblue" } : null}
+                style={isDragging ? { border: "2px dashed #74b9ff" } : null}
                 onClick={onImageUpload}
                 {...dragProps}
               >

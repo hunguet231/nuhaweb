@@ -51,10 +51,10 @@ function SellerDashboard() {
           <a href="/me/sell/products">
             <div className="box product">
               <p>Sản phẩm</p>
-              <p className="num">
+              <div className="num">
                 {loading && <CircularProgress color="inherit" size={20} />}
                 {!loading && <>{countPrds}</>}
-              </p>
+              </div>
             </div>
           </a>
           <div className="box customer">

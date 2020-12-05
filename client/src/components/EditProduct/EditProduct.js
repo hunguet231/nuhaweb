@@ -16,6 +16,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import swal from "@sweetalert/with-react";
 import ImageUploading from "react-images-uploading";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToHtml from "draftjs-to-html";
 import "./EditProduct.css";
 
 function EditProduct({ history, match }) {
@@ -27,15 +31,20 @@ function EditProduct({ history, match }) {
   const [photos, setPhotos] = useState(null);
   const [images, setImages] = useState([]);
   const [imgLoading, setImgLoading] = useState(false);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(false);
+  const [editorSate, setEditorState] = useState(EditorState.createEmpty());
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  let photosArray = [];
-
   const redirect = "/me/update-shop";
+
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("userInfo")).user.isSeller) {
+      history.push(redirect);
+    }
+  }, [userInfo, history]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -49,57 +58,22 @@ function EditProduct({ history, match }) {
       setProduct(data.data[0]);
     };
     fetchProduct();
-    setTitle(product.title);
-    setDescription(product.description);
-    setQuantity(product.quantity);
-    setCategory(product.category);
-    setPrices(product.prices);
-  }, [product]);
-
-  const { _id } = product;
-  const editPrd = async () => {
-    setLoading(true);
-
-    await Axios.put(
-      `/api/v1/products/${_id}`,
-      {
-        title,
-        description,
-        quantity,
-        prices,
-        category,
-        photos,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
-          }`,
-        },
-      }
-    );
-
-    setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("userInfo")).user.isSeller) {
-      history.push(redirect);
+    if (product) {
+      setTitle(product.title);
+      setDescription(product.description);
+      setQuantity(product.quantity);
+      setPrices(product.prices);
+      setCategory(product.category);
     }
+  }, [product]);
 
-    if (photos && images.length == photos.length) {
+  useEffect(() => {
+    if (photos && photos.length) {
       editPrd();
-
-      setTitle("");
-      setDescription("");
-      setQuantity("");
-      setPrices("");
-      setCategory("");
-
       window.scrollTo(0, 0);
-
-      // show sweetalert
       swal({
         title: "Cập nhật thành công",
         content: <a href="/me/sell/products">Về trang sản phẩm</a>,
@@ -107,7 +81,70 @@ function EditProduct({ history, match }) {
         button: "Sửa đổi tiếp",
       });
     }
-  }, [photos, userInfo, history]);
+  }, [photos]);
+
+  // handle click edit button
+  const handleEdit = (e) => {
+    e.preventDefault();
+    upload();
+  };
+
+  // upload and set photos
+  const upload = async () => {
+    setImgLoading(true);
+    // post to cloundinary
+    const url = "https://api.cloudinary.com/v1_1/dcsvjbc6c/image/upload";
+    const formData = new FormData();
+    let photosArray = [];
+
+    for (let i = 0; i < images.length; i++) {
+      let image = images[i];
+      formData.append("file", image.data_url);
+      formData.append("upload_preset", "babuweb");
+
+      const res = await Axios.post(url, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.data.secure_url;
+      photosArray.push(data);
+    }
+    setImgLoading(false);
+    setPhotos(photosArray);
+  };
+
+  // put req to edit product
+  const editPrd = async () => {
+    setLoading(true);
+
+    if (product) {
+      const { _id } = product;
+
+      await Axios.put(
+        `/api/v1/products/${_id}`,
+        {
+          title,
+          description,
+          quantity,
+          prices,
+          category,
+          photos,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("userInfo")).token
+            }`,
+          },
+        }
+      );
+
+      setLoading(false);
+    }
+  };
 
   const onImgsChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
@@ -121,46 +158,12 @@ function EditProduct({ history, match }) {
     setTitle(e.target.value);
   };
 
-  const handleDetailChange = (e) => {
-    setDescription(e.target.value);
-  };
-
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
   const handlePriceChange = (e) => {
     setPrices(e.target.value);
-  };
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-
-    //FILE UPLOAD
-    const upload = async () => {
-      setImgLoading(true);
-      // post to cloundinary
-      const url = "https://api.cloudinary.com/v1_1/dcsvjbc6c/image/upload";
-      const formData = new FormData();
-
-      for (let i = 0; i < images.length; i++) {
-        let image = images[i];
-        formData.append("file", image.data_url);
-        formData.append("upload_preset", "babuweb");
-
-        const res = await Axios.post(url, formData, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const data = await res.data.secure_url;
-        photosArray.push(data);
-      }
-      setImgLoading(false);
-      setPhotos(photosArray);
-    };
-    upload();
   };
 
   return (
@@ -176,23 +179,33 @@ function EditProduct({ history, match }) {
           onChange={handleTitleChange}
           value={title}
         />
-        <TextField
-          label="Mô tả chi tiết"
-          multiline
-          rows={10}
-          variant="outlined"
-          onChange={handleDetailChange}
-          value={description}
+        <p>Mô tả chi tiết*</p>
+        {/* <Editor
+          editorState={description}
+          onEditorStateChange={(state) => {
+            setEditorState(state);
+          }}
+        /> */}
+        {/* <CKEditor
+          editor={ClassicEditor}
+          config={{
+            removePlugins: ["MediaEmbed", "ImageUpload"],
+            language: "vi",
+          }}
+          data={description}
+          onChange={(event, editor) => {
+            setDescription(editor.getData());
+          }}
         />
         <TextField
           variant="outlined"
           label="Số lượng"
           onChange={handleQuantityChange}
           value={quantity}
-        />
+        /> */}
         <TextField
           variant="outlined"
-          label="Giá(đơn vị VNĐ) Ví dụ 1000000"
+          label="Đơn giá"
           onChange={handlePriceChange}
           value={prices}
         />
@@ -227,7 +240,7 @@ function EditProduct({ history, match }) {
               </div>
               <div
                 className="drop-zone"
-                style={isDragging ? { border: "2px dashed dodgerblue" } : null}
+                style={isDragging ? { border: "2px dashed #74b9ff" } : null}
                 onClick={onImageUpload}
                 {...dragProps}
               >

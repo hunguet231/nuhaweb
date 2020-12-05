@@ -92,7 +92,7 @@ function Navbar({ history }) {
         </div>
         <div className="navbar-right">
           <input type="checkbox" id="nav-toggle" />
-          <label for="nav-toggle" className="icon-burger">
+          <label htmlFor="nav-toggle" className="icon-burger">
             <div className="line"></div>
             <div className="line"></div>
             <div className="line"></div>
