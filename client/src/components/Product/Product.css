@@ -96,4 +96,7 @@
     .city .MuiTypography-root {
         font-size: 12px;
     }
+    .author .name {
+        font-size: 13px;
+    }
 }
