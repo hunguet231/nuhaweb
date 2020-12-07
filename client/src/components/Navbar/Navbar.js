@@ -76,7 +76,7 @@ function Navbar({ history }) {
       <div className="navbar">
         <div className="navbar-left">
           <Link to="/">
-            <h2>BABU</h2>
+            <h2>NUHA</h2>
           </Link>
           <div className="search-box">
             <input

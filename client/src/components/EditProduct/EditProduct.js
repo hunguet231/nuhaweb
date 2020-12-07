@@ -17,9 +17,16 @@ import { useSelector } from "react-redux";
 import swal from "@sweetalert/with-react";
 import ImageUploading from "react-images-uploading";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  convertToRaw,
+  convertFromHTML,
+  ContentState,
+} from "draft-js";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
+import editorLabels from "../../ultils/draft-wysiwyg-vi";
+import readNumber from "read-vn-number";
 import "./EditProduct.css";
 
 function EditProduct({ history, match }) {
@@ -33,7 +40,7 @@ function EditProduct({ history, match }) {
   const [imgLoading, setImgLoading] = useState(false);
   const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(false);
-  const [editorSate, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -67,6 +74,13 @@ function EditProduct({ history, match }) {
       setQuantity(product.quantity);
       setPrices(product.prices);
       setCategory(product.category);
+      setEditorState(
+        EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            convertFromHTML(product.description)
+          )
+        )
+      );
     }
   }, [product]);
 
@@ -163,7 +177,11 @@ function EditProduct({ history, match }) {
   };
 
   const handlePriceChange = (e) => {
-    setPrices(e.target.value);
+    const addCommas = (num) =>
+      num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
+
+    setPrices(addCommas(removeNonNumeric(e.target.value)));
   };
 
   return (
@@ -177,38 +195,62 @@ function EditProduct({ history, match }) {
           variant="outlined"
           label="Tên sản phẩm"
           onChange={handleTitleChange}
+          required
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={title}
-        />
-        <p>Mô tả chi tiết*</p>
-        {/* <Editor
-          editorState={description}
-          onEditorStateChange={(state) => {
-            setEditorState(state);
-          }}
-        /> */}
-        {/* <CKEditor
-          editor={ClassicEditor}
-          config={{
-            removePlugins: ["MediaEmbed", "ImageUpload"],
-            language: "vi",
-          }}
-          data={description}
-          onChange={(event, editor) => {
-            setDescription(editor.getData());
-          }}
         />
         <TextField
           variant="outlined"
           label="Số lượng"
           onChange={handleQuantityChange}
+          required
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={quantity}
-        /> */}
+        />
         <TextField
           variant="outlined"
           label="Đơn giá"
           onChange={handlePriceChange}
+          required
+          inputProps={{ maxLength: 16 }}
+          InputLabelProps={{
+            style: {
+              fontSize: "14px",
+            },
+          }}
           value={prices}
         />
+        <p>
+          Giá bằng chữ:{" "}
+          <span className="prices-text">
+            {prices
+              ? `${readNumber(parseInt(prices.split(".").join("")))} đồng`
+              : ""}
+          </span>
+        </p>
+
+        <p>Mô tả chi tiết</p>
+        <Editor
+          wrapperClassName="wrapper-editor"
+          editorClassName="content-editor"
+          localization={{ locale: "vi", translations: editorLabels }}
+          editorState={editorState}
+          onEditorStateChange={(state) => {
+            setEditorState(state);
+            setDescription(
+              draftToHtml(convertToRaw(state.getCurrentContent()))
+            );
+          }}
+        />
+
         <p>Danh mục</p>
         <FormControl>
           <Select value={category} onChange={handleCategoryChange}>

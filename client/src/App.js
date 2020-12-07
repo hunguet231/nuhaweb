@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 import Navbar from "./components/Navbar/Navbar";
 import SliderTop from "./components/SliderTop/SliderTop";
 import "./App.css";
@@ -38,7 +39,6 @@ function App() {
           <Navbar />
           {/* <Breadcrumbs /> */}
         </div>
-
         <div className="body">
           <Route
             path="/"
@@ -102,12 +102,14 @@ function App() {
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
-
         {/* Toaster */}
         {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
           <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
         )}
-
+        <MessengerCustomerChat
+          pageId="103310781374312"
+          appId="659192831443395"
+        />
         <div className="footer">
           <Footer />
         </div>

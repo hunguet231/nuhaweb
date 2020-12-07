@@ -17,7 +17,7 @@ function Footer() {
           <Typography variant="subtitle2">Liên hệ hỗ trợ</Typography>
         </Grid>
         <Grid item xs={6} sm={4}>
-          <h5>VỀ BABU</h5>
+          <h5>VỀ NUHA</h5>
           <br />
           <Typography variant="subtitle2">Giới thiệu</Typography>
           <Typography variant="subtitle2">Blog</Typography>
@@ -35,7 +35,7 @@ function Footer() {
           <Typography variant="caption" className="text-bottom">
             GD Plus Team | UEB Business Challenges
             <br />
-            &copy;Copyright 2020 - BABU. Phiên bản thử nghiệm
+            &copy;Copyright 2020 - NUHA. Phiên bản thử nghiệm
           </Typography>
         </Grid>
       </Grid>
