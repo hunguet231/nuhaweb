@@ -80,6 +80,7 @@
     color: #e74c3c;
     font-size: 18px;
     text-shadow: .2px .1px .8px #e74c3c;
+    word-wrap: break-word;
 }
 
 @media (max-width: 510px) {
