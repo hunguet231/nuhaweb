@@ -8,13 +8,14 @@ function CarouselPrdsDetail({ photos }) {
     return { original: photo, thumbnail: photo };
   });
   return (
-    <ImageGallery
-      className="gallery-product"
-      lazyLoad
-      thumbnailPosition="left"
-      showBullets
-      items={images}
-    />
+    <div className="gallery-product">
+      <ImageGallery
+        lazyLoad
+        thumbnailPosition="left"
+        showBullets
+        items={images}
+      />
+    </div>
   );
 }
 

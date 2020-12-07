@@ -1,9 +1,9 @@
-.image-gallery {
+.gallery-product .image-gallery {
     background-color: rgba(200, 200, 200, 0.287);
     height: 300px;
 }
 
-.image-gallery-slide img {
+.gallery-product .image-gallery-slide img {
     width: 100%;
     height: 300px;
     max-height: 80vh;
