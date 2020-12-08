@@ -2,9 +2,16 @@
 .gallery-product .image-gallery-slide {
     background-color: rgba(200, 200, 200, 0.287);
     height: 300px;
+    max-height: 100vh;
 }
 
 .gallery-product .image-gallery-slide img {
     height: 300px;
+    max-height: 100vh;
     background-color: #fff;
+}
+
+.gallery-product .fullscreen .image-gallery-slide img,
+.gallery-product .fullscreen .image-gallery-slide {
+    height: 100vh;
 }
