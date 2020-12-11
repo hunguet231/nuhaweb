@@ -139,18 +139,17 @@ const ProductDetail = ({ match }) => {
                     </div>
                     <div className="mess">
                       <MailOutlineIcon />
-                      <a href={`sms://${user.phoneNumber}?body=`}>
-                        Nhắn tin SMS
-                      </a>
+                      <a href={`sms://${user.phoneNumber}`}>Nhắn tin SMS</a>
                     </div>
                     {user.website && (
                       <div className="web">
                         <LanguageIcon />
                         <a
                           href={
-                            user.website.startsWith("htttp://")
+                            user.website.startsWith("http://") ||
+                            user.website.startsWith("https://")
                               ? user.website
-                              : "http://" + user.website
+                              : "https://" + user.website
                           }
                           target="_blank"
                         >
@@ -174,9 +173,10 @@ const ProductDetail = ({ match }) => {
                         <img src="/fb.svg" />
                         <a
                           href={
-                            user.facebook.startsWith("htttp://")
+                            user.facebook.startsWith("http://") ||
+                            user.facebook.startsWith("https://")
                               ? user.facebook
-                              : "http://" + user.facebook
+                              : "https://" + user.facebook
                           }
                           target="_blank"
                         >

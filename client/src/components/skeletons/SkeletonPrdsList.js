@@ -1,32 +1,37 @@
 import { Grid } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import "./Skeleton.css";
 
 function SkeletonPrdsList() {
   return (
     <div>
-      <Skeleton height={15} width={200} />
+      <Skeleton animation="wave" height={20} width={100} />
       <Grid container spacing={2}>
         {Array(12)
           .fill()
           .map((item, index) => (
             <Grid key={index} item xs={6} sm={4} lg={3}>
               <div className="img">
-                <Skeleton width={200} height={150} />
+                <Skeleton
+                  variant="rect"
+                  animation="wave"
+                  width="auto"
+                  height={170}
+                />
               </div>
               <div className="text">
                 <div className="row">
                   <div className="circle">
-                    <Skeleton circle width={20} height={20} />
+                    <Skeleton variant="circle" width={20} height={20} />
                   </div>
-                  <Skeleton width={177} height={10} />
+                  <Skeleton width="100%" height={20} />
                 </div>
                 <div className="row">
                   <div className="circle">
-                    <Skeleton circle width={20} height={20} />
+                    <Skeleton variant="circle" width={20} height={20} />
                   </div>
-                  <Skeleton width={177} height={10} />
+                  <Skeleton width="100%" height={20} />
                 </div>
               </div>
             </Grid>

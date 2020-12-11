@@ -18,10 +18,23 @@ import Toaster from "./components/Toaster";
 import UpdateShop from "./components/pages/UpdateShop";
 import EditProduct from "./components/EditProduct/EditProduct";
 import Category from "./components/Category/Category";
+import { Detector } from "react-detect-offline";
+import { Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const [online, setOnline] = useState(null);
+  const [open, setOpen] = useState(true);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -102,14 +115,39 @@ function App() {
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
+
         {/* Toaster */}
         {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
           <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
         )}
+
+        {/* Messenger Chat Button */}
         <MessengerCustomerChat
           pageId="103310781374312"
           appId="659192831443395"
         />
+
+        {/* Detect Online/Offline */}
+        <Detector
+          render={({ online }) => (
+            <>
+              {!online ? (
+                <Snackbar
+                  open={open}
+                  autoHideDuration={5000}
+                  onClose={handleClose}
+                >
+                  <Alert onClose={handleClose} severity="success">
+                    Mất kết nối mạng
+                  </Alert>
+                </Snackbar>
+              ) : (
+                ""
+              )}
+            </>
+          )}
+        />
+
         <div className="footer">
           <Footer />
         </div>

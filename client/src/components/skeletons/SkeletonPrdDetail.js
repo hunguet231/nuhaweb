@@ -1,5 +1,5 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { Grid } from "@material-ui/core";
 import "./Skeleton.css";
 
@@ -8,26 +8,23 @@ function SkeletonPrdDetail() {
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={8}>
-          <Grid container align="center">
-            <Grid item xs={12}>
-              <Skeleton width={`100%`} height={350} />
-            </Grid>
-          </Grid>
+          <Skeleton variant="rect" width="100%" height={300} />
+          <br />
 
-          <div className="col">
-            <Skeleton width={100} height={10} />
-            <Skeleton width={300} height={10} />
-            <Skeleton width={100} height={10} />
-            <Skeleton width={300} height={10} />
-          </div>
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Skeleton width={100} height={10} />
-          <Skeleton width={300} height={10} />
-          <Skeleton width={100} height={10} />
-          <Skeleton width={300} height={10} />
-          <Skeleton width={100} height={10} />
-          <Skeleton width={300} height={10} />
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
+          <Skeleton width={100} height={20} />
+          <Skeleton width={280} height={20} />
         </Grid>
       </Grid>
     </div>
