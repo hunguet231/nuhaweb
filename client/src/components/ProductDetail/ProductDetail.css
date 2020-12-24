@@ -7,6 +7,10 @@
     border-radius: 5px;
 }
 
+.product-detail .MuiButton-root {
+    margin-bottom: 8px;
+}
+
 .product-detail .MuiTypography-subtitle2 {
     font-size: 15px;
 }
@@ -19,6 +23,10 @@
 
 .product-detail h4 {
     font-size: 18px;
+}
+
+.save-fav {
+    margin-top: 10px;
 }
 
 .save-fav .MuiSvgIcon-root {

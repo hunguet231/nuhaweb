@@ -64,6 +64,10 @@ const UserSchema = new mongoose.Schema(
     avatarShop: {
       type: String,
     },
+    shopLevel: {
+      type: String,
+      default: "Hạng thường",
+    },
     phoneNumber: {
       type: String,
     },
