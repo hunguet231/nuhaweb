@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import PortraitIcon from "@material-ui/icons/Portrait";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
@@ -8,6 +8,7 @@ import Rating from "../Rating/Rating";
 import "./Product.css";
 
 function Product({
+  color,
   product: {
     _id,
     title,
@@ -57,7 +58,6 @@ function Product({
                 </Link>
               </Typography>
             </div>
-            {/* Display time relative to a now */}
             <div className="city">
               <Typography variant="subtitle2" color="textSecondary">
                 <LocationOnOutlinedIcon />
@@ -68,9 +68,7 @@ function Product({
             </div>
 
             <div className="prices">
-              <h4>
-                {prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
-              </h4>
+              <p>{prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
             </div>
 
             {/* <Rating

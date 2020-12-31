@@ -9,3 +9,9 @@
     height: auto;
     margin: 0 auto;
 }
+
+.slider-top .image-gallery,
+.slider-top .image-gallery-slide,
+.slider-top .image-gallery-slide img {
+    height: 300px;
+}

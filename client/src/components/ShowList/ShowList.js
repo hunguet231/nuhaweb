@@ -6,7 +6,7 @@ import "./ShowList.css";
 import SkeletonPrdsList from "../skeletons/SkeletonPrdsList";
 import { listProducts } from "../../actions/productActions";
 
-function ShowList({ title }) {
+function ShowList({ title, color }) {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
@@ -20,12 +20,17 @@ function ShowList({ title }) {
     <div className="products-list">
       {!loading && (
         <>
-          <h3>{title}</h3>
+          <div
+            style={{ borderLeft: `5px solid ${color}` }}
+            className="title-top"
+          >
+            {title}
+          </div>
           <div className="list-items">
             <Grid container spacing={2}>
               {products.map((product) => (
                 <Grid key={product._id} item xs={6} sm={4} lg={3}>
-                  <Product product={product} />
+                  <Product color={color} product={product} />
                 </Grid>
               ))}
             </Grid>

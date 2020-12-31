@@ -7,6 +7,10 @@
     border-radius: 5px;
 }
 
+.product-detail .product-description {
+    margin-top: 10px;
+}
+
 .product-detail .MuiButton-root {
     margin-bottom: 8px;
 }
@@ -40,6 +44,15 @@
     flex-wrap: wrap;
 }
 
+.text-breadcrumbs {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    width: 220px;
+    -webkit-box-orient: vertical;
+}
+
 .phone,
 .mess,
 .web,
@@ -47,12 +60,14 @@
 .facebook {
     display: flex;
     align-items: center;
-    background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     margin-right: 9px;
     margin-top: 9px;
     padding: 3px;
     border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
 }
 
 .phone .MuiSvgIcon-root {
@@ -75,6 +90,15 @@
 .facebook img {
     margin-right: 5px;
     width: 25px;
+}
+
+.share {
+    display: flex;
+    justify-items: center;
+}
+
+.share .copy-link-btn {
+    margin-left: 12px;
 }
 
 .share .MuiSvgIcon-root {

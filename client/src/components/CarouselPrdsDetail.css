@@ -1,3 +1,8 @@
+.gallery-product {
+    display: block;
+    margin: 10px auto 5px;
+}
+
 .gallery-product .image-gallery,
 .gallery-product .image-gallery-slide {
     height: 300px;

@@ -57,15 +57,16 @@ function App() {
             path="/"
             render={(props) => (
               <>
-                <div className="slider">
-                  <SliderTop />
-                </div>
+                <div className="slider">{/* <SliderTop /> */}</div>
                 <div className="wrapper">
                   <div className="showcase">
                     <Category />
                   </div>
                   <div className="showcase">
-                    <ShowList title="Tất cả sản phẩm" />
+                    <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
+                  </div>
+                  <div className="showcase">
+                    <ShowList color="#27ae60" title="Tất cả sản phẩm" />
                   </div>
                 </div>
               </>

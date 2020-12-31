@@ -4,6 +4,13 @@
     background-color: #fff;
 }
 
+.products-list .title-top {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-left: 15px;
+}
+
 .list-items {
     margin-top: 10px;
 }

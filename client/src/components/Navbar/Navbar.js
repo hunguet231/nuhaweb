@@ -29,7 +29,6 @@ const useStyles = makeStyles({
     border: 0,
     color: "white",
     height: 35,
-    boxShadow: "0 1px 2px #7CC0FF",
   },
   label: {
     textTransform: "capitalize",

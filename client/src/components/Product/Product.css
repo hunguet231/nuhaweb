@@ -2,11 +2,14 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: 0px 3px 4px rgba(44, 71, 146, 0.15);
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-in-out;
 }
 
 .product-item:hover {
     box-shadow: rgba(100, 100, 111, 0.28) 0px 7px 29px 0px;
+    transform: translateY(-3px);
 }
 
 .product-item-header {
@@ -25,6 +28,20 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: all 0.5s;
+    position: relative;
+}
+
+.product-item-header .img::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.5s ease-in-out;
+}
+
+.product-item-header:hover .img::after {
+    background: linear-gradient(0deg, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
 .product-item-header:hover .img {
@@ -64,7 +81,8 @@
 
 .author .name {
     font-size: 15px;
-    color: rgb(61, 61, 61);
+    font-weight: 500;
+    color: #28b1ff;
 }
 
 .time .MuiSvgIcon-root,
@@ -76,17 +94,27 @@
     /* color: #4C83FF; */
 }
 
+.author .MuiSvgIcon-root {
+    color: #28b1ff;
+}
+
+.city .MuiSvgIcon-root {
+    color: rgb(239, 108, 108);
+}
+
 .prices {
-    color: #e74c3c;
+    color: #2d3436;
     font-size: 18px;
-    text-shadow: .2px .1px .8px #e74c3c;
+    font-weight: 600;
+    text-shadow: .2px .1px .8px #2d3436;
     word-wrap: break-word;
+    margin-top: 6px;
+    margin-left: 2px;
 }
 
 @media (max-width: 510px) {
     .prices {
-        font-size: 14px;
-        text-shadow: .2px .1px .8px #e74c3c;
+        font-size: 16px;
     }
     .product-item-body .title {
         text-shadow: .2px .1px .9px #474747;
@@ -97,6 +125,6 @@
         font-size: 12px;
     }
     .author .name {
-        font-size: 13px;
+        font-size: 14px;
     }
 }

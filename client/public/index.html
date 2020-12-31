@@ -13,9 +13,29 @@
 </head>
 
 <body>
+    <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=659192831443395&autoLogAppEvents=1" nonce="B8AenhRD"></script> -->
     <div id="root"></div>
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=659192831443395&autoLogAppEvents=1" nonce="LdFOrHlH"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '659192831443395',
+                xfbml: false,
+                version: 'v9.0'
+            });
+            document.dispatchEvent(new Event('fb_init'));
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=659192831443395&autoLogAppEvents=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>

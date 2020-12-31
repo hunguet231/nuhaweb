@@ -11,8 +11,9 @@ function CarouselPrdsDetail({ photos }) {
     <div className="gallery-product">
       <ImageGallery
         lazyLoad
-        thumbnailPosition="left"
+        showIndex
         showBullets
+        showThumbnails={false}
         items={images}
       />
     </div>
