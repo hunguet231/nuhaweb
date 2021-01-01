@@ -29,7 +29,7 @@ function ShowList({ title, color }) {
           <div className="list-items">
             <Grid container spacing={2}>
               {products.map((product) => (
-                <Grid key={product._id} item xs={6} sm={4} lg={3}>
+                <Grid key={product._id} item xs={6} sm={3}>
                   <Product color={color} product={product} />
                 </Grid>
               ))}

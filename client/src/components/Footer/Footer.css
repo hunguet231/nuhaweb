@@ -1,9 +1,9 @@
 .footer-wrapper {
     width: 100%;
     font-size: 16px;
-    /* background: #3f4140; */
-    color: #696969;
-    background: url("./bg-repeat.png") repeat;
+    background: #3f4140;
+    color: #d0d0d0;
+    /* background: url("./bg-repeat.png") repeat; */
     border-top: 1px solid #d8d8d8;
 }
 
@@ -16,6 +16,10 @@
 .text-bottom {
     color: gray;
     line-height: 1;
+}
+
+.socal-icon img {
+    margin-right: 5px;
 }
 
 @media (max-width: 510px) {

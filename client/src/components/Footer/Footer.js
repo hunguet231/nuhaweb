@@ -26,9 +26,11 @@ function Footer() {
           <Grid item xs={6} sm={4}>
             <h5>LIÊN KẾT XÃ HỘI</h5>
             <br />
-            <img width="32" src="/facebook.svg" />
-            <img width="32" src="/instagram.svg" />
-            <img width="32" src="/twitter.svg" />
+            <div className="socal-icon">
+              <img width="32" src="/facebook.png" />
+              <img width="32" src="/instagram.png" />
+              <img width="32" src="/twitter.png" />
+            </div>
           </Grid>
         </Grid>
         <Grid container>
@@ -38,7 +40,11 @@ function Footer() {
               <br />
               &copy;Copyright 2020 - NUHA. Phiên bản thử nghiệm
               <br />
-              Made by <a href="https://fb.com/hungnguyen2301">Hung</a> with ❤
+              Made by{" "}
+              <a target="_blank" href="https://fb.com/hungnguyen2301">
+                Hung
+              </a>{" "}
+              with ❤
             </Typography>
           </Grid>
         </Grid>

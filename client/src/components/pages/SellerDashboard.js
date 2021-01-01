@@ -52,7 +52,9 @@ function SellerDashboard() {
       </div>
 
       <div className="over-view">
-        <h4>Tổng quan</h4>
+        <h4>
+          Tổng quan <Link to="/me/update-level">Nâng cấp shop</Link>
+        </h4>
 
         {/* Shop Info */}
         <div className="shop-info">

@@ -21,6 +21,7 @@ import Category from "./components/Category/Category";
 import { Detector } from "react-detect-offline";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import Headroom from "react-headroom";
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -48,16 +49,17 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <div className="header">
-          <Navbar />
-          {/* <Breadcrumbs /> */}
-        </div>
+        <Headroom>
+          <div className="header">
+            <Navbar />
+          </div>
+        </Headroom>
         <div className="body">
           <Route
             path="/"
             render={(props) => (
               <>
-                <div className="slider">{/* <SliderTop /> */}</div>
+                {/* <div className="slider"><SliderTop /></div> */}
                 <div className="wrapper">
                   <div className="showcase">
                     <Category />

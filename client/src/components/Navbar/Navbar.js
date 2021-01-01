@@ -25,7 +25,6 @@ import { logout } from "../../actions/userActions";
 
 const useStyles = makeStyles({
   root: {
-    background: "#6c5ce7",
     border: 0,
     color: "white",
     height: 35,
@@ -119,6 +118,7 @@ function Navbar({ history }) {
               <Link to="/me/sell/dashboard">
                 <Button
                   variant="contained"
+                  color="primary"
                   classes={{ root: classes.root, label: classes.label }}
                 >
                   <PostAddRoundedIcon />
