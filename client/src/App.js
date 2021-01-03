@@ -50,9 +50,7 @@ function App() {
     <Router>
       <div className="app">
         <Headroom>
-          <div className="header">
-            <Navbar />
-          </div>
+          <Navbar />
         </Headroom>
         <div className="body">
           <Route
@@ -113,16 +111,15 @@ function App() {
               />
             </div>
             <div className="showcase">
-              <Route path="/products/:slug" component={ProductDetail} exact />
+              <Route
+                path="/products/:slug/:userId"
+                component={ProductDetail}
+                exact
+              />
             </div>
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
-
-        {/* Toaster */}
-        {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
-          <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
-        )}
 
         {/* Messenger Chat Button */}
         <MessengerCustomerChat
@@ -152,6 +149,10 @@ function App() {
         />
 
         <div className="footer">
+          {/* Toaster */}
+          {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
+            <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
+          )}
           <Footer />
         </div>
       </div>

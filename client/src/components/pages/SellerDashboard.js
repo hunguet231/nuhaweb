@@ -18,7 +18,7 @@ function SellerDashboard() {
   const [countPrds, setCountPrds] = useState("");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const fetchProducts = async () => {
       setLoading(true);
       const { data } = await Axios.get(`/api/v1/users/${_id}/products`);

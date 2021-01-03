@@ -45,13 +45,7 @@ function Navbar({ history }) {
   const [keyword, setKeyword] = useState("");
 
   // search product
-  const handleSearch = () => {
-    if (keyword.trim()) {
-      history.push(`/search?q=${keyword}`);
-    } else {
-      history.push("/");
-    }
-  };
+  const handleSearch = () => {};
 
   // logout
   const handleLogout = () => {
@@ -89,13 +83,6 @@ function Navbar({ history }) {
           </div>
         </div>
         <div className="navbar-right">
-          <input type="checkbox" id="nav-toggle" />
-          <label htmlFor="nav-toggle" className="icon-burger">
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-          </label>
-
           <div className="navbar-right__top">
             <Link to="/" className="option">
               <HomeOutlinedIcon />
@@ -129,8 +116,10 @@ function Navbar({ history }) {
             <div className="user">
               {userInfo ? (
                 <>
-                  <p onClick={handleClick}>{userInfo.user.firstName}</p>
-                  <KeyboardArrowDownIcon />
+                  <Avatar />
+                  <p className="user-name" onClick={handleClick}>
+                    {userInfo.user.firstName}
+                  </p>
                   <Menu
                     anchorEl={anchorEl}
                     keepMounted

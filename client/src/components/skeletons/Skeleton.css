@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.row-text {
+    margin-left: 10px;
+}
+
 .circle {
     margin-right: 8px;
 }

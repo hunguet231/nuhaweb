@@ -95,6 +95,10 @@ function Register({ location, history }) {
     }
   }, [history, location, userInfo, redirect]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };

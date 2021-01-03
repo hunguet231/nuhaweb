@@ -23,7 +23,7 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
   queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
 
   // finding resource
-  query = User.find(JSON.parse(queryStr));
+  query = User.find(JSON.parse(queryStr)).populate("products");
 
   // select fields
   if (req.query.select) {
@@ -129,11 +129,13 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/users/:id
 // @access  Private
 exports.deleteUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findByIdAndDelete(req.params.id);
+  const user = await User.findById(req.params.id);
 
   if (!user) {
     return new ErrorResponse(`User not found with id of ${req.params.id}`, 404);
   }
+
+  user.remove();
 
   res.status(200).json({
     success: true,

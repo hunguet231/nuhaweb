@@ -1,9 +1,11 @@
 .category {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     max-width: 1000px;
-    margin: 30px auto 20px;
-    padding: 0 15px;
-    background-color: #fff;
+    margin: 10px auto 20px;
+}
+
+.category .category-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 3px;
 }

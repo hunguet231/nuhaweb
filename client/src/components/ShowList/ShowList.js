@@ -5,6 +5,7 @@ import Product from "../Product/Product";
 import "./ShowList.css";
 import SkeletonPrdsList from "../skeletons/SkeletonPrdsList";
 import { listProducts } from "../../actions/productActions";
+import EmptyCard from "../EmptyCard/EmptyCard";
 
 function ShowList({ title, color }) {
   const dispatch = useDispatch();
@@ -30,9 +31,12 @@ function ShowList({ title, color }) {
             <Grid container spacing={2}>
               {products.map((product) => (
                 <Grid key={product._id} item xs={6} sm={3}>
-                  <Product color={color} product={product} />
+                  <Product product={product} />
                 </Grid>
               ))}
+              <Grid item xs={6} sm={3}>
+                <EmptyCard />
+              </Grid>
             </Grid>
           </div>
         </>

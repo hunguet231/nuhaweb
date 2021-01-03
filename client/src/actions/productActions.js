@@ -18,7 +18,7 @@ export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/v1/products?limit=12");
+    const { data } = await axios.get("/api/v1/products?limit=11");
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.data });
   } catch (error) {

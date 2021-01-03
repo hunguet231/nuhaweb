@@ -18,7 +18,7 @@ function Login({ location, history }) {
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     if (userInfo) {
       history.push(redirect);
     }

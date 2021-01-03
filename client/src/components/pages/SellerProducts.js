@@ -24,7 +24,7 @@ function SellerProducts() {
   const { user } = userInfo;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const fetchProducts = async () => {
       setLoading(true);
       const { data } = await Axios.get(

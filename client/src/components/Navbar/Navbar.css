@@ -4,7 +4,7 @@
     background-color: #fff;
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 999 !important;
 }
 
 .navbar {
@@ -24,7 +24,7 @@
 }
 
 .navbar-left h2 {
-    color: #74b9ff;
+    color: #3498db;
 }
 
 .option {
@@ -87,42 +87,22 @@
     background-color: transparent;
 }
 
-.search-box>input::-webkit-search-cancel-button {
-    position: relative;
-    font-size: 24px;
-    background-color: #A09F9F;
-}
-
 .user {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
+.user .MuiAvatar-root {
+    border: 1px solid #3498db;
+}
+
+.user .user-name {
+    margin-left: 6px;
+}
+
 ::placeholder {
     color: rgb(124, 124, 124);
-}
-
-#nav-toggle {
-    position: absolute;
-    top: -100px
-}
-
-.icon-burger {
-    position: absolute;
-    right: 8px;
-    top: 6px;
-    display: none;
-    cursor: pointer;
-}
-
-.icon-burger .line {
-    width: 21px;
-    height: 3px;
-    background-color: #fff;
-    margin: 4px 0;
-    border-radius: 3px;
-    transition: all .3s ease-in-out;
 }
 
 
@@ -147,18 +127,6 @@
 }
 
 @media (max-width: 510px) {
-    .icon-burger {
-        display: block;
-    }
-    .navbar-right :checked~.icon-burger .line:nth-child(1) {
-        transform: translateY(8px) rotate(225deg);
-    }
-    .navbar-right :checked~.icon-burger .line:nth-child(3) {
-        transform: translateY(-6px) rotate(-225deg);
-    }
-    .navbar-right :checked~.icon-burger .line:nth-child(2) {
-        opacity: 0;
-    }
     .navbar-right__top {
         position: fixed;
         z-index: 999;

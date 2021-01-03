@@ -104,7 +104,7 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 // Encrypt password using bcrypt
@@ -145,5 +145,19 @@ UserSchema.methods.getResetPasswordToken = function () {
 
   return resetToken;
 };
+
+// Cascade delete courses when a bootcamp is deleted
+UserSchema.pre("remove", async function (next) {
+  await this.model("Product").deleteMany({ user: this._id });
+  next();
+});
+
+// Reverse populate with virtuals
+UserSchema.virtual("products", {
+  ref: "Product",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
 
 module.exports = mongoose.model("User", UserSchema);

@@ -8,7 +8,6 @@ import Rating from "../Rating/Rating";
 import "./Product.css";
 
 function Product({
-  color,
   product: {
     _id,
     title,
@@ -31,7 +30,7 @@ function Product({
     <>
       {user && (
         <div className="product-item">
-          <Link to={`/products/${slug}`}>
+          <Link to={`/products/${slug}/${user._id}`}>
             <div className="product-item-header" title={title}>
               <div
                 className="img"
@@ -40,7 +39,7 @@ function Product({
             </div>
           </Link>
           <div className="product-item-body">
-            <Link to={`/products/${slug}`}>
+            <Link to={`/products/${slug}/${user._id}`}>
               <Typography className="title" variant="body2" title={title}>
                 {title}
               </Typography>

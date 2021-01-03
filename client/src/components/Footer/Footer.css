@@ -5,6 +5,7 @@
     color: #d0d0d0;
     /* background: url("./bg-repeat.png") repeat; */
     border-top: 1px solid #d8d8d8;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .footer-inner {

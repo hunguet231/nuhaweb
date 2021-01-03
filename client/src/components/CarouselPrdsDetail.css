@@ -27,3 +27,9 @@
 .gallery-product .fullscreen .image-gallery-slide {
     height: 100vh;
 }
+
+.gallery-product .image-gallery-svg {
+    width: 18px;
+    height: 32px;
+    z-index: -2 !important;
+}

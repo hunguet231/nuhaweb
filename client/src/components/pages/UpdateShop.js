@@ -26,7 +26,7 @@ function UpdateShop({ history }) {
     // if (JSON.parse(localStorage.getItem("userInfo")).user.isSeller) {
     //   history.push("/me/sell/dashboard");
     // }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     setIsUpdate(false);
   }, [
     shopName,
