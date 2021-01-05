@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    z-index: 0;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
 .header {
@@ -28,4 +28,28 @@
 .slider {
     display: block;
     margin-top: 82px;
+}
+
+.app {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 200px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .app {
+        padding-bottom: 300px;
+    }
+}
+
+@media (max-width: 510px) {
+    .app {
+        padding-bottom: 290px;
+    }
 }

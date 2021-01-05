@@ -26,24 +26,34 @@
     margin-left: 25px;
 }
 
-.fb,
-.google {
+.my-facebook-button-class,
+.my-google-button-class {
+    width: 100%;
     display: flex;
     align-items: center;
-    border: 1px solid hsl(0, 0%, 78%);
-    margin: 20px 5px;
-    padding: 6px;
+    justify-content: center;
+    color: #585858 !important;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
+    background-color: #fff !important;
+    border: none !important;
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 3px;
     font-weight: 600;
     cursor: pointer;
+    outline: none;
     position: relative;
 }
 
-.fb p,
-.google p {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%)
+.my-facebook-button-class img,
+.gg-login-inner img {
+    width: 26px;
+    margin-right: 10px;
+}
+
+.gg-login-inner {
+    display: flex;
+    align-items: center;
 }
 
 form {
@@ -58,7 +68,7 @@ form {
     border-radius: 999px;
     outline: none;
     border: 0;
-    background-color: ghostwhite;
+    background-color: rgb(243, 243, 243);
 }
 
 form button {
@@ -98,9 +108,11 @@ form button:hover {
     .login form input {
         margin-top: 14px;
     }
-    .login p.text-sm,
-    .fb,
-    .google {
+    .login p.text-sm {
         font-size: 14px;
+    }
+    .gg-login-inner span,
+    .my-facebook-button-class {
+        font-size: 12px;
     }
 }

@@ -1,3 +1,7 @@
+.skeleton {
+    padding: auto 8px;
+}
+
 .row {
     display: flex;
     align-items: center;

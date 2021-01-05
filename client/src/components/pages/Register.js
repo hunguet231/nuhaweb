@@ -185,7 +185,7 @@ function Register({ location, history }) {
             </button>
           </form>
           <br />
-          <p className="text-sm">Hoặc đăng ký với</p>
+          <p className="text-sm">Hoặc</p>
           <div className="fb">
             <img src="/facebook.svg" />
             <p>Facebook</p>

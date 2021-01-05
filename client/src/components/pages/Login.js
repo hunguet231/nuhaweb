@@ -5,6 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
 import "./Login.css";
 import Alert from "@material-ui/lab/Alert";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+
+const responseFacebook = (response) => {
+  console.log(response);
+};
+
+const responseGoogle = (response) => {
+  console.log(response);
+};
 
 function Login({ location, history }) {
   const [email, setEmail] = useState("");
@@ -65,15 +75,29 @@ function Login({ location, history }) {
             </button>
           </form>
           <br />
-          <p className="text-sm">Hoặc đăng nhập với</p>
-          <div className="fb">
-            <img src="/facebook.svg" />
-            <p>Facebook</p>
-          </div>
-          <div className="google">
-            <img src="/google.svg" />
-            <p>Google</p>
-          </div>
+          <p className="text-sm">Hoặc</p>
+          <FacebookLogin
+            textButton="Đăng nhập bằng Facebook"
+            appId="659192831443395"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={responseFacebook}
+            cssClass="my-facebook-button-class"
+            icon={<img src="/facebook.svg" />}
+          ></FacebookLogin>
+          <GoogleLogin
+            clientId="45790515442-clqjotokdi4k0frcbnoi36kpvqj6476v.apps.googleusercontent.com"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            className="my-google-button-class"
+            cookiePolicy={"single_host_origin"}
+            icon={false}
+          >
+            <div className="gg-login-inner">
+              <img src="/google.svg" />
+              <span>Đăng nhập bằng Google</span>
+            </div>
+          </GoogleLogin>
           <p className="text-sm">
             Bạn chưa có tài khoản?{" "}
             <Link

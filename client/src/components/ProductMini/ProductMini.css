@@ -46,7 +46,7 @@
     height: 100px;
 }
 
-.product-mini .text .title {
+.product-mini .text .title-mini {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -56,15 +56,25 @@
 
 .product-mini .prices {
     color: #e74c3c;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.product-mini .prices .MuiSvgIcon-root {
+    color: #858585;
+    font-size: 14px;
 }
 
 .product-mini .category-b {
     display: flex;
     align-items: center;
     font-weight: 300;
-    color: #858585
+    color: #858585;
 }
 
 .product-mini .category-b .MuiSvgIcon-root {
     font-size: 14px;
+    margin-left: 3px;
 }

@@ -35,3 +35,10 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 510px) {
+    .empty-card .text {
+        font-size: 14px;
+        transform: translateX(-10px);
+    }
+}

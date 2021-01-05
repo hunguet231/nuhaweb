@@ -15,6 +15,8 @@ function CarouselPrdsDetail({ photos }) {
         showBullets
         showThumbnails={false}
         items={images}
+        showThumbnails
+        thumbnailPosition="left"
       />
     </div>
   );

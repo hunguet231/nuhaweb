@@ -59,9 +59,9 @@ function App() {
               <>
                 {/* <div className="slider"><SliderTop /></div> */}
                 <div className="wrapper">
-                  <div className="showcase">
+                  {/* <div className="showcase">
                     <Category />
-                  </div>
+                  </div> */}
                   <div className="showcase">
                     <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
                   </div>

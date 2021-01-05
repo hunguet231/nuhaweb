@@ -54,7 +54,7 @@ function EditProduct({ history, match }) {
   }, [userInfo, history]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ function EditProduct({ history, match }) {
   useEffect(() => {
     if (photos && photos.length) {
       editPrd();
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       swal({
         title: "Cập nhật thành công",
         content: <a href="/me/sell/products">Về trang sản phẩm</a>,

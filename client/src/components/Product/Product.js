@@ -39,10 +39,12 @@ function Product({
             </div>
           </Link>
           <div className="product-item-body">
-            <Link to={`/products/${slug}/${user._id}`}>
-              <Typography className="title" variant="body2" title={title}>
-                {title}
-              </Typography>
+            <Link
+              to={`/products/${slug}/${user._id}`}
+              className="title"
+              title={title}
+            >
+              {title}
             </Link>
             <div className="author">
               <Typography variant="subtitle2" color="textSecondary">

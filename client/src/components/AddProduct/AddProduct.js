@@ -127,7 +127,7 @@ function AddProduct({ history }) {
               "Content-Type": "application/json",
             },
           });
-
+          console.log(res.data);
           const data = await res.data.secure_url;
           photosArray.push(data);
         }

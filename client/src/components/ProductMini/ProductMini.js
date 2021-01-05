@@ -1,5 +1,6 @@
 import React from "react";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
+import MonetizationOnOutlinedIcon from "@material-ui/icons/MonetizationOnOutlined";
 import "./ProductMini.css";
 
 function ProductMini({
@@ -14,12 +15,16 @@ function ProductMini({
         ></div>
 
         <div className="text">
-          <div className="title">{title}</div>
+          <div className="title-mini">{title}</div>
+
+          <div className="prices">
+            <MonetizationOnOutlinedIcon className="mr-5" />
+            {prices} đ
+          </div>
           <div className="category-b">
             <LocalOfferIcon className="mr-5" />
             {category}
           </div>
-          <div className="prices">{prices} đ</div>
         </div>
       </div>
     </a>
