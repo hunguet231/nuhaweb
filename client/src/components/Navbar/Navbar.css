@@ -133,7 +133,7 @@
 
 @media (max-width: 510px) {
     .navbar-right__top {
-        position: fixed;
+        /* position: fixed;
         z-index: 999;
         left: 0;
         right: 0;
@@ -144,11 +144,12 @@
         flex-direction: column;
         justify-content: flex-start;
         width: auto;
-        transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out; */
+        display: none;
     }
     .user {
         display: none;
-        position: fixed;
+        /* position: fixed;
         justify-content: center;
         z-index: 999;
         left: 0;
@@ -160,7 +161,7 @@
         width: auto;
         height: 64px;
         transition: all 0.4s ease-in-out;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.322);
+        border-bottom: 1px solid rgba(128, 128, 128, 0.322); */
     }
     .option {
         color: rgb(37, 37, 37);
@@ -172,11 +173,6 @@
     }
     .option .MuiTypography-root {
         font-size: 14px;
-    }
-    .navbar-right :checked~.navbar-right__top,
-    .navbar-right :checked~.navbar-right__bottom .user {
-        background-color: rgba(255, 255, 255, 0.95);
-        transform: translateX(0);
     }
     .navbar-right {
         justify-content: flex-end;
