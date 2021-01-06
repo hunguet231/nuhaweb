@@ -41,6 +41,7 @@ function EditProduct({ history, match }) {
   const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(false);
   const [editorState, setEditorState] = useState("");
+  const [valueUpload, setValueUpload] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -55,9 +56,6 @@ function EditProduct({ history, match }) {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
-
-  useEffect(() => {
     const fetchProduct = async () => {
       const { data } = await Axios.get(
         `/api/v1/products?slug=${match.params.slug}`
@@ -81,6 +79,7 @@ function EditProduct({ history, match }) {
           )
         )
       );
+      initImagesPreview(product.photos);
     }
   }, [product]);
 
@@ -96,6 +95,38 @@ function EditProduct({ history, match }) {
       });
     }
   }, [photos]);
+
+  // init images preview
+  // const urlToFile = async (image) => {
+  //   const response = await fetch(image);
+  //   const blob = await response.blob();
+  //   const file = new File([blob], `${image}.png`, { type: blob.type });
+  //   return file;
+  // };
+
+  const toDataURL = (url) =>
+    fetch(url)
+      .then((response) => response.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          })
+      );
+
+  const initImagesPreview = (photos) => {
+    const imgObjList = [];
+    photos.forEach((photo) => {
+      // const file = urlToFile(photo);
+      toDataURL(photo).then((dataUrl) => {
+        imgObjList.push({ data_url: dataUrl });
+      });
+    });
+    setImages(imgObjList);
+  };
 
   // handle click edit button
   const handleEdit = (e) => {
@@ -162,6 +193,7 @@ function EditProduct({ history, match }) {
 
   const onImgsChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
+    console.log(imageList);
   };
 
   const handleCategoryChange = (e) => {
@@ -261,8 +293,8 @@ function EditProduct({ history, match }) {
         </FormControl>
         <p>Ảnh sản phẩm</p>
         <ImageUploading
-          multiple
           value={images}
+          multiple
           onChange={onImgsChange}
           dataURLKey="data_url"
         >
@@ -290,7 +322,7 @@ function EditProduct({ history, match }) {
                 Chọn ảnh hoặc kéo thả vào đây
               </div>
               <div className="preview">
-                {imageList.map((image, index) => (
+                {images.map((image, index) => (
                   <div key={index} className="image-item">
                     <div className="img">
                       <img src={image.data_url} width="100" />

@@ -235,4 +235,12 @@
     .link-view-more .MuiSvgIcon-root {
         font-size: 14px;
     }
+    .web .MuiSvgIcon-root {
+        width: 16px;
+    }
+    .zalo img,
+    .facebook img {
+        width: 14px;
+        margin-left: 1px;
+    }
 }

@@ -20,7 +20,16 @@ import Axios from "axios";
 import { useSelector } from "react-redux";
 
 function ItemManage({ product, history }) {
-  const { title, slug, photos, quantity, updatedAt, createdAt, _id } = product;
+  const {
+    title,
+    slug,
+    user,
+    photos,
+    quantity,
+    updatedAt,
+    createdAt,
+    _id,
+  } = product;
 
   const { DateTime } = require("luxon");
   const date = DateTime.local().setLocale("vi");
@@ -88,7 +97,7 @@ function ItemManage({ product, history }) {
         toggleModal={toggleModal}
       />
       <Grid className="item" item xs={12} md={6}>
-        <Link to={`/products/${slug}`}>
+        <Link to={`/products/${slug}/${user._id}`}>
           <div className="photo">
             <div
               className="inner"
@@ -97,7 +106,7 @@ function ItemManage({ product, history }) {
           </div>
         </Link>
         <div className="text">
-          <Link to={`/products/${slug}`}>
+          <Link to={`/products/${slug}/${user._id}`}>
             <h4>{title}</h4>
           </Link>
           <Typography variant="body2">

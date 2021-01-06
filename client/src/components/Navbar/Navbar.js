@@ -101,18 +101,6 @@ function Navbar({ history }) {
           </div>
 
           <div className="navbar-right__bottom">
-            <div className="sell-btn">
-              <Link to="/me/sell/dashboard">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  classes={{ root: classes.root, label: classes.label }}
-                >
-                  <PostAddRoundedIcon />
-                  <p>Bắt đầu bán</p>
-                </Button>
-              </Link>
-            </div>
             <div className="user">
               {userInfo ? (
                 <>
@@ -144,6 +132,18 @@ function Navbar({ history }) {
                   </Link>
                 </>
               )}
+            </div>
+            <div className="sell-btn">
+              <Link to="/me/sell/dashboard">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  classes={{ root: classes.root, label: classes.label }}
+                >
+                  <PostAddRoundedIcon />
+                  <p>Bắt đầu bán</p>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

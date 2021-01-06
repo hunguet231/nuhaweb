@@ -7,6 +7,12 @@
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+.MuiFormLabel-root,
+.DraftEditor-root,
+.image-gallery-slide-wrapper {
+    z-index: 0 !important;
+}
+
 .header {
     margin-bottom: 81px;
 }
