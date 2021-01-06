@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  withRouter,
+} from "react-router-dom";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import Navbar from "./components/Navbar/Navbar";
 import SliderTop from "./components/SliderTop/SliderTop";
@@ -160,4 +165,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;
