@@ -117,6 +117,7 @@ const ProductDetail = ({ match }) => {
     <>
       {product && (
         <>
+          {/* Breadcrumbs */}
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
             aria-label="breadcrumb"
@@ -139,250 +140,240 @@ const ProductDetail = ({ match }) => {
             </Typography>
           </Breadcrumbs>
 
+          {/* Detail Section */}
           <div className="product-detail">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={8}>
-                    <CarouselPrdsDetail photos={product.photos} />
-                    <div className="product-description">
-                      <div className="title">{product.title}</div>
-                      {/* <Rating
+            <section>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={8}>
+                  <CarouselPrdsDetail photos={product.photos} />
+                  <div className="product-description">
+                    <div className="title">{product.title}</div>
+                    {/* <Rating
                     value={numRatings}
                     text={`(${numReviews} đánh giá)`}
                     id={_id}
                   /> */}
-                      <div className="prices" style={{ color: " #e74c3c" }}>
-                        {product.prices
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                        đ
-                      </div>
-                      <div className="save-fav">
-                        {/* Favorite */}
-                        <Tooltip title="Thêm vào yêu thích">
-                          <FavoriteBorderIcon onClick={addToFavorite} />
-                        </Tooltip>
-                        {/* Bookmark */}
-                        <Tooltip title="Lưu sản phẩm">
-                          <BookmarkBorderIcon onClick={savePost} />
-                        </Tooltip>
-                      </div>
+                    <div className="prices" style={{ color: " #e74c3c" }}>
+                      {product.prices
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                      đ
                     </div>
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <div>
-                      <Typography color="textSecondary" variant="subtitle2">
-                        Thông tin liên hệ:
-                        <br />
-                        {userInfo && (
-                          <>
-                            <div className="contact">
-                              <div className="phone">
-                                <PhoneInTalkIcon />
-                                <a href={`tel:${product.user.phoneNumber}`}>
-                                  Gọi {product.user.phoneNumber}
-                                </a>
-                              </div>
-                              <div className="mess">
-                                <MailOutlineIcon />
-                                <a href={`sms://${product.user.phoneNumber}`}>
-                                  Nhắn tin SMS
-                                </a>
-                              </div>
+                    <div className="save-fav">
+                      {/* Favorite */}
+                      <Tooltip title="Thêm vào yêu thích">
+                        <FavoriteBorderIcon onClick={addToFavorite} />
+                      </Tooltip>
+                      {/* Bookmark */}
+                      <Tooltip title="Lưu sản phẩm">
+                        <BookmarkBorderIcon onClick={savePost} />
+                      </Tooltip>
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <div>
+                    <Typography color="textSecondary" variant="subtitle2">
+                      Thông tin liên hệ:
+                      <br />
+                      {userInfo && (
+                        <>
+                          <div className="contact">
+                            <div className="phone">
+                              <PhoneInTalkIcon />
+                              <a href={`tel:${product.user.phoneNumber}`}>
+                                Gọi {product.user.phoneNumber}
+                              </a>
                             </div>
-                            <div className="contact-more">
-                              {product.user.website && (
-                                <div className="web">
-                                  <LanguageIcon />
-                                  <a
-                                    href={
-                                      product.user.website.startsWith(
-                                        "http://"
-                                      ) ||
-                                      product.user.website.startsWith(
-                                        "https://"
-                                      )
-                                        ? product.user.website
-                                        : "https://" + product.user.website
-                                    }
-                                    target="_blank"
-                                  >
-                                    {product.user.website}
-                                  </a>
-                                </div>
-                              )}
-                              {product.user.zalo && (
-                                <div className="zalo">
-                                  <img src="/zalo.svg" />
-                                  <a
-                                    href={`https://zalo.me/${product.user.zalo}`}
-                                    target="_blank"
-                                  >
-                                    Zalo
-                                  </a>
-                                </div>
-                              )}
-                              {product.user.facebook && (
-                                <div className="facebook">
-                                  <img src="/fb.svg" />
-                                  <a
-                                    href={
-                                      product.user.facebook.startsWith(
-                                        "http://"
-                                      ) ||
-                                      product.user.facebook.startsWith(
-                                        "https://"
-                                      )
-                                        ? product.user.facebook
-                                        : "https://" + product.user.facebook
-                                    }
-                                    target="_blank"
-                                  >
-                                    Facebook
-                                  </a>
-                                </div>
-                              )}
+                            <div className="mess">
+                              <MailOutlineIcon />
+                              <a href={`sms://${product.user.phoneNumber}`}>
+                                Nhắn tin SMS
+                              </a>
+                            </div>
+                          </div>
+                          <div className="contact-more">
+                            {product.user.website && (
+                              <div className="web">
+                                <LanguageIcon />
+                                <a
+                                  href={
+                                    product.user.website.startsWith(
+                                      "http://"
+                                    ) ||
+                                    product.user.website.startsWith("https://")
+                                      ? product.user.website
+                                      : "https://" + product.user.website
+                                  }
+                                  target="_blank"
+                                >
+                                  {product.user.website}
+                                </a>
+                              </div>
+                            )}
+                            {product.user.zalo && (
+                              <div className="zalo">
+                                <img src="/zalo.svg" />
+                                <a
+                                  href={`https://zalo.me/${product.user.zalo}`}
+                                  target="_blank"
+                                >
+                                  Zalo
+                                </a>
+                              </div>
+                            )}
+                            {product.user.facebook && (
+                              <div className="facebook">
+                                <img src="/fb.svg" />
+                                <a
+                                  href={
+                                    product.user.facebook.startsWith(
+                                      "http://"
+                                    ) ||
+                                    product.user.facebook.startsWith("https://")
+                                      ? product.user.facebook
+                                      : "https://" + product.user.facebook
+                                  }
+                                  target="_blank"
+                                >
+                                  Facebook
+                                </a>
+                              </div>
+                            )}
 
-                              <Typography
-                                className="d-flex-r"
-                                color="textSecondary"
-                                variant="subtitle2"
+                            <Typography
+                              className="d-flex-r"
+                              color="textSecondary"
+                              variant="subtitle2"
+                            >
+                              <DomainIcon className="mr-5 icon-detail" />
+                              Nhà cung cấp:
+                              <Link
+                                style={{ color: "dodgerblue" }}
+                                to={`/users/${product.user._id}`}
                               >
-                                <DomainIcon className="mr-5 icon-detail" />
-                                Nhà cung cấp:{" "}
-                                <Link
-                                  style={{ color: "dodgerblue" }}
-                                  to={`/users/${product.user._id}`}
-                                >
-                                  {product.user.shopName}
-                                </Link>
+                                {product.user.shopName}
+                              </Link>
+                            </Typography>
+                            <Typography
+                              className="d-flex-r"
+                              color="textSecondary"
+                              variant="subtitle2"
+                            >
+                              <LocationOnIcon className="mr-5 icon-detail" />
+                              Địa chỉ:{" "}
+                              <Typography color="textPrimary" variant="inherit">
+                                {product.user.address} | {product.user.city}
                               </Typography>
-                              <Typography
-                                className="d-flex-r"
-                                color="textSecondary"
-                                variant="subtitle2"
-                              >
-                                <LocationOnIcon className="mr-5 icon-detail" />
-                                Địa chỉ:{" "}
-                                <Typography
-                                  color="textPrimary"
-                                  variant="inherit"
-                                >
-                                  {product.user.address} | {product.user.city}
-                                </Typography>
+                            </Typography>
+                            <Typography
+                              className="d-flex-r"
+                              color="textSecondary"
+                              variant="subtitle2"
+                            >
+                              <ExposureIcon className="mr-5 icon-detail" />
+                              Số lượng có sẵn:{" "}
+                              <Typography color="textPrimary" variant="inherit">
+                                {product.quantity}
                               </Typography>
-                              <Typography
-                                className="d-flex-r"
-                                color="textSecondary"
-                                variant="subtitle2"
-                              >
-                                <ExposureIcon className="mr-5 icon-detail" />
-                                Số lượng có sẵn:{" "}
-                                <Typography
-                                  color="textPrimary"
-                                  variant="inherit"
-                                >
-                                  {product.quantity}
-                                </Typography>
-                              </Typography>
-                            </div>
-                          </>
-                        )}
-                        {!userInfo && (
-                          <>
-                            <Link style={{ color: "dodgerblue" }} to="/login">
-                              Đăng nhập
-                            </Link>{" "}
-                            để xem
-                          </>
-                        )}
-                      </Typography>
-                    </div>
-                  </Grid>
+                            </Typography>
+                          </div>
+                        </>
+                      )}
+                      {!userInfo && (
+                        <>
+                          <Link style={{ color: "dodgerblue" }} to="/login">
+                            Đăng nhập
+                          </Link>{" "}
+                          để xem
+                        </>
+                      )}
+                    </Typography>
+                  </div>
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={8}>
-                    <Typography color="textSecondary" variant="subtitle2">
-                      Chi tiết sản phẩm:
+            </section>
+
+            <section>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={8}>
+                  <Typography color="textSecondary" variant="subtitle2">
+                    Chi tiết sản phẩm:
+                  </Typography>
+                  <div className="description">
+                    <Typography color="textPrimary" variant="inherit">
+                      {ReactHtmlParser(product.description)}
                     </Typography>
-                    <div className="description">
-                      <Typography color="textPrimary" variant="inherit">
-                        {ReactHtmlParser(product.description)}
-                      </Typography>
-                    </div>
-                    <Typography color="textSecondary" variant="subtitle2">
-                      <br />
-                      Chia sẻ bài viết:
-                    </Typography>
+                  </div>
+                  <Typography color="textSecondary" variant="subtitle2">
+                    <br />
+                    Chia sẻ bài viết:
+                  </Typography>
 
-                    <div className="share">
-                      <div
-                        className="fb-share-button"
-                        data-href={`http://localhost:3000${location.pathname}`}
-                        data-layout="button_count"
-                        data-size="small"
-                      >
-                        <a
-                          target="_blank"
-                          href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-                          className="fb-xfbml-parse-ignore"
-                        >
-                          Chia sẻ
-                        </a>
-                      </div>
-
-                      <div className="copy-link-btn ">
-                        <FileCopyOutlinedIcon
-                          className="link-icon "
-                          onClick={copyToClipboard}
-                        />
-                        <Typography variant="caption">
-                          {copySucess !== "" && copySucess}
-                        </Typography>
-                      </div>
-                    </div>
-
-                    <Typography color="textSecondary" variant="subtitle2">
-                      <br />
-                      Bình luận công khai:
-                    </Typography>
-
+                  <div className="share">
                     <div
-                      className="fb-comments"
+                      className="fb-share-button"
                       data-href={`http://localhost:3000${location.pathname}`}
-                      data-numposts="5"
-                      data-lazy="true"
-                      data-width="100%"
-                    ></div>
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <Typography color="textSecondary" variant="subtitle2">
-                      Sản phẩm khác của shop:
-                    </Typography>
-                    {products
-                      .filter((prd) => prd._id != product._id)
-                      .slice(0, 5)
-                      .map((product, index) => (
-                        <Grid item xs={12}>
-                          <a
-                            href={`/products/${product.slug}/${product.user._id}`}
-                          >
-                            <ProductMini key={index} product={product} />
-                          </a>
-                        </Grid>
-                      ))}
+                      data-layout="button_count"
+                      data-size="small"
+                    >
+                      <a
+                        target="_blank"
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                        className="fb-xfbml-parse-ignore"
+                      >
+                        Chia sẻ
+                      </a>
+                    </div>
 
-                    <a href="#" className="link-view-more">
-                      <span>Xem tất cả</span>
-                      <ArrowForwardIosRoundedIcon />
-                    </a>
-                  </Grid>
+                    <div className="copy-link-btn ">
+                      <FileCopyOutlinedIcon
+                        className="link-icon "
+                        onClick={copyToClipboard}
+                      />
+                      <Typography variant="caption">
+                        {copySucess !== "" && copySucess}
+                      </Typography>
+                    </div>
+                  </div>
+
+                  <Typography color="textSecondary" variant="subtitle2">
+                    <br />
+                    Bình luận công khai:
+                  </Typography>
+
+                  <div
+                    className="fb-comments"
+                    data-href={`http://localhost:3000${location.pathname}`}
+                    data-numposts="5"
+                    data-lazy="true"
+                    data-width="100%"
+                  ></div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography color="textSecondary" variant="subtitle2">
+                    Sản phẩm khác của shop:
+                  </Typography>
+                  {products
+                    .filter((prd) => prd._id != product._id)
+                    .slice(0, 5)
+                    .map((product, index) => (
+                      <Grid item xs={12}>
+                        <a
+                          href={`/products/${product.slug}/${product.user._id}`}
+                        >
+                          <ProductMini key={index} product={product} />
+                        </a>
+                      </Grid>
+                    ))}
+
+                  <a href="#" className="link-view-more">
+                    <span>Xem tất cả</span>
+                    <ArrowForwardIosRoundedIcon />
+                  </a>
                 </Grid>
               </Grid>
-            </Grid>
+            </section>
             {/* Comment */}
             {/* <Typography color="textSecondary" variant="subtitle2">
                   <br />

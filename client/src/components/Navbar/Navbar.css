@@ -95,10 +95,6 @@
     cursor: pointer;
 }
 
-.user-inner .MuiSvgIcon-root {
-    color: #3498db;
-}
-
 .user-wrapper .MuiAvatar-root {
     border: 1px solid #3498db;
     width: 32px;

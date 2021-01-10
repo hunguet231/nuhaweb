@@ -11,7 +11,19 @@
 .footer-inner {
     max-width: 1000px;
     margin: 0 auto 0;
-    padding: 15px 15px 3px;
+    padding: 26px 15px 3px;
+}
+
+.footer-inner .footer-link {
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+    font-weight: 300;
+    display: block;
+    line-height: 1.5;
+}
+
+.footer-inner .footer-link:hover {
+    text-decoration: underline;
 }
 
 .text-bottom {
