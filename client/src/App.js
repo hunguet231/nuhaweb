@@ -27,10 +27,17 @@ import { Detector } from "react-detect-offline";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import Headroom from "react-headroom";
+import Profile from "./components/pages/Profile";
 
 function App() {
+  // user info
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
+
   const [online, setOnline] = useState(null);
   const [open, setOpen] = useState(true);
 
@@ -71,7 +78,7 @@ function App() {
                     <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
                   </div>
                   <div className="showcase">
-                    <ShowList color="#27ae60" title="Tất cả sản phẩm" />
+                    <ShowList color="#27ae60" title="Sản phẩm khác" />
                   </div>
                 </div>
               </>
@@ -95,6 +102,16 @@ function App() {
               />
             </div>
             <div className="showcase">
+              <Route
+                exact
+                path="/products/:slug/:userId"
+                component={ProductDetail}
+              />
+            </div>
+            <div className="showcase">
+              <Route exact path="/profile" component={Profile} />
+            </div>
+            <div className="showcase">
               <PrivateRoute
                 exact
                 path="/me/sell/products/add"
@@ -115,13 +132,6 @@ function App() {
                 component={UpdateShop}
               />
             </div>
-            <div className="showcase">
-              <Route
-                path="/products/:slug/:userId"
-                component={ProductDetail}
-                exact
-              />
-            </div>
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
@@ -130,6 +140,7 @@ function App() {
         <MessengerCustomerChat
           pageId="103310781374312"
           appId="659192831443395"
+          language="vi_VN"
         />
 
         {/* Detect Online/Offline */}

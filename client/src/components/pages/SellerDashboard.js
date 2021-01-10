@@ -11,9 +11,16 @@ import EditIcon from "@material-ui/icons/Edit";
 import "./SellerDashboard.css";
 
 function SellerDashboard() {
+  // user info
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
+
   const { firstName, lastName, _id } = userInfo.user;
+
   const [loading, setLoading] = useState(false);
   const [countPrds, setCountPrds] = useState("");
 

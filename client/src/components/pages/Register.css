@@ -31,20 +31,8 @@
     justify-content: space-between;
 }
 
-.register .name input {
+.register .name .MuiTextField-root {
     width: 48%;
-}
-
-.register .city {
-    align-self: flex-start;
-    margin-top: 20px;
-    font-size: 14px;
-    margin-left: 15px;
-}
-
-.register .city .title {
-    color: #7a7a7a;
-    margin-right: 10px;
 }
 
 .fb,
@@ -72,16 +60,7 @@ form {
     flex-direction: column;
 }
 
-.register form input {
-    margin-top: 20px;
-    height: 40px;
-    padding: 0 15px;
-    outline: none;
-    border: 0;
-    background-color: ghostwhite;
-}
-
-form button {
+form .submit-btn {
     margin-top: 20px;
     border-radius: 999px;
     padding: 10px;
@@ -89,17 +68,45 @@ form button {
     outline: none;
     cursor: pointer;
     color: white;
+    font-size: 14px;
     font-weight: 600;
     background-image: linear-gradient( 135deg, #72EDF2 10%, #5151E5 100%);
     background-size: 200%;
     transition: background-position .5s;
 }
 
-form button:hover {
+form .submit-btn:hover {
     background-position: center;
 }
 
-#label-avt {
+.register .MuiTextField-root,
+.register .MuiFormControl-root {
+    margin-top: 20px;
+}
+
+.register .MuiInputLabel-root {
+    font-size: 14px;
+}
+
+.text-info {
+    font-size: 13px;
+    line-height: 1.3;
+    letter-spacing: 0.4px;
+    margin-top: 6px;
+    color: #242424;
+    justify-self: start;
+}
+
+.register .terms a {
+    color: dodgerblue;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+
+/* #label-avt {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 6px;
     width: fit-content;
@@ -113,9 +120,10 @@ form button:hover {
 #shopAvatar {
     background-color: #fff;
     cursor: pointer;
-}
+} */
 
-.imgUp {
+
+/* .imgUp {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -123,7 +131,7 @@ form button:hover {
 
 .imgUp p {
     font-size: 14px;
-}
+} */
 
 @keyframes moving {
     0% {
@@ -141,7 +149,6 @@ form button:hover {
     .slogan {
         font-size: 16px !important;
     }
-    .text-sm,
     .fb,
     .google {
         font-size: 14px;

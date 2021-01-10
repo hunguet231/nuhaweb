@@ -10,18 +10,20 @@ import {
   Badge,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import ArrowDropDownOutlinedIcon from "@material-ui/icons/ArrowDropDownOutlined";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
 import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
 import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { logout } from "../../actions/userActions";
+import { useGoogleLogout } from "react-google-login";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles({
   },
   label: {
     textTransform: "capitalize",
+    fontSize: "12px",
   },
 });
 
@@ -39,7 +42,11 @@ function Navbar({ history }) {
 
   // user info
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [keyword, setKeyword] = useState("");
@@ -51,7 +58,13 @@ function Navbar({ history }) {
   const handleLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
+    signOut();
   };
+
+  const { signOut } = useGoogleLogout({
+    clientId:
+      "45790515442-clqjotokdi4k0frcbnoi36kpvqj6476v.apps.googleusercontent.com",
+  });
 
   // menu
   const handleClick = (event) => {
@@ -94,20 +107,21 @@ function Navbar({ history }) {
               <Typography variant="caption"> Thông báo</Typography>
             </Link>
 
-            <Link to="/" className="option">
+            <Link to="/help" className="option">
               <HelpOutlineRoundedIcon />
               <Typography variant="caption"> Trợ giúp</Typography>
             </Link>
           </div>
 
           <div className="navbar-right__bottom">
-            <div className="user">
+            <div className="user-wrapper">
               {userInfo ? (
                 <>
-                  <Avatar />
-                  <p className="user-name" onClick={handleClick}>
-                    {userInfo.user.firstName}
-                  </p>
+                  <div className="user-inner" onClick={handleClick}>
+                    <Avatar src={userInfo.user.avatarUser} />
+                    <p className="user-name">{userInfo.user.firstName}</p>
+                    <ArrowDropDownOutlinedIcon />
+                  </div>
                   <Menu
                     anchorEl={anchorEl}
                     keepMounted
@@ -115,8 +129,10 @@ function Navbar({ history }) {
                     onClose={handleClose}
                   >
                     <MenuItem onClick={handleClose}>
-                      <AccountCircleIcon />{" "}
-                      <Typography variant="subtitle2">Tài khoản</Typography>
+                      <AccountCircleOutlinedIcon />{" "}
+                      <Link to="/profile">
+                        <Typography variant="subtitle2">Tài khoản</Typography>
+                      </Link>
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>
                       <ExitToAppIcon />{" "}
@@ -127,8 +143,8 @@ function Navbar({ history }) {
               ) : (
                 <>
                   <Link to="/login" className="option">
-                    <AccountCircleIcon />
-                    <Typography variant="caption">Đăng nhập</Typography>
+                    <Avatar />
+                    <p className="user-name">Đăng nhập</p>
                   </Link>
                 </>
               )}

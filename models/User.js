@@ -60,6 +60,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatarUser: {
       type: String,
+      default: "",
     },
     avatarShop: {
       type: String,
@@ -119,7 +120,7 @@ UserSchema.pre("save", async function (next) {
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };

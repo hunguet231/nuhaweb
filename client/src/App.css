@@ -13,6 +13,31 @@
     z-index: 0 !important;
 }
 
+.MuiTextField-root,
+.MuiFormControl-root {
+    margin-top: 20px;
+}
+
+.MuiInputLabel-root {
+    font-size: 14px;
+}
+
+.text-info {
+    font-size: 13px;
+    line-height: 1.3;
+    letter-spacing: 0.4px;
+    margin-top: 6px;
+    color: #242424;
+}
+
+.text-info a {
+    color: dodgerblue;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
 .header {
     margin-bottom: 81px;
 }

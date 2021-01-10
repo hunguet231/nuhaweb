@@ -61,17 +61,7 @@ form {
     flex-direction: column;
 }
 
-.login form input {
-    margin-top: 20px;
-    height: 40px;
-    padding: 0 15px;
-    border-radius: 999px;
-    outline: none;
-    border: 0;
-    background-color: rgb(243, 243, 243);
-}
-
-form button {
+form .submit-btn {
     margin-top: 20px;
     border-radius: 999px;
     padding: 10px;
@@ -85,8 +75,17 @@ form button {
     transition: background-position .5s;
 }
 
-form button:hover {
+form .submit-btn:hover {
     background-position: center;
+}
+
+.login .MuiTextField-root,
+.login .MuiFormControl-root {
+    margin-top: 20px;
+}
+
+.login .MuiInputLabel-root {
+    font-size: 14px;
 }
 
 @keyframes moving {

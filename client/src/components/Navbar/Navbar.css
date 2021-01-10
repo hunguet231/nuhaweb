@@ -70,8 +70,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 3px 5px;
-    margin-right: 5px;
-    margin-top: 8px;
+    margin-right: 3px;
+    margin-top: 5px;
     background-color: #eeeeee;
     border-radius: 999px;
 }
@@ -88,18 +88,27 @@
     background-color: transparent;
 }
 
-.user {
+.user-wrapper,
+.user-inner {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.user .MuiAvatar-root {
-    border: 1px solid #3498db;
+.user-inner .MuiSvgIcon-root {
+    color: #3498db;
 }
 
-.user .user-name {
+.user-wrapper .MuiAvatar-root {
+    border: 1px solid #3498db;
+    width: 32px;
+    height: 32px;
+}
+
+.user-wrapper .user-name {
     margin-left: 6px;
+    font-size: 14px;
+    color: #3498db;
 }
 
 ::placeholder {
@@ -147,7 +156,7 @@
         transition: all 0.4s ease-in-out; */
         display: none;
     }
-    .user {
+    .user-wrapper {
         display: none;
         /* position: fixed;
         justify-content: center;

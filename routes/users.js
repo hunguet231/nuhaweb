@@ -6,6 +6,7 @@ const {
   updateUser,
   deleteUser,
 } = require("../controllers/users");
+const { protect } = require("../middlewares/auth");
 
 // include other resourse routers
 const productsRouter = require("./products");

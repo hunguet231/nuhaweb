@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
+const cors = require("cors");
 require("colors");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
@@ -15,6 +16,7 @@ const app = express();
 
 // body parse middleware
 app.use(express.json());
+app.use(cors());
 
 // cookie parser middleware
 app.use(cookieParser());

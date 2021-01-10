@@ -40,7 +40,11 @@ const ProductDetail = ({ match }) => {
   const [products, setProducts] = useState(null);
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
 
   const location = useLocation();
 
@@ -63,7 +67,6 @@ const ProductDetail = ({ match }) => {
   useEffect(() => {
     if (products) {
       const product = products.find((prd) => prd.slug == match.params.slug);
-      console.log(products);
       setProduct(product);
     }
   }, [products]);
@@ -364,7 +367,11 @@ const ProductDetail = ({ match }) => {
                       .slice(0, 5)
                       .map((product, index) => (
                         <Grid item xs={12}>
-                          <ProductMini key={index} product={product} />
+                          <a
+                            href={`/products/${product.slug}/${product.user._id}`}
+                          >
+                            <ProductMini key={index} product={product} />
+                          </a>
                         </Grid>
                       ))}
 
@@ -376,7 +383,6 @@ const ProductDetail = ({ match }) => {
                 </Grid>
               </Grid>
             </Grid>
-
             {/* Comment */}
             {/* <Typography color="textSecondary" variant="subtitle2">
                   <br />

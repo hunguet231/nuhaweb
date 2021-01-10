@@ -263,7 +263,7 @@ function AddProduct({ history }) {
         </ImageUploading>
         {imgLoading && (
           <>
-            <p>Đang tải lên ảnh... </p>
+            <p> Đang tải lên ảnh... </p>
             <LinearProgress color="secondary" style={{ marginTop: "5px" }} />
           </>
         )}

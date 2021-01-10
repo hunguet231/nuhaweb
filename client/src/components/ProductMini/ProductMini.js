@@ -7,27 +7,25 @@ function ProductMini({
   product: { photos, user, title, prices, category, slug },
 }) {
   return (
-    <a href={`/products/${slug}/${user._id}`}>
-      <div className="product-mini">
-        <div
-          className="img"
-          style={{ backgroundImage: `url(${photos[0]})` }}
-        ></div>
+    <div className="product-mini">
+      <div
+        className="img"
+        style={{ backgroundImage: `url(${photos[0]})` }}
+      ></div>
 
-        <div className="text">
-          <div className="title-mini">{title}</div>
+      <div className="text">
+        <div className="title-mini">{title}</div>
 
-          <div className="prices">
-            <MonetizationOnOutlinedIcon className="mr-5" />
-            {prices} đ
-          </div>
-          <div className="category-b">
-            <LocalOfferIcon className="mr-5" />
-            {category}
-          </div>
+        <div className="prices">
+          <MonetizationOnOutlinedIcon className="mr-5" />
+          {prices} đ
+        </div>
+        <div className="category-b">
+          <LocalOfferIcon className="mr-5" />
+          {category}
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 

@@ -6,14 +6,23 @@ import {
   productDetailsReducer,
   productCreateReducer,
 } from "./reducers/productReducers";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  googleLoginReducer,
+  updateShopReducer,
+  userDetailsReducer,
+} from "./reducers/userReducers";
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   productCreate: productCreateReducer,
   userLogin: userLoginReducer,
+  googleLogin: googleLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  updateShop: updateShopReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -27,7 +36,7 @@ const initialState = {
 const middleware = [thunk];
 
 const store = createStore(
-  reducer,
+  rootReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );

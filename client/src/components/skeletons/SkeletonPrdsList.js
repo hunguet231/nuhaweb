@@ -11,7 +11,7 @@ function SkeletonPrdsList() {
         {Array(12)
           .fill()
           .map((item, index) => (
-            <Grid key={index} item xs={6} sm={4} lg={3}>
+            <Grid key={index} item xs={6} sm={3}>
               <div className="img">
                 <Skeleton
                   variant="rect"

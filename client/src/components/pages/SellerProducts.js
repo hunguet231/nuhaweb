@@ -19,8 +19,13 @@ function SellerProducts() {
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // user info
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
   const { user } = userInfo;
 
   useEffect(() => {
