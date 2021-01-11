@@ -111,7 +111,7 @@ function Register({ location, history }) {
         <Grid item xs={12} sm={6}>
           {error && <Alert severity="error">{error}</Alert>}
           {message && <Alert severity="error">{message}</Alert>}
-          <h3>Đăng ký</h3>
+          <h3 className="text-align-center">Đăng ký</h3>
           <form onSubmit={handleSubmit}>
             <div className="name">
               <TextField
@@ -191,7 +191,7 @@ function Register({ location, history }) {
                 labelWidth={120}
               />
             </FormControl>
-            <p className="text-info">
+            <p className="text-info text-align-center">
               Khi bấm vào "Đăng ký" nghĩa là bạn đã hiểu và đồng ý với các{" "}
               <a href="/help/terms">điều khoản & chính sách</a> của NUHA
             </p>
@@ -203,7 +203,7 @@ function Register({ location, history }) {
             </button>
           </form>
           <br />
-          <p className="text-sm">Hoặc</p>
+          <p className="text-sm text-align-center">Hoặc</p>
           <FacebookLogin
             textButton="Đăng nhập với Facebook"
             appId="659192831443395"
@@ -228,7 +228,7 @@ function Register({ location, history }) {
               <span>Đăng nhập bằng Google</span>
             </div>
           </GoogleLogin>
-          <p className="text-sm">
+          <p className="text-sm text-align-center">
             Bạn đã có tài khoản?{" "}
             <Link
               style={{ color: "dodgerblue" }}

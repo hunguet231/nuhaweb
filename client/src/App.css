@@ -37,6 +37,10 @@
     color: #242424;
 }
 
+.text-align-center {
+    text-align: center;
+}
+
 .text-info a {
     color: dodgerblue;
 }

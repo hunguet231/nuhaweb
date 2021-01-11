@@ -88,8 +88,8 @@ function Login({ location, history }) {
             Hệ thống liên kết nguồn hàng với các nhà bán lẻ
           </p>
         </Grid>
-        <Grid item xs={12} sm={6} align="center">
-          <h3>Đăng nhập</h3>
+        <Grid item xs={12} sm={6}>
+          <h3 className="text-align-center">Đăng nhập</h3>
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             <TextField
@@ -137,7 +137,7 @@ function Login({ location, history }) {
             </button>
           </form>
           <br />
-          <p className="text-sm">Hoặc</p>
+          <p className="text-sm text-align-center">Hoặc</p>
           <FacebookLogin
             textButton="Đăng nhập với Facebook"
             appId="659192831443395"
@@ -162,7 +162,7 @@ function Login({ location, history }) {
             </div>
           </GoogleLogin>
 
-          <p className="text-sm">
+          <p className="text-sm text-align-center">
             Bạn chưa có tài khoản?{" "}
             <Link
               style={{ color: "dodgerblue" }}
