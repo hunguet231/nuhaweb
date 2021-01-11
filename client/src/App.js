@@ -136,13 +136,6 @@ function App() {
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
 
-        {/* Messenger Chat Button */}
-        <MessengerCustomerChat
-          pageId="103310781374312"
-          appId="659192831443395"
-          language="vi_VN"
-        />
-
         {/* Detect Online/Offline */}
         <Detector
           render={({ online }) => (
