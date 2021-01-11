@@ -108,7 +108,7 @@ function Register({ location, history }) {
           <img className="register-img" src="/register.svg" />
           <p className="slogan">Tạo tài khoản trong chốc lát!</p>
         </Grid>
-        <Grid item xs={12} sm={6} align="center">
+        <Grid item xs={12} sm={6}>
           {error && <Alert severity="error">{error}</Alert>}
           {message && <Alert severity="error">{message}</Alert>}
           <h3>Đăng ký</h3>
