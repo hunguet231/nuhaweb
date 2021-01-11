@@ -6,6 +6,11 @@ require("colors");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/error");
+const { AwakeHeroku } = require("awake-heroku");
+
+AwakeHeroku.add("https://nuhaweb.herokuapp.com");
+AwakeHeroku.add("http://nuhaweb.herokuapp.com");
+AwakeHeroku.start();
 
 dotenv.config();
 
