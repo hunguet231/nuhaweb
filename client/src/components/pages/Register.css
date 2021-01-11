@@ -86,6 +86,9 @@ form .submit-btn:hover {
 
 .register .MuiFormLabel-outlined.MuiInputLabel-shrink {
     transform: translate(14px, -6px) scale(0.75);
+    -moz-transform: translate(14px, -6px) scale(0.75);
+    -webkit-transform: translate(14px, -6px) scale(0.75);
+    -o-transform: translate(14px, -6px) scale(0.75);
 }
 
 .register .MuiInputLabel-root {

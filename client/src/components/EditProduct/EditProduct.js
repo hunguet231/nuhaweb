@@ -99,14 +99,6 @@ function EditProduct({ history, match }) {
     }
   }, [photos]);
 
-  // init images preview
-  // const urlToFile = async (image) => {
-  //   const response = await fetch(image);
-  //   const blob = await response.blob();
-  //   const file = new File([blob], `${image}.png`, { type: blob.type });
-  //   return file;
-  // };
-
   const toDataURL = (url) =>
     fetch(url)
       .then((response) => response.blob())
@@ -196,7 +188,6 @@ function EditProduct({ history, match }) {
 
   const onImgsChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
-    console.log(imageList);
   };
 
   const handleCategoryChange = (e) => {
@@ -312,9 +303,9 @@ function EditProduct({ history, match }) {
           }) => (
             // write your building UI
             <div className="upload__image-wrapper">
-              <div className="remove-all" onClick={onImageRemoveAll}>
+              <span className="remove-all" onClick={onImageRemoveAll}>
                 Xoá tất cả
-              </div>
+              </span>
               <div
                 className="drop-zone"
                 style={isDragging ? { border: "2px dashed #74b9ff" } : null}

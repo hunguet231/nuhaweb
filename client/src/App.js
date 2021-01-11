@@ -102,6 +102,13 @@ function App() {
               />
             </div>
             <div className="showcase">
+              <PrivateRoute
+                exact
+                path="/products/:slug/edit"
+                component={EditProduct}
+              />
+            </div>
+            <div className="showcase">
               <Route
                 exact
                 path="/products/:slug/:userId"
@@ -118,13 +125,7 @@ function App() {
                 component={AddProduct}
               />
             </div>
-            <div className="showcase">
-              <PrivateRoute
-                exact
-                path="/products/:slug/edit"
-                component={EditProduct}
-              />
-            </div>
+
             <div className="showcase">
               <PrivateRoute
                 path="/me/update-shop"
@@ -135,6 +136,13 @@ function App() {
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
+        {/* 
+        Messenger Chat Button
+        <MessengerCustomerChat
+          pageId="103310781374312"
+          appId="659192831443395"
+          language="vi_VN"
+        /> */}
 
         {/* Detect Online/Offline */}
         <Detector

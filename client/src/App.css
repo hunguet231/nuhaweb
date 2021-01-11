@@ -18,8 +18,11 @@
     margin-top: 20px;
 }
 
-.MuiFormLabel-outlined.MuiInputLabel-shrink {
+.register .MuiFormLabel-outlined.MuiInputLabel-shrink {
     transform: translate(14px, -6px) scale(0.75);
+    -moz-transform: translate(14px, -6px) scale(0.75);
+    -webkit-transform: translate(14px, -6px) scale(0.75);
+    -o-transform: translate(14px, -6px) scale(0.75);
 }
 
 .MuiInputLabel-root {

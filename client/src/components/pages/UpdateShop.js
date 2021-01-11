@@ -98,9 +98,7 @@ function UpdateShop({ history }) {
           required
           value={shopName}
         />
-        <div className="text-info">
-          Tên shop giúp người mua dễ dàng nhận biết ra shop của bạn hơn
-        </div>
+        <div className="text-info">Ví dụ: NUHA Shop</div>
         <TextField
           variant="outlined"
           label="Số điện thoại"
@@ -109,12 +107,12 @@ function UpdateShop({ history }) {
           value={phoneNumber}
         />
         <div className="text-info">
-          Dùng số điện thoại thường xuyên liên lạc
+          Dùng số điện thoại bạn thường xuyên liên lạc
         </div>
         <TextField
           variant="outlined"
           select
-          label="Chọn tỉnh/thành phố"
+          label="Chọn tỉnh/thành phố *"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         >
@@ -153,7 +151,8 @@ function UpdateShop({ history }) {
           value={facebook}
         />
         <div className="text-info">
-          Các thông tin liên hệ trên sẽ được hiển thị công khai
+          Các thông tin trên sẽ được hiển thị công khai, mặc định cho sản phẩm,
+          bạn có thể thay đổi khi đăng sản phẩm
         </div>
         <button type="submit" className="submit-btn">
           Cập nhật{" "}
