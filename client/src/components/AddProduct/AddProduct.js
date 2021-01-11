@@ -41,7 +41,10 @@ function AddProduct({ history }) {
   const { loading, error, product } = productCreate;
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
 
   let photosArray = [];
 
@@ -51,7 +54,10 @@ function AddProduct({ history }) {
     if (!JSON.parse(localStorage.getItem("userInfo")).user.isSeller) {
       history.push(redirect);
     }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [history]);
 
+  useEffect(() => {
     if (photos && images.length == photos.length && !error) {
       dispatch(
         listProductCreate(
@@ -80,7 +86,7 @@ function AddProduct({ history }) {
         button: "Thêm tiếp",
       });
     }
-  }, [photos, userInfo, history]);
+  }, [photos, userInfo]);
 
   const onImgsChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
@@ -268,7 +274,7 @@ function AddProduct({ history }) {
           </>
         )}
 
-        <button type="submit">
+        <button type="submit" className="submit-btn">
           <SaveOutlinedIcon />
           Tạo mới{" "}
           {loading && <CircularProgress style={{ color: "#fff" }} size={15} />}

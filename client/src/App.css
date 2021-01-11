@@ -18,6 +18,10 @@
     margin-top: 20px;
 }
 
+.MuiInputLabel-shrink {
+    transform: translate(14px, -6px) scale(0.75);
+}
+
 .MuiInputLabel-root {
     font-size: 14px;
 }

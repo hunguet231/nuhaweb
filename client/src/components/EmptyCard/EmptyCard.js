@@ -10,13 +10,13 @@ function EmptyCard() {
     <Link to="/products">
       <div className="empty-card">
         <div className="text">Xem tất cả</div>
-        <div className="icon-button">
-          <Tooltip title="Xem tất cả">
+        <Tooltip title="Xem tất cả">
+          <div className="icon-button">
             <IconButton>
               <ArrowForwardIcon />
             </IconButton>
-          </Tooltip>
-        </div>
+          </div>
+        </Tooltip>
       </div>
     </Link>
   );

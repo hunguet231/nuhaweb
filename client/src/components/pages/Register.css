@@ -84,6 +84,10 @@ form .submit-btn:hover {
     margin-top: 20px;
 }
 
+.register .MuiInputLabel-shrink {
+    transform: translate(14px, -6px) scale(0.75);
+}
+
 .register .MuiInputLabel-root {
     font-size: 14px;
 }
@@ -104,34 +108,6 @@ form .submit-btn:hover {
 .text-sm {
     font-size: 14px;
 }
-
-
-/* #label-avt {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 6px;
-    width: fit-content;
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 5px;
-    cursor: pointer;
-}
-
-#userAvatar,
-#shopAvatar {
-    background-color: #fff;
-    cursor: pointer;
-} */
-
-
-/* .imgUp {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.imgUp p {
-    font-size: 14px;
-} */
 
 @keyframes moving {
     0% {

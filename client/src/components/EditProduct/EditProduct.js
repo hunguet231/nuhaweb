@@ -44,7 +44,10 @@ function EditProduct({ history, match }) {
   const [valueUpload, setValueUpload] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const googleLogin = useSelector((state) => state.googleLogin);
+  const userInfo = googleLogin.userInfo
+    ? googleLogin.userInfo
+    : userLogin.userInfo;
 
   const redirect = "/me/update-shop";
 
@@ -52,10 +55,10 @@ function EditProduct({ history, match }) {
     if (!JSON.parse(localStorage.getItem("userInfo")).user.isSeller) {
       history.push(redirect);
     }
-  }, [userInfo, history]);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [history, userInfo]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const fetchProduct = async () => {
       const { data } = await Axios.get(
         `/api/v1/products?slug=${match.params.slug}`
@@ -348,7 +351,7 @@ function EditProduct({ history, match }) {
           </>
         )}
 
-        <button type="submit">
+        <button type="submit" className="submit-btn">
           <SaveOutlinedIcon />
           Ghi nhận{" "}
           {loading && <CircularProgress style={{ color: "#fff" }} size={15} />}
