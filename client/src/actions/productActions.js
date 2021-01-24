@@ -12,13 +12,16 @@ import {
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_FAIL,
   PRODUCT_EDIT_SUCCESS,
+  FILTER_PRODUCTS_CATEGORY_FAIL,
+  FILTER_PRODUCTS_CATEGORY_REQUEST,
+  FILTER_PRODUCTS_CATEGORY_SUCCESS,
 } from "../constants/productConstants";
 
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/v1/products?limit=11");
+    const { data } = await axios.get(`/api/v1/products?limit=11`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.data });
   } catch (error) {
@@ -87,6 +90,24 @@ export const listProductCreate = (
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const filterProducts = (filter) => async (dispatch) => {
+  try {
+    dispatch({ type: FILTER_PRODUCTS_CATEGORY_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/products?limit=11&${filter}`);
+
+    dispatch({ type: FILTER_PRODUCTS_CATEGORY_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({
+      type: FILTER_PRODUCTS_CATEGORY_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

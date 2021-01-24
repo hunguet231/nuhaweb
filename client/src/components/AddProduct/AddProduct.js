@@ -24,6 +24,7 @@ import draftToHtml from "draftjs-to-html";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import editorLabels from "../../ultils/draft-wysiwyg-vi";
 import readNumber from "read-vn-number";
+import { categories } from "../../ultils/categories";
 import "./AddProduct.css";
 
 function AddProduct({ history }) {
@@ -212,9 +213,9 @@ function AddProduct({ history }) {
         <p>Danh mục</p>
         <FormControl>
           <Select value={category} onChange={handleCategoryChange}>
-            <MenuItem value={"Đồ công nghệ"}>Đồ công nghệ</MenuItem>
-            <MenuItem value={"Quần áo"}>Quần áo</MenuItem>
-            <MenuItem value={"Đồ ăn"}>Đồ ăn</MenuItem>
+            {categories.map((category) => (
+              <MenuItem value={category.title}>{category.title}</MenuItem>
+            ))}
           </Select>
         </FormControl>
         <p>Ảnh sản phẩm</p>

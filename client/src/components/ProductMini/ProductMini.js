@@ -18,7 +18,7 @@ function ProductMini({
 
         <div className="prices">
           <MonetizationOnOutlinedIcon className="mr-5" />
-          {prices} đ
+          {prices} ₫
         </div>
         <div className="category-b">
           <LocalOfferIcon className="mr-5" />

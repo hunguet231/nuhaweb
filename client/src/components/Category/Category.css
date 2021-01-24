@@ -1,11 +1,64 @@
-.category {
+.categories-wrapper {
     width: 100%;
     max-width: 1000px;
-    margin: 10px auto 20px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: white;
 }
 
-.category .category-title {
-    font-size: 18px;
+.categories-wrapper .title {
+    display: flex;
+    align-items: center;
+    margin: 10px 15px;
+    color: #2e2e2e;
     font-weight: 500;
-    margin-left: 3px;
+}
+
+.categories-wrapper .title .MuiSvgIcon-root {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.categories .category-item {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categories .category-item .img {
+    width: 120px;
+    height: 90px;
+    border-radius: 5px;
+    background-color: rgb(194, 194, 194);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.categories .category-item .img::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.categories .category-item:hover .img::before {
+    background: radial-gradient(circle, rgba(0, 0, 0, .1) 10%, rgba(0, 0, 0, 0.01) 100%);
+}
+
+.categories .category-item p {
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 32px;
+    color: rgb(228, 228, 228);
 }

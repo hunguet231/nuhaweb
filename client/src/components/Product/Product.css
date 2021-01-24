@@ -102,9 +102,10 @@
 }
 
 .prices {
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 500;
     color: #2d3436;
-    font-size: 18px;
-    font-weight: 600;
     text-shadow: .2px .1px .8px #2d3436;
     word-wrap: break-word;
     margin-top: 6px;

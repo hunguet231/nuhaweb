@@ -3,7 +3,6 @@ import {
   FormControl,
   Grid,
   IconButton,
-  Input,
   InputAdornment,
   InputLabel,
   OutlinedInput,
@@ -13,7 +12,7 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../actions/userActions";
+import { google, register } from "../../actions/userActions";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FacebookLogin from "react-facebook-login";
@@ -27,7 +26,7 @@ function Register({ location, history }) {
   const [shopName, setShopName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const [values, setValues] = useState({
     password: "",
@@ -37,33 +36,73 @@ function Register({ location, history }) {
 
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const googleLogin = useSelector((state) => state.googleLogin);
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+
+  const { loading, error } = userRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo
+      ? userLogin.userInfo
+      : userRegister.userInfo;
+
     if (userInfo) {
       history.push(redirect);
     }
-  }, [history, location, userInfo, redirect]);
+  }, [history, userLogin, userRegister, googleLogin, redirect]);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
+  const validateServer = () => {
+    let errorsServer = {};
+    let isValid = true;
+
+    if (error) {
+      isValid = false;
+      errorsServer["email"] = "Email này đã tồn tại";
+    }
+    setErrors({ ...errors, ...errorsServer });
+
+    return isValid;
+  };
+
+  const validateClient = () => {
+    let errorsClient = {};
+    let isValid = true;
+
+    if (password !== confirmPassword) {
+      isValid = false;
+      errorsClient["password"] = "Mật khẩu không khớp nhau";
+    }
+
+    setErrors({ ...errors, ...errorsClient });
+
+    return isValid;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      setMessage("Mật khẩu không khớp nhau");
-      setTimeout(() => setMessage(null), 5000);
-    } else {
-      if (!error) {
+    if (validateClient()) {
+      dispatch(register(firstName, lastName, shopName, email, password));
+      if (validateServer()) {
         dispatch(register(firstName, lastName, shopName, email, password));
       } else {
-        return;
+        setTimeout(() => {
+          setErrors({});
+        }, 5000);
       }
+    } else {
+      setPassword("");
+      setConfirmPassword("");
+      setTimeout(() => {
+        setErrors({});
+      }, 5000);
     }
   };
 
@@ -71,16 +110,10 @@ function Register({ location, history }) {
   const responseFacebook = (response) => {};
 
   const responseGoogle = (response) => {
-    const { loading, error, userInfo } = userRegister;
-    const {
-      profileObj: { email, familyName, givenName, googleId, imageUrl },
-    } = response;
+    dispatch(google(response));
 
-    if (!error) {
-      dispatch(
-        register(givenName, familyName, email, email, googleId, imageUrl)
-      );
-    }
+    // store in sessionStorage to show toaster
+    sessionStorage.setItem("loginMsg", "1");
   };
 
   const handlePaswordChange = (prop) => (event) => {
@@ -106,12 +139,13 @@ function Register({ location, history }) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <img className="register-img" src="/register.svg" />
-          <p className="slogan">Tạo tài khoản trong chốc lát!</p>
+          <p className="slogan text-align-center">
+            Tạo tài khoản trong chốc lát!
+          </p>
         </Grid>
         <Grid item xs={12} sm={6}>
-          {error && <Alert severity="error">{error}</Alert>}
-          {message && <Alert severity="error">{message}</Alert>}
           <h3 className="text-align-center">Đăng ký</h3>
+          {errors.other && <Alert severity="error">{errors.other}</Alert>}
           <form onSubmit={handleSubmit}>
             <div className="name">
               <TextField
@@ -138,12 +172,12 @@ function Register({ location, history }) {
               }}
               required
             />
+            {errors.email && <Alert severity="error">{errors.email}</Alert>}
             <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Mật khẩu
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 required
                 autoComplete="new-password"
@@ -165,12 +199,15 @@ function Register({ location, history }) {
               />
             </FormControl>
 
+            {errors.password && (
+              <Alert severity="error">{errors.password}</Alert>
+            )}
+
             <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Nhập lại mật khẩu
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 required
                 autoComplete="new-password"
@@ -205,7 +242,7 @@ function Register({ location, history }) {
           <br />
           <p className="text-sm text-align-center">Hoặc</p>
           <FacebookLogin
-            textButton="Đăng nhập với Facebook"
+            textButton="Đăng ký với Facebook"
             appId="659192831443395"
             autoLoad={true}
             fields="name,email,picture"
@@ -225,7 +262,7 @@ function Register({ location, history }) {
           >
             <div className="gg-login-inner">
               <img src="/google.svg" />
-              <span>Đăng nhập bằng Google</span>
+              <span>Đăng ký bằng Google</span>
             </div>
           </GoogleLogin>
           <p className="text-sm text-align-center">

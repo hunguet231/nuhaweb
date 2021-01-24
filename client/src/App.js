@@ -28,6 +28,7 @@ import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import Headroom from "react-headroom";
 import Profile from "./components/pages/Profile";
+import FilteredProducts from "./components/pages/FilteredProducts";
 
 function App() {
   // user info
@@ -71,14 +72,14 @@ function App() {
               <>
                 {/* <div className="slider"><SliderTop /></div> */}
                 <div className="wrapper">
-                  {/* <div className="showcase">
+                  <div className="showcase">
                     <Category />
-                  </div> */}
+                  </div>
                   <div className="showcase">
                     <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
                   </div>
                   <div className="showcase">
-                    <ShowList color="#27ae60" title="Sản phẩm khác" />
+                    <ShowList color="#27ae60" title="Top yêu thích" />
                   </div>
                 </div>
               </>
@@ -90,9 +91,11 @@ function App() {
             <div className="showcase">
               <Route path="/login" exact component={Login} />
             </div>
-
             <div className="showcase">
               <Route path="/register" exact component={Register} />
+            </div>
+            <div className="showcase">
+              <Route path="/products" exact component={FilteredProducts} />
             </div>
             <div className="showcase">
               <PrivateRoute
@@ -136,6 +139,7 @@ function App() {
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
         </div>
+
         {/* 
         Messenger Chat Button
         <MessengerCustomerChat
@@ -154,7 +158,7 @@ function App() {
                   autoHideDuration={5000}
                   onClose={handleClose}
                 >
-                  <Alert onClose={handleClose} severity="success">
+                  <Alert onClose={handleClose} severity="error">
                     Mất kết nối mạng
                   </Alert>
                 </Snackbar>
@@ -170,6 +174,7 @@ function App() {
           {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
             <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
           )}
+          {/* Footer */}
           <Footer />
         </div>
       </div>

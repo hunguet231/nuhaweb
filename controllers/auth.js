@@ -23,6 +23,7 @@ exports.register = asyncHandler(async (req, res) => {
   const user = await User.create({
     firstName,
     lastName,
+    shopName: email,
     email,
     password,
     avatarUser,

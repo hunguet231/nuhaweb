@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +20,6 @@ import "./Login.css";
 import Alert from "@material-ui/lab/Alert";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
-import Axios from "axios";
-import store from "../../store";
 
 function Login({ location, history }) {
   const [email, setEmail] = useState("");
@@ -97,6 +97,13 @@ function Login({ location, history }) {
               variant="outlined"
               autoComplete="username"
               label="Email"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonOutlineOutlinedIcon style={{ color: "gray" }} />
+                  </InputAdornment>
+                ),
+              }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -112,6 +119,11 @@ function Login({ location, history }) {
                 required
                 autoComplete="current-password"
                 value={values.password}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <LockOutlinedIcon style={{ color: "gray" }} />
+                  </InputAdornment>
+                }
                 onChange={handlePaswordChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
@@ -128,6 +140,14 @@ function Login({ location, history }) {
                 labelWidth={70}
               />
             </FormControl>
+
+            <Link
+              to="/forgot-password"
+              className="text-sm"
+              style={{ marginTop: "8px", textDecoration: "underline" }}
+            >
+              Bạn quên mật khẩu?
+            </Link>
 
             <button type="submit" className="submit-btn">
               Đăng nhập{" "}

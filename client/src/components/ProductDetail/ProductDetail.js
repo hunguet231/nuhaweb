@@ -20,7 +20,6 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import SkeletonPrdDetail from "../skeletons/SkeletonPrdDetail";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
-import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import HomeIcon from "@material-ui/icons/Home";
@@ -35,7 +34,6 @@ import ProductMini from "../ProductMini/ProductMini";
 
 const ProductDetail = ({ match }) => {
   const [loading, setLoading] = useState(false);
-  const [copySucess, setCopySuccess] = useState("");
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState(null);
 
@@ -101,14 +99,6 @@ const ProductDetail = ({ match }) => {
     }
   });
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(`${window.location.href}`);
-    setCopySuccess("Đã sao chép liên kết!");
-    setTimeout(() => {
-      setCopySuccess("");
-    }, 2000);
-  };
-
   const addToFavorite = () => {};
 
   const savePost = () => {};
@@ -157,7 +147,7 @@ const ProductDetail = ({ match }) => {
                       {product.prices
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                      đ
+                      ₫
                     </div>
                     <div className="save-fav">
                       {/* Favorite */}
@@ -193,79 +183,124 @@ const ProductDetail = ({ match }) => {
                             </div>
                           </div>
                           <div className="contact-more">
-                            {product.user.website && (
-                              <div className="web">
-                                <LanguageIcon />
-                                <a
-                                  href={
-                                    product.user.website.startsWith(
-                                      "http://"
-                                    ) ||
-                                    product.user.website.startsWith("https://")
-                                      ? product.user.website
-                                      : "https://" + product.user.website
-                                  }
-                                  target="_blank"
-                                >
-                                  {product.user.website}
-                                </a>
-                              </div>
-                            )}
-                            {product.user.zalo && (
-                              <div className="zalo">
-                                <img src="/zalo.svg" />
-                                <a
-                                  href={`https://zalo.me/${product.user.zalo}`}
-                                  target="_blank"
-                                >
-                                  Zalo
-                                </a>
-                              </div>
-                            )}
-                            {product.user.facebook && (
-                              <div className="facebook">
-                                <img src="/fb.svg" />
-                                <a
-                                  href={
-                                    product.user.facebook.startsWith(
-                                      "http://"
-                                    ) ||
-                                    product.user.facebook.startsWith("https://")
-                                      ? product.user.facebook
-                                      : "https://" + product.user.facebook
-                                  }
-                                  target="_blank"
-                                >
-                                  Facebook
-                                </a>
-                              </div>
-                            )}
-
                             <Typography
-                              className="d-flex-r"
+                              className="d-flex-r "
                               color="textSecondary"
                               variant="subtitle2"
                             >
                               <DomainIcon className="mr-5 icon-detail" />
                               Nhà cung cấp:
                               <Link
+                                className="supplier"
                                 style={{ color: "dodgerblue" }}
                                 to={`/users/${product.user._id}`}
                               >
                                 {product.user.shopName}
                               </Link>
                             </Typography>
-                            <Typography
-                              className="d-flex-r"
-                              color="textSecondary"
-                              variant="subtitle2"
-                            >
-                              <LocationOnIcon className="mr-5 icon-detail" />
-                              Địa chỉ:{" "}
-                              <Typography color="textPrimary" variant="inherit">
-                                {product.user.address} | {product.user.city}
-                              </Typography>
-                            </Typography>
+                            {product.user.website && (
+                              <div className="web">
+                                <LanguageIcon />
+                                <Typography
+                                  className="d-flex-r"
+                                  color="textSecondary"
+                                  variant="subtitle2"
+                                >
+                                  Website:
+                                  <a
+                                    className="web-link"
+                                    href={
+                                      product.user.website.startsWith(
+                                        "http://"
+                                      ) ||
+                                      product.user.website.startsWith(
+                                        "https://"
+                                      )
+                                        ? product.user.website
+                                        : "https://" + product.user.website
+                                    }
+                                    target="_blank"
+                                  >
+                                    {product.user.website}
+                                  </a>
+                                </Typography>
+                              </div>
+                            )}
+                            {product.user.zalo && (
+                              <div className="zalo">
+                                <img src="/zalo.svg" />
+                                <Typography
+                                  className="d-flex-r"
+                                  color="textSecondary"
+                                  variant="subtitle2"
+                                >
+                                  Zalo:
+                                  <a
+                                    className="zalo-link"
+                                    href={`https://zalo.me/${product.user.zalo}`}
+                                    target="_blank"
+                                  >
+                                    Xem
+                                  </a>
+                                </Typography>
+                              </div>
+                            )}
+                            {product.user.facebook && (
+                              <div className="facebook">
+                                <img src="/fb.svg" />
+                                <Typography
+                                  className="d-flex-r"
+                                  color="textSecondary"
+                                  variant="subtitle2"
+                                >
+                                  Facebook:
+                                  <a
+                                    className="fb-link"
+                                    href={
+                                      product.user.facebook.startsWith(
+                                        "http://"
+                                      ) ||
+                                      product.user.facebook.startsWith(
+                                        "https://"
+                                      )
+                                        ? product.user.facebook
+                                        : "https://" + product.user.facebook
+                                    }
+                                    target="_blank"
+                                  >
+                                    Xem
+                                  </a>
+                                </Typography>
+                              </div>
+                            )}
+
+                            <div className="address">
+                              <div className="icon">
+                                <LocationOnIcon className="mr-5 icon-detail" />
+                              </div>
+                              <div className="text">
+                                <Typography
+                                  color="textPrimary"
+                                  variant="inherit"
+                                >
+                                  <Typography
+                                    color="textSecondary"
+                                    variant="subtitle2"
+                                  >
+                                    Địa chỉ:
+                                  </Typography>{" "}
+                                  {product.user.address} | {product.user.city}
+                                </Typography>
+                                <a
+                                  className="map-link"
+                                  target="_blank"
+                                  href={`https://maps.google.com/?q=${product.user.address}`}
+                                >
+                                  Xem bản đồ
+                                </a>
+                              </div>
+                            </div>
+
                             <Typography
                               className="d-flex-r"
                               color="textSecondary"
@@ -324,16 +359,6 @@ const ProductDetail = ({ match }) => {
                       >
                         Chia sẻ
                       </a>
-                    </div>
-
-                    <div className="copy-link-btn ">
-                      <FileCopyOutlinedIcon
-                        className="link-icon "
-                        onClick={copyToClipboard}
-                      />
-                      <Typography variant="caption">
-                        {copySucess !== "" && copySucess}
-                      </Typography>
                     </div>
                   </div>
 

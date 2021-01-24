@@ -39,8 +39,7 @@
 .sortBy {
     display: flex;
     align-items: center;
-    margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .sortBy .text {

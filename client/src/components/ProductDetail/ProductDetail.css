@@ -19,6 +19,15 @@
     align-items: center;
 }
 
+.address {
+    display: flex;
+    align-items: center;
+}
+
+.address .MuiTypography-root {
+    display: inline !important;
+}
+
 .mr-5 {
     margin-right: 5px;
 }
@@ -102,6 +111,19 @@
     margin-top: 0 !important;
     padding: 10px 5px;
     background-color: #fff;
+}
+
+.map-link,
+.fb-link,
+.zalo-link,
+.web-link {
+    color: dodgerblue;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.supplier {
+    margin-left: 5px;
 }
 
 .phone,

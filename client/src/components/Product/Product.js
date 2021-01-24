@@ -69,7 +69,7 @@ function Product({
             </div>
 
             <div className="prices">
-              <p>{prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+              <p>{prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} ₫</p>
             </div>
 
             {/* <Rating

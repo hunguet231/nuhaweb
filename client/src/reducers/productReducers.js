@@ -8,6 +8,9 @@ import {
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
+  FILTER_PRODUCTS_CATEGORY_REQUEST,
+  FILTER_PRODUCTS_CATEGORY_SUCCESS,
+  FILTER_PRODUCTS_CATEGORY_FAIL,
 } from "../constants/productConstants";
 
 export const productListReducer = (state = { products: [] }, action) => {
@@ -43,6 +46,22 @@ export const productCreateReducer = (state = { product: {} }, action) => {
     case PRODUCT_CREATE_SUCCESS:
       return { loading: false, product: action.payload };
     case PRODUCT_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const filterProductsCategoryReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case FILTER_PRODUCTS_CATEGORY_REQUEST:
+      return { loading: true, ...state };
+    case FILTER_PRODUCTS_CATEGORY_SUCCESS:
+      return { loading: false, products: action.payload };
+    case FILTER_PRODUCTS_CATEGORY_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

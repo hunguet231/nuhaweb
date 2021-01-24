@@ -2,11 +2,11 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
-require("colors");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middlewares/error");
 const { AwakeHeroku } = require("awake-heroku");
+require("colors");
 
 AwakeHeroku.add("https://nuhaweb.herokuapp.com");
 AwakeHeroku.add("http://nuhaweb.herokuapp.com");
