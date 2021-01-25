@@ -61,6 +61,7 @@ function Login({ location, history }) {
   // handle regular login
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(login(username, values.password));
 
     // store in sessionStorage to show toaster

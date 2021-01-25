@@ -46,7 +46,6 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlength: [6, "Mật khẩu phải ít nhất 6 ký tự"],
       select: false,
     },
     resetPasswordToken: String,

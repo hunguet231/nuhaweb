@@ -27,12 +27,7 @@ function Register({ location, history }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  const [values, setValues] = useState({
-    password: "",
-    confirmPassword: "",
-    showPassword: false,
-  });
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -117,18 +112,16 @@ function Register({ location, history }) {
     sessionStorage.setItem("loginMsg", "1");
   };
 
-  const handlePaswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    setPassword(values.password);
+  const handlePaswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
-  const handleConfirmPaswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    setConfirmPassword(values.confirmPassword);
+  const handleConfirmPaswordChange = (event) => {
+    setConfirmPassword(event.target.value);
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -181,11 +174,11 @@ function Register({ location, history }) {
                 Mật khẩu
               </InputLabel>
               <OutlinedInput
-                type={values.showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 required
                 autoComplete="new-password"
-                value={values.password}
-                onChange={handlePaswordChange("password")}
+                value={password}
+                onChange={handlePaswordChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -194,7 +187,7 @@ function Register({ location, history }) {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -211,11 +204,11 @@ function Register({ location, history }) {
                 Nhập lại mật khẩu
               </InputLabel>
               <OutlinedInput
-                type={values.showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 required
                 autoComplete="new-password"
-                value={values.confirmPassword}
-                onChange={handleConfirmPaswordChange("confirmPassword")}
+                value={confirmPassword}
+                onChange={handleConfirmPaswordChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -224,7 +217,7 @@ function Register({ location, history }) {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
