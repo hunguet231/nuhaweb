@@ -23,11 +23,8 @@ import { GoogleLogin } from "react-google-login";
 
 function Login({ location, history }) {
   const [username, setUsername] = useState("");
-  const [values, setValues] = useState({
-    password: "",
-    showPassword: false,
-  });
-
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -62,18 +59,18 @@ function Login({ location, history }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(login(username, values.password));
+    dispatch(login(username, password));
 
     // store in sessionStorage to show toaster
     sessionStorage.setItem("loginMsg", "1");
   };
 
-  const handlePaswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handlePaswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -116,16 +113,16 @@ function Login({ location, history }) {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 required
                 autoComplete="current-password"
-                value={values.password}
+                value={password}
                 startAdornment={
                   <InputAdornment position="start">
                     <LockOutlinedIcon style={{ color: "gray" }} />
                   </InputAdornment>
                 }
-                onChange={handlePaswordChange("password")}
+                onChange={handlePaswordChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -134,7 +131,7 @@ function Login({ location, history }) {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }

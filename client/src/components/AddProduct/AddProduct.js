@@ -33,7 +33,7 @@ function AddProduct({ history }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [prices, setPrices] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState({});
   const [photos, setPhotos] = useState(null);
   const [images, setImages] = useState([]);
   const [imgLoading, setImgLoading] = useState(false);
