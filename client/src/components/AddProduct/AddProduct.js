@@ -33,7 +33,7 @@ function AddProduct({ history }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [prices, setPrices] = useState("");
-  const [category, setCategory] = useState({});
+  const [category, setCategory] = useState("");
   const [photos, setPhotos] = useState(null);
   const [images, setImages] = useState([]);
   const [imgLoading, setImgLoading] = useState(false);
@@ -60,7 +60,7 @@ function AddProduct({ history }) {
   }, [history]);
 
   useEffect(() => {
-    if (photos && images.length == photos.length && !error) {
+    if (photos && images.length == photos.length && !error && category) {
       dispatch(
         listProductCreate(
           title,
@@ -76,7 +76,7 @@ function AddProduct({ history }) {
       setDescription("");
       setQuantity("");
       setPrices("");
-      setCategory({});
+      setCategory("");
 
       window.scrollTo(0, 0);
 
@@ -215,6 +215,7 @@ function AddProduct({ history }) {
           <Select
             onChange={handleCategoryChange}
             native
+            required
             id="grouped-native-select"
           >
             <option aria-label="None" value="" />
