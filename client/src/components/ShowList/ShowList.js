@@ -28,7 +28,7 @@ function ShowList({ title, color }) {
             {title}
           </div>
           <div className="list-items">
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               {products &&
                 products.map((product) => (
                   <Grid key={product._id} item xs={6} sm={3}>

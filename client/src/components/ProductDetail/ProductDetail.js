@@ -22,6 +22,7 @@ import SkeletonPrdDetail from "../skeletons/SkeletonPrdDetail";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 import HomeIcon from "@material-ui/icons/Home";
 import "./ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -175,11 +176,11 @@ const ProductDetail = ({ match }) => {
                 <Grid item xs={12} sm={4}>
                   <div>
                     <Typography color="textSecondary" variant="subtitle2">
-                      Thông tin liên hệ:
-                      <br />
+                      {/* Thông tin liên hệ: */}
+                      {/* <br /> */}
                       {userInfo && (
                         <>
-                          <div className="contact">
+                          {/* <div className="contact">
                             <div className="phone">
                               <PhoneInTalkIcon />
                               <a href={`tel:${product.user.phoneNumber}`}>
@@ -192,7 +193,7 @@ const ProductDetail = ({ match }) => {
                                 Nhắn tin SMS
                               </a>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="contact-more">
                             <Typography
                               className="d-flex-r "
@@ -209,7 +210,7 @@ const ProductDetail = ({ match }) => {
                                 {product.user.shopName}
                               </Link>
                             </Typography>
-                            {product.user.website && (
+                            {/* {product.user.website && (
                               <div className="web">
                                 <LanguageIcon />
                                 <Typography
@@ -283,7 +284,7 @@ const ProductDetail = ({ match }) => {
                                   </a>
                                 </Typography>
                               </div>
-                            )}
+                            )} */}
 
                             <div className="address">
                               <div className="icon">
@@ -323,6 +324,11 @@ const ProductDetail = ({ match }) => {
                                 {product.quantity}
                               </Typography>
                             </Typography>
+                          </div>
+
+                          <div className="add-to-cart">
+                            <AddShoppingCartOutlinedIcon />
+                            <p>Thêm vào giỏ hàng</p>
                           </div>
                         </>
                       )}

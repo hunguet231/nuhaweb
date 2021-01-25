@@ -19,6 +19,7 @@ import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -148,6 +149,9 @@ function Navbar({ history }) {
                   </Link>
                 </>
               )}
+            </div>
+            <div className="cart">
+              <ShoppingCartOutlinedIcon />
             </div>
             <div className="sell-btn">
               <Link to="/me/sell/dashboard">

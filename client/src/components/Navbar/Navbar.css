@@ -61,6 +61,10 @@
     margin-top: 8px;
 }
 
+.navbar-right__bottom .cart .MuiSvgIcon-root {
+    cursor: pointer;
+}
+
 .logo {
     height: 50px;
 }

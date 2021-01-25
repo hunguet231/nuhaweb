@@ -80,7 +80,6 @@
 
 .author .name {
     color: rgba(0, 0, 0, 0.54);
-    font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.57;
     letter-spacing: 0.00714em;
@@ -126,6 +125,8 @@
         font-size: 12px;
     }
     .author .name {
-        font-size: 14px;
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: normal;
     }
 }

@@ -80,10 +80,23 @@
 }
 
 .contact-more {
+    margin-top: 10px;
     padding: 5px;
     border: solid 1px rgba(151, 151, 151, 0.15);
     border-radius: 5px;
     background-color: rgba(216, 216, 216, 0.15);
+}
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 5px;
+    color: #fff;
+    background-color: dodgerblue;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .MuiBreadcrumbs-root a,

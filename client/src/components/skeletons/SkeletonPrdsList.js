@@ -7,7 +7,7 @@ function SkeletonPrdsList() {
   return (
     <div>
       <Skeleton animation="wave" height={20} width={100} />
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         {Array(12)
           .fill()
           .map((item, index) => (
