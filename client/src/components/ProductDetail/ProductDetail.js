@@ -122,12 +122,14 @@ const ProductDetail = ({ match }) => {
               />
               Trang chủ
             </Link>
+
             <Link
               color="inherit"
               to={`/products?category=${product.category.category}`}
             >
               {product.category.category}
             </Link>
+
             <Link
               color="inherit"
               to={`/products?category=${product.category.category}`}

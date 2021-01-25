@@ -22,7 +22,7 @@ function ProductMini({
         </div>
         <div className="category-b">
           <LocalOfferIcon className="mr-5" />
-          {category}
+          {category && category.category}
         </div>
       </div>
     </div>
