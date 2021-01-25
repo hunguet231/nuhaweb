@@ -86,22 +86,22 @@ function Register({ location, history }) {
 
     console.log(password);
 
-    // if (validateClient()) {
-    //   dispatch(register(firstName, lastName, shopName, username, password));
-    //   if (validateServer()) {
-    //     dispatch(register(firstName, lastName, shopName, username, password));
-    //   } else {
-    //     setTimeout(() => {
-    //       setErrors({});
-    //     }, 5000);
-    //   }
-    // } else {
-    //   setPassword("");
-    //   setConfirmPassword("");
-    //   setTimeout(() => {
-    //     setErrors({});
-    //   }, 5000);
-    // }
+    if (validateClient()) {
+      dispatch(register(firstName, lastName, shopName, username, password));
+      if (validateServer()) {
+        dispatch(register(firstName, lastName, shopName, username, password));
+      } else {
+        setTimeout(() => {
+          setErrors({});
+        }, 5000);
+      }
+    } else {
+      setPassword("");
+      setConfirmPassword("");
+      setTimeout(() => {
+        setErrors({});
+      }, 5000);
+    }
   };
 
   // handle social login
