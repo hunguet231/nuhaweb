@@ -34,7 +34,7 @@ const ProductSchema = new mongoose.Schema(
       required: [true, "Please add a description"],
     },
     category: {
-      type: String,
+      type: Object,
       required: true,
     },
     quantity: {

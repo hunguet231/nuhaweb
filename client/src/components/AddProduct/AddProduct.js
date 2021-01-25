@@ -76,7 +76,7 @@ function AddProduct({ history }) {
       setDescription("");
       setQuantity("");
       setPrices("");
-      setCategory("");
+      setCategory({});
 
       window.scrollTo(0, 0);
 
@@ -95,7 +95,7 @@ function AddProduct({ history }) {
   };
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
+    setCategory(JSON.parse(e.target.value));
   };
 
   const handleTitleChange = (e) => {
@@ -135,7 +135,6 @@ function AddProduct({ history }) {
               "Content-Type": "application/json",
             },
           });
-          console.log(res.data);
           const data = await res.data.secure_url;
           photosArray.push(data);
         }
@@ -214,17 +213,23 @@ function AddProduct({ history }) {
         <p>Danh mục</p>
         <FormControl>
           <Select
-            value={category}
             onChange={handleCategoryChange}
             native
-            defaultValue=""
             id="grouped-native-select"
           >
             <option aria-label="None" value="" />
-            {categories.map((category, index) => (
-              <optgroup key={index} label={category.title}>
-                {category.subCategory.map((title) => (
-                  <option value={title}>{title}</option>
+            {categories.map((categoryItem, index) => (
+              <optgroup key={index} label={categoryItem.title}>
+                {categoryItem.subCategory.map((title, index) => (
+                  <option
+                    key={index}
+                    value={JSON.stringify({
+                      subCategory: title,
+                      category: categoryItem.title,
+                    })}
+                  >
+                    {title}
+                  </option>
                 ))}
               </optgroup>
             ))}

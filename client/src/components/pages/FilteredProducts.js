@@ -16,7 +16,9 @@ import cities from "../../ultils/cities";
 function FilteredProducts({ location }) {
   const [sort, setSort] = useState("");
   const [city, setCity] = useState("");
-  const filter = location.search ? location.search.split("?")[1] : "/";
+  const filter = location.search
+    ? "category." + location.search.split("?")[1]
+    : "/";
 
   const dispatch = useDispatch();
   const filteredProducts = useSelector((state) => state.filteredProducts);
