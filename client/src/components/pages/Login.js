@@ -22,7 +22,7 @@ import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
 
 function Login({ location, history }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [values, setValues] = useState({
     password: "",
     showPassword: false,
@@ -61,7 +61,7 @@ function Login({ location, history }) {
   // handle regular login
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(email, values.password));
+    dispatch(login(username, values.password));
 
     // store in sessionStorage to show toaster
     sessionStorage.setItem("loginMsg", "1");
@@ -93,10 +93,10 @@ function Login({ location, history }) {
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             <TextField
-              type="email"
+              type="text"
               variant="outlined"
               autoComplete="username"
-              label="Email"
+              label="Tên tài khoản"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -105,7 +105,7 @@ function Login({ location, history }) {
                 ),
               }}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setUsername(e.target.value);
               }}
               required
             />

@@ -9,7 +9,7 @@
 .categories-wrapper .title {
     display: flex;
     align-items: center;
-    margin: 10px 15px;
+    margin: 10px 0px;
     color: #2e2e2e;
     font-weight: 500;
 }

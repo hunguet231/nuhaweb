@@ -11,20 +11,20 @@ const client = new OAuth2Client(
 // @route   POST /api/v1/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, avatarUser } = req.body;
+  const { firstName, lastName, username, password, avatarUser } = req.body;
 
-  const userExists = await User.findOne({ email });
+  const userExists = await User.findOne({ username });
   if (userExists) {
     res.status(400);
-    throw new Error("Email này đã tồn tại");
+    throw new Error("Tài khoản này đã tồn tại");
   }
 
   // create user
   const user = await User.create({
     firstName,
     lastName,
-    shopName: email,
-    email,
+    shopName: username,
+    username,
     password,
     avatarUser,
   });
@@ -36,10 +36,10 @@ exports.register = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   // check for user
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ username }).select("+password");
 
   if (!user) {
     res.status(401);
@@ -78,7 +78,7 @@ exports.googleLogin = (req, res) => {
       } = response.payload;
 
       if (email_verified) {
-        User.findOne({ email }).exec((err, user) => {
+        User.findOne({ username: email }).exec((err, user) => {
           if (err) {
             console.log(err);
             return res.status(400).json({ error: "Something went wrong..." });
@@ -92,7 +92,7 @@ exports.googleLogin = (req, res) => {
                 lastName: family_name,
                 avatarUser: picture,
                 shopName: email,
-                email,
+                username: email,
                 password,
               });
               newUser.save((err, data) => {
@@ -222,10 +222,10 @@ exports.updateShop = asyncHandler(async (req, res) => {
 // @route   POST /api/v1/auth/forgotpassword
 // @access  Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ username: req.body.email });
 
   if (!user) {
-    return next(new ErrorResponse("There is no user with that email", 404));
+    return next(new ErrorResponse("There is no user with that username", 404));
   }
 
   // get reset token

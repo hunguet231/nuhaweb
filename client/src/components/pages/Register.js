@@ -22,7 +22,7 @@ import "./Register.css";
 function Register({ location, history }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [shopName, setShopName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -63,8 +63,9 @@ function Register({ location, history }) {
     let isValid = true;
 
     if (error) {
+      console.log(error);
       isValid = false;
-      errorsServer["email"] = "Email này đã tồn tại";
+      errorsServer["username"] = "Tài khoản này đã tồn tại";
     }
     setErrors({ ...errors, ...errorsServer });
 
@@ -89,9 +90,9 @@ function Register({ location, history }) {
     e.preventDefault();
 
     if (validateClient()) {
-      dispatch(register(firstName, lastName, shopName, email, password));
+      dispatch(register(firstName, lastName, shopName, username, password));
       if (validateServer()) {
-        dispatch(register(firstName, lastName, shopName, email, password));
+        dispatch(register(firstName, lastName, shopName, username, password));
       } else {
         setTimeout(() => {
           setErrors({});
@@ -162,17 +163,19 @@ function Register({ location, history }) {
               />
             </div>
             <TextField
-              type="email"
+              type="text"
               variant="outlined"
               autoComplete="username"
-              label="Email"
+              label="Tên tài khoản"
               onChange={(e) => {
-                setEmail(e.target.value);
+                setUsername(e.target.value);
                 setShopName(e.target.value);
               }}
               required
             />
-            {errors.email && <Alert severity="error">{errors.email}</Alert>}
+            {errors.username && (
+              <Alert severity="error">{errors.username}</Alert>
+            )}
             <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Mật khẩu

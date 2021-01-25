@@ -24,7 +24,7 @@ router
         "lastName",
         "phoneNumber",
         "reviews",
-        "email",
+        "username",
         "address",
         "shopName",
         "numReviews",

@@ -79,18 +79,19 @@
 }
 
 .author .name {
-    font-size: 15px;
-    font-weight: 400;
-    color: #28b1ff;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.57;
+    letter-spacing: 0.00714em;
 }
 
 .time .MuiSvgIcon-root,
 .author .MuiSvgIcon-root,
 .city .MuiSvgIcon-root {
     margin-right: 5px;
-    margin-bottom: -4px;
+    margin-bottom: -3px;
     font-size: large;
-    /* color: #4C83FF; */
 }
 
 .author .MuiSvgIcon-root {

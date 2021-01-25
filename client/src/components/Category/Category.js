@@ -15,23 +15,15 @@ function Category() {
     autoplaySpeed: 5000,
     cssEase: "linear",
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
-    rows: 2,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    rows: 1,
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
         breakpoint: 800,
         settings: {
+          arrows: false,
           slidesToShow: 4,
           slidesToScroll: 4,
           initialSlide: 0,

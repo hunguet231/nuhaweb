@@ -280,9 +280,20 @@ function EditProduct({ history, match }) {
 
         <p>Danh mục</p>
         <FormControl>
-          <Select value={category} onChange={handleCategoryChange}>
-            {categories.map((category) => (
-              <MenuItem value={category.title}>{category.title}</MenuItem>
+          <Select
+            value={category}
+            onChange={handleCategoryChange}
+            native
+            defaultValue=""
+            id="grouped-native-select"
+          >
+            <option aria-label="None" value="" />
+            {categories.map((category, index) => (
+              <optgroup key={index} label={category.title}>
+                {category.subCategory.map((title) => (
+                  <option value={title}>{title}</option>
+                ))}
+              </optgroup>
             ))}
           </Select>
         </FormControl>

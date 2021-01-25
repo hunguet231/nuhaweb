@@ -52,10 +52,9 @@ function Product({
               </Typography>
 
               <Typography variant="subtitle2" color="textSecondary">
-                Đăng bởi:
                 <Link className="name" to={`/users/${user._id}`}>
                   {" "}
-                  {user.firstName}
+                  {user.shopName}
                 </Link>
               </Typography>
             </div>

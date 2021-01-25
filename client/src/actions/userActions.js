@@ -16,7 +16,7 @@ import {
   GOOGLE_LOGOUT,
 } from "../constants/userConstants";
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (username, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -31,7 +31,7 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.post(
       "/api/v1/auth/login",
       {
-        email,
+        username,
         password,
       },
       config
@@ -99,7 +99,7 @@ export const register = (
   firstName,
   lastName,
   shopName,
-  email,
+  username,
   password,
   avatarUser
 ) => async (dispatch) => {
@@ -120,7 +120,7 @@ export const register = (
         firstName,
         lastName,
         shopName,
-        email,
+        username,
         password,
         avatarUser,
       },
