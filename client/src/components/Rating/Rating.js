@@ -11,6 +11,7 @@ function Rating({ value, text, color, id }) {
   return (
     <div className="rating">
       <div className="star">
+        <span className="num">{value}</span>
         <span style={{ color }}>
           {value >= 1 ? (
             <StarRoundedIcon />
@@ -56,7 +57,6 @@ function Rating({ value, text, color, id }) {
             <StarBorderRoundedIcon />
           )}
         </span>
-        <span>{value}</span>
       </div>
       <div className="text">
         {/* <Link to={`/products/${id}/reviews`}> */}

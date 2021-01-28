@@ -102,7 +102,7 @@ export const filterProducts = (filter) => async (dispatch) => {
   try {
     dispatch({ type: FILTER_PRODUCTS_CATEGORY_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/products?limit=11&${filter}`);
+    const { data } = await axios.get(`/api/v1/products?limit=20&${filter}`);
 
     dispatch({ type: FILTER_PRODUCTS_CATEGORY_SUCCESS, payload: data.data });
   } catch (error) {

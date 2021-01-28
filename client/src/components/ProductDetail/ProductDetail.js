@@ -8,6 +8,9 @@ import {
   Button,
   Breadcrumbs,
 } from "@material-ui/core";
+import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
+import CardTravelOutlinedIcon from "@material-ui/icons/CardTravelOutlined";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 import ExposureIcon from "@material-ui/icons/Exposure";
@@ -31,12 +34,16 @@ import ReactHtmlParser from "react-html-parser";
 import { listProducts } from "../../actions/productActions";
 import Axios from "axios";
 import Category from "../Category/Category";
+import QuantityPicker from "../QuantityPicker/QuantityPicker";
 import ProductMini from "../ProductMini/ProductMini";
+import Rating from "../Rating/Rating";
+import Alert from "@material-ui/lab/Alert";
 
-const ProductDetail = ({ match }) => {
+const ProductDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState(null);
+  const [qty, setQty] = useState(0);
 
   const userLogin = useSelector((state) => state.userLogin);
   const googleLogin = useSelector((state) => state.googleLogin);
@@ -100,6 +107,10 @@ const ProductDetail = ({ match }) => {
     }
   });
 
+  const addToCartHandler = (e) => {
+    e.preventDefault();
+  };
+
   const addToFavorite = () => {};
 
   const savePost = () => {};
@@ -146,41 +157,65 @@ const ProductDetail = ({ match }) => {
           <div className="product-detail">
             <section>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={12} sm={6}>
                   <CarouselPrdsDetail photos={product.photos} />
+                  <div className="row">
+                    <div className="save-fav">
+                      {/* Favorite */}
+                      <Tooltip title="Thêm vào yêu thích">
+                        <div className="fav">
+                          <FavoriteBorderIcon onClick={addToFavorite} />
+                          <p>Thích</p>
+                        </div>
+                      </Tooltip>
+                      {/* Bookmark */}
+                      <Tooltip title="Lưu sản phẩm">
+                        <div className="save">
+                          <BookmarkBorderIcon onClick={savePost} />
+                          <p>Lưu</p>
+                        </div>
+                      </Tooltip>
+                    </div>
+                    <div className="share">
+                      <div
+                        className="fb-share-button"
+                        data-href={`http://localhost:3000${location.pathname}`}
+                        data-layout="button_count"
+                        data-size="small"
+                      >
+                        <a
+                          target="_blank"
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                          className="fb-xfbml-parse-ignore"
+                        >
+                          Chia sẻ
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <div className="product-description">
                     <div className="title">{product.title}</div>
-                    {/* <Rating
-                    value={numRatings}
-                    text={`(${numReviews} đánh giá)`}
-                    id={_id}
-                  /> */}
+                    <Rating
+                      value={product.numRatings}
+                      text={`(${product.numReviews} đánh giá)`}
+                      // id={_id}
+                    />
                     <div className="prices" style={{ color: " #e74c3c" }}>
                       {product.prices
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                       ₫
                     </div>
-                    <div className="save-fav">
-                      {/* Favorite */}
-                      <Tooltip title="Thêm vào yêu thích">
-                        <FavoriteBorderIcon onClick={addToFavorite} />
-                      </Tooltip>
-                      {/* Bookmark */}
-                      <Tooltip title="Lưu sản phẩm">
-                        <BookmarkBorderIcon onClick={savePost} />
-                      </Tooltip>
-                    </div>
                   </div>
-                </Grid>
-                <Grid item xs={12} sm={4}>
                   <div>
                     <Typography color="textSecondary" variant="subtitle2">
                       {/* Thông tin liên hệ: */}
                       {/* <br /> */}
-                      {userInfo && (
-                        <>
-                          {/* <div className="contact">
+                      {/* {userInfo && (
+                        <> */}
+                      {/* <div className="contact">
                             <div className="phone">
                               <PhoneInTalkIcon />
                               <a href={`tel:${product.user.phoneNumber}`}>
@@ -194,23 +229,23 @@ const ProductDetail = ({ match }) => {
                               </a>
                             </div>
                           </div> */}
-                          <div className="contact-more">
-                            <Typography
-                              className="d-flex-r "
-                              color="textSecondary"
-                              variant="subtitle2"
-                            >
-                              <DomainIcon className="mr-5 icon-detail" />
-                              Nhà cung cấp:
-                              <Link
-                                className="supplier"
-                                style={{ color: "dodgerblue" }}
-                                to={`/users/${product.user._id}`}
-                              >
-                                {product.user.shopName}
-                              </Link>
-                            </Typography>
-                            {/* {product.user.website && (
+                      <div className="contact-more">
+                        <Typography
+                          className="d-flex-r "
+                          color="textSecondary"
+                          variant="subtitle2"
+                        >
+                          <DomainIcon className="mr-5 icon-detail" />
+                          Nhà cung cấp:
+                          <Link
+                            className="supplier"
+                            style={{ color: "dodgerblue" }}
+                            to={`/users/${product.user._id}`}
+                          >
+                            {product.user.shopName}
+                          </Link>
+                        </Typography>
+                        {/* {product.user.website && (
                               <div className="web">
                                 <LanguageIcon />
                                 <Typography
@@ -286,58 +321,77 @@ const ProductDetail = ({ match }) => {
                               </div>
                             )} */}
 
-                            <div className="address">
-                              <div className="icon">
-                                <LocationOnIcon className="mr-5 icon-detail" />
-                              </div>
-                              <div className="text">
-                                <Typography
-                                  color="textPrimary"
-                                  variant="inherit"
-                                >
-                                  <Typography
-                                    color="textSecondary"
-                                    variant="subtitle2"
-                                  >
-                                    Địa chỉ:
-                                  </Typography>{" "}
-                                  {product.user.address} | {product.user.city}
-                                </Typography>
-                                <a
-                                  className="map-link"
-                                  target="_blank"
-                                  href={`https://maps.google.com/?q=${product.user.address}`}
-                                >
-                                  Xem bản đồ
-                                </a>
-                              </div>
-                            </div>
-
-                            <Typography
-                              className="d-flex-r"
-                              color="textSecondary"
-                              variant="subtitle2"
-                            >
-                              <ExposureIcon className="mr-5 icon-detail" />
-                              Số lượng có sẵn:{" "}
-                              <Typography color="textPrimary" variant="inherit">
-                                {product.quantity}
-                              </Typography>
+                        <div className="address">
+                          <div className="icon">
+                            <LocationOnIcon className="mr-5 icon-detail" />
+                          </div>
+                          <div className="text">
+                            <Typography color="textPrimary" variant="inherit">
+                              <Typography
+                                color="textSecondary"
+                                variant="subtitle2"
+                              >
+                                Địa chỉ:
+                              </Typography>{" "}
+                              {product.user.address} | {product.user.city}
                             </Typography>
+                            <a
+                              className="map-link"
+                              target="_blank"
+                              href={`https://maps.google.com/?q=${product.user.address}`}
+                            >
+                              Xem bản đồ
+                            </a>
                           </div>
+                        </div>
 
-                          <div className="add-to-cart">
-                            <AddShoppingCartOutlinedIcon />
-                            <p>Thêm vào giỏ hàng</p>
-                          </div>
+                        <Typography
+                          className="d-flex-r"
+                          color="textSecondary"
+                          variant="subtitle2"
+                        >
+                          <ExposureIcon className="mr-5 icon-detail" />
+                          Số lượng có sẵn:
+                          <Typography color="textPrimary" variant="inherit">
+                            {" "}
+                            {product.quantity}
+                          </Typography>
+                        </Typography>
+                      </div>
+
+                      {product.quantity === 0 && (
+                        <>
+                          <br />
+                          <Alert severity="warning">Tạm hết hàng</Alert>
                         </>
                       )}
-                      {!userInfo && (
+
+                      {product.quantity > 0 && (
                         <>
-                          <Link style={{ color: "dodgerblue" }} to="/login">
-                            Đăng nhập
-                          </Link>{" "}
-                          để xem
+                          <QuantityPicker />
+
+                          <div className="buy">
+                            <button
+                              onClick={addToCartHandler}
+                              disabled={product.quantity === 0}
+                              className="add-to-cart"
+                            >
+                              <AddShoppingCartOutlinedIcon />
+                              <p>Thêm vào giỏ</p>
+                            </button>
+
+                            <button
+                              disabled={product.quantity === 0}
+                              className="checkout"
+                            >
+                              <CardTravelOutlinedIcon />
+                              <p>Mua ngay</p>
+                            </button>
+                          </div>
+                          <div className="row guaranteed">
+                            <VerifiedUserOutlinedIcon />
+                            <p>NUHA đảm bảo</p>
+                          </div>
                         </>
                       )}
                     </Typography>
@@ -356,27 +410,6 @@ const ProductDetail = ({ match }) => {
                     <Typography color="textPrimary" variant="inherit">
                       {ReactHtmlParser(product.description)}
                     </Typography>
-                  </div>
-                  <Typography color="textSecondary" variant="subtitle2">
-                    <br />
-                    Chia sẻ bài viết:
-                  </Typography>
-
-                  <div className="share">
-                    <div
-                      className="fb-share-button"
-                      data-href={`http://localhost:3000${location.pathname}`}
-                      data-layout="button_count"
-                      data-size="small"
-                    >
-                      <a
-                        target="_blank"
-                        href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-                        className="fb-xfbml-parse-ignore"
-                      >
-                        Chia sẻ
-                      </a>
-                    </div>
                   </div>
 
                   <Typography color="textSecondary" variant="subtitle2">
@@ -416,19 +449,19 @@ const ProductDetail = ({ match }) => {
                 </Grid>
               </Grid>
             </section>
-            {/* Comment */}
-            {/* <Typography color="textSecondary" variant="subtitle2">
-                  <br />
-                  Để lại đánh giá của bạn:
-                  <br />
-                </Typography>
-                <AccountCircle />
-                <TextField fullWidth label={"Hung Nguyen"} /> */}
-            {/* <Typography color="textSecondary" variant="subtitle2">
-                  <br />
-                  Tất cả đánh giá:
-                  <Link to={`/products/${slug}/reviews`}> Xem tất cả</Link>
-                </Typography> */}
+            {/* Comment
+            <Typography color="textSecondary" variant="subtitle2">
+              <br />
+              Để lại đánh giá của bạn:
+              <br />
+            </Typography>
+            <AccountCircleOutlinedIcon />
+            <TextField fullWidth label={"Hung Nguyen"} />
+            <Typography color="textSecondary" variant="subtitle2">
+              <br />
+              Tất cả đánh giá:
+              <Link to={`/products/reviews`}> Xem tất cả</Link>
+            </Typography> */}
           </div>
         </>
       )}

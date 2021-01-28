@@ -49,66 +49,71 @@ function FilteredProducts({ location }) {
       </Breadcrumbs>
       {!loading && (
         <>
-          <div className="list-items">
-            <div className="sortBy">
-              <div className="filter">
-                <FormControl>
-                  <InputLabel shrink>
-                    <div className="d-flex-r">
-                      <SortIcon />
-                      <span>Sắp xếp</span>
-                    </div>
-                  </InputLabel>
-                  <Select
-                    native
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                  >
-                    <option value="">Mặc định</option>
-                    <option value="Yêu thích"> Yêu thích </option>
-                    <option value="Giá(thấp đến cao)">Giá(thấp đến cao)</option>
-                    <option value="Giá(cao xuống thấp)">
-                      Giá(cao xuống thấp)
-                    </option>
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="filter">
-                <FormControl>
-                  <InputLabel shrink>
-                    <div className="d-flex-r">
-                      <LocationOnOutlinedIcon />
-                      <span>Vị trí</span>
-                    </div>
-                  </InputLabel>
-                  <Select
-                    native
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  >
-                    <option value="">Toàn quốc</option>
-                    {cities.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
+          {!filteredProducts && <p>Loading...</p>}
+          {filteredProducts && (
+            <div className="list-items">
+              <div className="sortBy">
+                <div className="filter">
+                  <FormControl>
+                    <InputLabel shrink>
+                      <div className="d-flex-r">
+                        <SortIcon />
+                        <span>Sắp xếp</span>
+                      </div>
+                    </InputLabel>
+                    <Select
+                      native
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                    >
+                      <option value="">Mặc định</option>
+                      <option value="Yêu thích"> Yêu thích </option>
+                      <option value="Giá(thấp đến cao)">
+                        Giá(thấp đến cao)
                       </option>
-                    ))}
-                  </Select>
-                </FormControl>
+                      <option value="Giá(cao xuống thấp)">
+                        Giá(cao xuống thấp)
+                      </option>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="filter">
+                  <FormControl>
+                    <InputLabel shrink>
+                      <div className="d-flex-r">
+                        <LocationOnOutlinedIcon />
+                        <span>Vị trí</span>
+                      </div>
+                    </InputLabel>
+                    <Select
+                      native
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    >
+                      <option value="">Toàn quốc</option>
+                      {cities.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-            </div>
 
-            <Grid container spacing={2}>
-              {products && products.length === 0 && (
-                <p>Không có sản phẩm nào!</p>
-              )}
-              {products &&
-                products.map((product) => (
-                  <Grid key={product._id} item xs={6} sm={3}>
-                    <Product product={product} />
-                  </Grid>
-                ))}
-            </Grid>
-          </div>
+              <Grid container spacing={2}>
+                {products && products.length === 0 && (
+                  <p>Không có sản phẩm nào!</p>
+                )}
+                {products &&
+                  products.map((product) => (
+                    <Grid key={product._id} item xs={6} sm={3}>
+                      <Product product={product} />
+                    </Grid>
+                  ))}
+              </Grid>
+            </div>
+          )}
         </>
       )}
       {loading && <SkeletonPrdsList />}

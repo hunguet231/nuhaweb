@@ -71,11 +71,11 @@ function Product({
               <p>{prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} ₫</p>
             </div>
 
-            {/* <Rating
-            value={numRatings}
-            text={`(${numReviews} đánh giá)`}
-            id={_id}
-          /> */}
+            <Rating
+              value={numRatings}
+              text={`(${numReviews} đánh giá)`}
+              id={_id}
+            />
           </div>
         </div>
       )}

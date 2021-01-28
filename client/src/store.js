@@ -14,12 +14,14 @@ import {
   updateShopReducer,
   userDetailsReducer,
 } from "./reducers/userReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 const rootReducer = combineReducers({
   productList: productListReducer,
   filteredProducts: filterProductsCategoryReducer,
   productDetails: productDetailsReducer,
   productCreate: productCreateReducer,
+  cart: cartReducer,
   userLogin: userLoginReducer,
   googleLogin: googleLoginReducer,
   userRegister: userRegisterReducer,
@@ -31,8 +33,15 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+  },
 };
 
 const middleware = [thunk];

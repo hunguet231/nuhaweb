@@ -10,7 +10,7 @@ function SkeletonPrdDetail() {
         <Grid item xs={12}>
           <Skeleton variant="rect" width="100%" height={40} />
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={6}>
           <Skeleton variant="rect" width="100%" height={300} />
           <br />
 
@@ -21,7 +21,7 @@ function SkeletonPrdDetail() {
           <Skeleton width={100} height={20} />
           <Skeleton width={280} height={20} />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <Skeleton width={100} height={20} />
           <Skeleton width={280} height={20} />
           <Skeleton width={100} height={20} />

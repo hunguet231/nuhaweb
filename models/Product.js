@@ -18,9 +18,13 @@ const reviewSchema = mongoose.Schema(
 
 const ProductSchema = new mongoose.Schema(
   {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      default: mongoose.Types.ObjectId(),
+    },
     title: {
       type: String,
-      required: [true, "Please add a name"],
+      required: true,
     },
     slug: {
       type: String,
@@ -31,19 +35,19 @@ const ProductSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "Please add a description"],
+      required: true,
     },
     category: {
       type: Object,
       required: true,
     },
     quantity: {
-      type: String,
-      default: "0",
+      type: Number,
+      default: 0,
     },
     prices: {
       type: String,
-      required: [true, "Price is required"],
+      required: true,
     },
     reviews: [reviewSchema],
     user: {
@@ -51,7 +55,7 @@ const ProductSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    avgStars: {
+    numRatings: {
       type: Number,
       default: 0,
     },
@@ -69,7 +73,7 @@ const ProductSchema = new mongoose.Schema(
 
 // create product slug from the title
 ProductSchema.pre("save", function (next) {
-  this.slug = slugify(this.title, { lower: true }) + "." + short.generate();
+  this.slug = slugify(this.title, { lower: true }) + "." + this._id;
   next();
 });
 
