@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Breadcrumbs,
+  Snackbar,
 } from "@material-ui/core";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import CardTravelOutlinedIcon from "@material-ui/icons/CardTravelOutlined";
@@ -28,6 +29,8 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 import HomeIcon from "@material-ui/icons/Home";
 import "./ProductDetail.css";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import { useSelector, useDispatch } from "react-redux";
 import CarouselPrdsDetail from "../CarouselPrdsDetail";
 import ReactHtmlParser from "react-html-parser";
@@ -38,15 +41,23 @@ import QuantityPicker from "../QuantityPicker/QuantityPicker";
 import ProductMini from "../ProductMini/ProductMini";
 import Rating from "../Rating/Rating";
 import Alert from "@material-ui/lab/Alert";
+import { useRef } from "react";
+import Toaster from "../Toaster";
+import { addToCart } from "../../actions/cartActions";
 
 const ProductDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState(null);
-  const [qty, setQty] = useState(0);
+  const qtyRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const googleLogin = useSelector((state) => state.googleLogin);
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const userInfo = googleLogin.userInfo
     ? googleLogin.userInfo
@@ -79,9 +90,7 @@ const ProductDetail = ({ match, history }) => {
 
   useEffect(() => {
     document.addEventListener("fb_init", (e) => window.FB.XFBML.parse());
-  }, []);
 
-  useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "659192831443395",
@@ -108,7 +117,17 @@ const ProductDetail = ({ match, history }) => {
   });
 
   const addToCartHandler = (e) => {
-    e.preventDefault();
+    if (product) {
+      dispatch(addToCart(product._id, qtyRef.current.defaultValue));
+      setOpen(true);
+    }
+  };
+
+  const handleOpenCart = (e) => {
+    if (product) {
+      dispatch(addToCart(product._id, qtyRef.current.defaultValue));
+      history.push("/cart");
+    }
   };
 
   const addToFavorite = () => {};
@@ -195,7 +214,7 @@ const ProductDetail = ({ match, history }) => {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <div className="product-description">
+                  <div className="product-description__left">
                     <div className="title">{product.title}</div>
                     <Rating
                       value={product.numRatings}
@@ -209,7 +228,7 @@ const ProductDetail = ({ match, history }) => {
                       ₫
                     </div>
                   </div>
-                  <div>
+                  <div className="product-description__right">
                     <Typography color="textSecondary" variant="subtitle2">
                       {/* Thông tin liên hệ: */}
                       {/* <br /> */}
@@ -368,7 +387,7 @@ const ProductDetail = ({ match, history }) => {
 
                       {product.quantity > 0 && (
                         <>
-                          <QuantityPicker />
+                          <QuantityPicker ref={qtyRef} />
 
                           <div className="buy">
                             <button
@@ -381,8 +400,9 @@ const ProductDetail = ({ match, history }) => {
                             </button>
 
                             <button
+                              onClick={handleOpenCart}
                               disabled={product.quantity === 0}
-                              className="checkout"
+                              className="go-to-cart"
                             >
                               <CardTravelOutlinedIcon />
                               <p>Mua ngay</p>
@@ -390,7 +410,7 @@ const ProductDetail = ({ match, history }) => {
                           </div>
                           <div className="row guaranteed">
                             <VerifiedUserOutlinedIcon />
-                            <p>NUHA đảm bảo</p>
+                            <p>NUHA đảm bảo - Nhận hàng hoặc hoàn tiền</p>
                           </div>
                         </>
                       )}
@@ -404,13 +424,37 @@ const ProductDetail = ({ match, history }) => {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={8}>
                   <Typography color="textSecondary" variant="subtitle2">
-                    Chi tiết sản phẩm:
+                    <Tabs>
+                      <TabList>
+                        <Tab>Sản phẩm</Tab>
+                        <Tab>Cửa hàng</Tab>
+                      </TabList>
+
+                      <TabPanel>
+                        <div className="description">
+                          <Typography color="textPrimary" variant="inherit">
+                            {ReactHtmlParser(product.description)}
+                          </Typography>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <Typography
+                          className="d-flex-r "
+                          color="textSecondary"
+                          variant="subtitle2"
+                        >
+                          Nhà cung cấp:
+                          <Link
+                            className="supplier"
+                            style={{ color: "dodgerblue" }}
+                            to={`/users/${product.user._id}`}
+                          >
+                            {product.user.shopName}
+                          </Link>
+                        </Typography>
+                      </TabPanel>
+                    </Tabs>
                   </Typography>
-                  <div className="description">
-                    <Typography color="textPrimary" variant="inherit">
-                      {ReactHtmlParser(product.description)}
-                    </Typography>
-                  </div>
 
                   <Typography color="textSecondary" variant="subtitle2">
                     <br />
@@ -465,6 +509,7 @@ const ProductDetail = ({ match, history }) => {
           </div>
         </>
       )}
+      {open && <Toaster msg={`Đã thêm vào giỏ`} />}
       {loading && <SkeletonPrdDetail />}
     </>
   );

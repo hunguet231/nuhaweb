@@ -119,6 +119,94 @@
     margin: 0;
 }
 
+.cart-modal p {
+    font-size: 14px;
+}
+
+.cart-modal .cart-modal-title {
+    justify-content: space-between;
+}
+
+.cart-modal .title-left {
+    margin-right: 50px;
+}
+
+.cart-modal .title-left p {
+    margin-left: 20px;
+}
+
+.cart-modal .title-right .prices {
+    color: tomato;
+    font-weight: 400;
+    text-shadow: unset;
+}
+
+.cart-modal .title-left,
+.cart-modal .cart-modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.cart-modal .cart-modal-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-modal .cart-modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-modal .cart-modal-footer button {
+    color: #fff;
+    background-color: #6394F8;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    width: 250px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.product-cart-item,
+.product-cart-item .sub-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-cart-item .img {
+    width: 50px;
+    height: 35px;
+    margin-right: 8px;
+    background-color: rgb(194, 194, 194);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.product-cart-item .text .title {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    width: 200px;
+    -webkit-box-orient: vertical;
+}
+
+.product-cart-item .sub-text .price {
+    color: rgb(228, 65, 54);
+    font-size: 13px;
+}
+
+.product-cart-item .sub-text .qty {
+    color: gray;
+    font-size: 13px;
+}
+
 
 /* Responsive Navbar*/
 

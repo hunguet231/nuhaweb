@@ -19,8 +19,8 @@ import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { makeStyles } from "@material-ui/core/styles";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { logout } from "../../actions/userActions";
@@ -38,8 +38,20 @@ const useStyles = makeStyles({
   },
 });
 
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}))(Badge);
+
 function Navbar({ history }) {
   const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   // user info
   const userLogin = useSelector((state) => state.userLogin);
@@ -49,15 +61,25 @@ function Navbar({ history }) {
     ? googleLogin.userInfo
     : userLogin.userInfo;
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorUser, setAnchorUser] = useState(null);
+  const [anchorCart, setAnchorCart] = useState(null);
   const [keyword, setKeyword] = useState("");
+
+  const qty = cartItems.length;
+  const prices = cartItems
+    .reduce(
+      (acc, item) => acc + item.qty * parseInt(item.price.replace(".", "")),
+      0
+    )
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   // search product
   const handleSearch = () => {};
 
   // logout
   const handleLogout = () => {
-    setAnchorEl(null);
+    setAnchorUser(null);
     dispatch(logout());
     signOut();
   };
@@ -68,12 +90,20 @@ function Navbar({ history }) {
   });
 
   // menu
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickUser = (event) => {
+    setAnchorUser(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleCloseUser = () => {
+    setAnchorUser(null);
+  };
+
+  const handleClickCart = (event) => {
+    setAnchorCart(event.currentTarget);
+  };
+
+  const handleCloseCart = () => {
+    setAnchorCart(null);
   };
 
   const classes = useStyles();
@@ -118,18 +148,18 @@ function Navbar({ history }) {
             <div className="user-wrapper">
               {userInfo ? (
                 <>
-                  <div className="user-inner" onClick={handleClick}>
+                  <div className="user-inner" onClick={handleClickUser}>
                     <Avatar src={userInfo.user.avatarUser} />
                     <p className="user-name">{userInfo.user.firstName}</p>
                     <ArrowDropDownOutlinedIcon />
                   </div>
                   <Menu
-                    anchorEl={anchorEl}
+                    anchorEl={anchorUser}
                     keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
+                    open={Boolean(anchorUser)}
+                    onClose={handleCloseUser}
                   >
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleCloseUser}>
                       <AccountCircleOutlinedIcon />{" "}
                       <Link to="/profile">
                         <Typography variant="subtitle2">Tài khoản</Typography>
@@ -150,9 +180,69 @@ function Navbar({ history }) {
                 </>
               )}
             </div>
-            <div className="cart">
-              <ShoppingCartOutlinedIcon />
+            <div className="cart" onClick={handleClickCart}>
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={qty} color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
             </div>
+            <Menu
+              className="cart-modal"
+              anchorEl={anchorCart}
+              keepMounted
+              open={Boolean(anchorCart)}
+              onClose={handleCloseCart}
+            >
+              <MenuItem className="cart-modal-title">
+                <div className="title-left">
+                  <StyledBadge badgeContent={qty} color="secondary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                  <p>Giỏ hàng</p>
+                </div>
+                <div className="title-right">
+                  <p>
+                    Tổng: <span className="prices">{prices} ₫</span>
+                  </p>
+                </div>
+              </MenuItem>
+              <hr />
+              <MenuItem className="cart-modal-body">
+                {qty === 0 && <p>Giỏ hàng trống!</p>}
+                {qty > 0 && (
+                  <>
+                    {cartItems.map((item) => (
+                      <MenuItem
+                        key={item.product}
+                        className="product-cart-item"
+                      >
+                        <div
+                          className="img"
+                          style={{ backgroundImage: `url(${item.image})` }}
+                        ></div>
+                        <div className="text">
+                          <a href={`/products/${item.slug}/${item.user}`}>
+                            <div className="title">{item.name}</div>
+                          </a>
+
+                          <div className="sub-text">
+                            <div className="price">{item.price} ₫</div>
+                            <div className="qty">SL: {item.qty}</div>
+                          </div>
+                        </div>
+                      </MenuItem>
+                    ))}
+                  </>
+                )}
+              </MenuItem>
+              <MenuItem className="cart-modal-footer">
+                <Link to={`/cart`} onClick={handleCloseCart}>
+                  <button>Xem giỏ</button>
+                </Link>
+              </MenuItem>
+            </Menu>
+
             <div className="sell-btn">
               <Link to="/me/sell/dashboard">
                 <Button

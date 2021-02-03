@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import "./QuantityPicker.css";
 
-function QuantityPicker() {
-  const [value, setValue] = useState(1);
+const QuantityPicker = forwardRef((props, ref, qty) => {
+  const [value, setValue] = useState(qty);
 
   const increment = () => {
     setValue((prevState) => ++prevState);
@@ -10,6 +10,11 @@ function QuantityPicker() {
 
   const decrement = () => {
     setValue((prevState) => (prevState > 1 ? --prevState : 1));
+  };
+
+  const handleChange = (e) => {
+    const res = e.target.validity.valid ? e.target.value : value;
+    setValue(res);
   };
 
   return (
@@ -22,10 +27,13 @@ function QuantityPicker() {
         &mdash;
       </button>
       <input
+        ref={ref}
         className="quantity-input__screen"
         type="text"
+        required
+        pattern="[0-9]*"
+        onInput={handleChange}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
       />
       <button
         className="quantity-input__modifier quantity-input__modifier--right"
@@ -35,6 +43,6 @@ function QuantityPicker() {
       </button>
     </div>
   );
-}
+});
 
 export default QuantityPicker;

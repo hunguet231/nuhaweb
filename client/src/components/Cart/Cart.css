@@ -1,0 +1,72 @@
+.cart-wrapper {
+    height: 100vh;
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 15px;
+}
+
+.cart-title p:last-child {
+    font-size: 13px;
+    color: gray;
+}
+
+.cart-item {
+    height: 80px;
+    margin-top: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.cart-item:hover {
+    background-color: rgb(244, 244, 244);
+}
+
+.cart-item .img {
+    width: 100px;
+    height: 80px;
+    margin-right: 6px;
+    background-color: rgb(194, 194, 194);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-item .sub-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item .text .title {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 8px;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    width: 200px;
+    -webkit-box-orient: vertical;
+}
+
+.cart-item .sub-text .price {
+    color: rgb(228, 65, 54);
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+.cart-item .sub-text .qty {
+    color: gray;
+    font-size: 13px;
+}
+
+.cart-item .delete-icon .MuiSvgIcon-root {
+    font-size: 14px;
+}

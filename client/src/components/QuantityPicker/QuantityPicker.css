@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     border-radius: 3px;
-    margin-top: 10px;
 }
 
 .quantity-input p {
@@ -16,9 +15,9 @@
 }
 
 .quantity-input__modifier {
-    padding: .45rem;
-    width: 2.5rem;
-    height: 2rem;
+    padding: .3rem;
+    width: 2rem;
+    height: 1.75rem;
     background: #f3f3f3;
     color: #888;
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -41,8 +40,8 @@
 }
 
 .quantity-input__screen {
-    width: 3rem;
-    padding: .45rem;
+    width: 2.6rem;
+    padding: .3rem;
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);

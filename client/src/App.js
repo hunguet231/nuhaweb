@@ -29,6 +29,7 @@ import { Alert } from "@material-ui/lab";
 import Headroom from "react-headroom";
 import Profile from "./components/pages/Profile";
 import FilteredProducts from "./components/pages/FilteredProducts";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   // user info
@@ -117,6 +118,9 @@ function App() {
                 path="/products/:slug/:userId"
                 component={ProductDetail}
               />
+            </div>
+            <div className="showcase">
+              <Route exact path="/cart" component={Cart} />
             </div>
             <div className="showcase">
               <Route exact path="/profile" component={Profile} />
