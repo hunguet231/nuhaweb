@@ -154,9 +154,13 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       type: USER_DETAILS_REQUEST,
     });
 
-    const {
-      userLogin: { userInfo },
-    } = getState;
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    console.log(userInfo);
 
     const config = {
       headers: {
@@ -169,7 +173,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
-      payload: data,
+      payload: data.data,
     });
   } catch (error) {
     dispatch({

@@ -387,7 +387,10 @@ const ProductDetail = ({ match, history }) => {
 
                       {product.quantity > 0 && (
                         <>
-                          <QuantityPicker ref={qtyRef} />
+                          <QuantityPicker
+                            defaultValue={Number(1)}
+                            ref={qtyRef}
+                          />
 
                           <div className="buy">
                             <button

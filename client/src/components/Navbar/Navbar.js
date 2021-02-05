@@ -12,7 +12,9 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowDropDownOutlinedIcon from "@material-ui/icons/ArrowDropDownOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import StorefrontOutlinedIcon from "@material-ui/icons/StorefrontOutlined";
 import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
+import ReceiptOutlinedIcon from "@material-ui/icons/ReceiptOutlined";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
 import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
 import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
@@ -163,6 +165,18 @@ function Navbar({ history }) {
                       <AccountCircleOutlinedIcon />{" "}
                       <Link to="/profile">
                         <Typography variant="subtitle2">Tài khoản</Typography>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUser}>
+                      <ReceiptOutlinedIcon />{" "}
+                      <Link to="/myorders">
+                        <Typography variant="subtitle2">Đơn mua</Typography>
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUser}>
+                      <StorefrontOutlinedIcon />{" "}
+                      <Link to="/me/sell/dashboard">
+                        <Typography variant="subtitle2">Bắt đầu bán</Typography>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>

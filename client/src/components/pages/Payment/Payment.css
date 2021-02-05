@@ -1,0 +1,11 @@
+.momo-payment,
+.zalopay-payment {
+    width: 20px;
+    margin-bottom: -3px;
+}
+
+.paypal-payment,
+.cash-payment {
+    height: 20px;
+    margin-bottom: -3px;
+}

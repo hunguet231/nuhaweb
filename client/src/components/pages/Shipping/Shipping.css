@@ -1,0 +1,26 @@
+.shipping-wrapper {
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 15px;
+}
+
+.shipping-wrapper .title {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.shipping-wrapper .title .MuiSvgIcon-root {
+    color: gray;
+    font-size: 18px;
+}
+
+.shipping-wrapper .address-box {
+    margin-left: 3px;
+    margin-top: 10px;
+}
+
+.shipping-wrapper .address-box .MuiTextField-root {
+    margin-top: 20px;
+}

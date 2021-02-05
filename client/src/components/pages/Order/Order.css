@@ -1,0 +1,47 @@
+.order-wrapper {
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 15px;
+}
+
+.order-wrapper .top-order {
+    background-color: rgb(85, 85, 85);
+    color: rgb(226, 226, 226);
+    padding: 3px;
+}
+
+.order-wrapper .cart-item {
+    justify-content: flex-start;
+}
+
+.order-wrapper .title {
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.order-wrapper .top-order>.title {
+    margin-top: 0px;
+}
+
+.order-wrapper .top-order>.title .MuiSvgIcon-root {
+    color: rgb(226, 226, 226);
+    margin-bottom: -5px;
+}
+
+.order-wrapper .address,
+.order-wrapper .payment {
+    color: gray;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.order-wrapper .address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.order-wrapper .tax {
+    margin-bottom: 8px;
+}

@@ -11,6 +11,13 @@ const OrderSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    sellerIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
+    ],
     orderItems: [
       {
         name: { type: String, required: true },
@@ -22,13 +29,20 @@ const OrderSchema = new mongoose.Schema(
           required: true,
           ref: "Product",
         },
+        qty: { type: Number, required: true },
+        slug: { type: String, required: true },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "User",
+        },
       },
     ],
     shippingAddress: {
+      userName: { type: String, required: true },
+      phoneNumber: { type: String, required: true },
       address: { type: String, required: true },
       city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
     },
     paymentMethod: {
       type: String,
@@ -42,7 +56,6 @@ const OrderSchema = new mongoose.Schema(
     },
     taxPrice: {
       type: Number,
-      required: true,
       default: 0.0,
     },
     shippingPrice: {
@@ -51,9 +64,8 @@ const OrderSchema = new mongoose.Schema(
       default: 0.0,
     },
     totalPrice: {
-      type: Number,
+      type: String,
       required: true,
-      default: 0.0,
     },
     isPaid: {
       type: Boolean,

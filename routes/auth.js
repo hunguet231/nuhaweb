@@ -3,7 +3,7 @@ const {
   register,
   login,
   googleLogin,
-  getMe,
+  getUserProfile,
   updateShop,
   forgotPassword,
   updateUserProfile,
@@ -17,7 +17,10 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/googleLogin", googleLogin);
 
-router.route("/profile").put(protect, updateUserProfile);
+router
+  .route("/profile")
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 router.put("/update-shop", protect, updateShop);
 

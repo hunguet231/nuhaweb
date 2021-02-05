@@ -30,6 +30,10 @@ import Headroom from "react-headroom";
 import Profile from "./components/pages/Profile";
 import FilteredProducts from "./components/pages/FilteredProducts";
 import Cart from "./components/Cart/Cart";
+import Shipping from "./components/pages/Shipping/Shipping";
+import Payment from "./components/pages/Payment/Payment";
+import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder";
+import Order from "./components/pages/Order/Order";
 
 function App() {
   // user info
@@ -121,6 +125,18 @@ function App() {
             </div>
             <div className="showcase">
               <Route exact path="/cart" component={Cart} />
+            </div>
+            <div className="showcase">
+              <Route exact path="/shipping" component={Shipping} />
+            </div>
+            <div className="showcase">
+              <Route exact path="/payment" component={Payment} />
+            </div>
+            <div className="showcase">
+              <Route exact path="/place-order" component={PlaceOrder} />
+            </div>
+            <div className="showcase">
+              <Route exact path="/order/:id" component={Order} />
             </div>
             <div className="showcase">
               <Route exact path="/profile" component={Profile} />

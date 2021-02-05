@@ -21,17 +21,11 @@ import "./Profile.css";
 function Profile({ location, history }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [shopName, setShopName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassowrd, setShowPassword] = useState(false);
   const [message, setMessage] = useState(null);
-
-  const [values, setValues] = useState({
-    password: "",
-    confirmPassword: "",
-    showPassword: false,
-  });
 
   const dispatch = useDispatch();
 
@@ -47,22 +41,22 @@ function Profile({ location, history }) {
     : userLogin.userInfo;
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
       if (!user) {
         dispatch(getUserDetails("profile"));
       } else {
-        console.log(user);
         setFirstName(user.firstName);
         setLastName(user.lastName);
+        setUsername(user.username);
       }
     }
   }, [dispatch, history, userInfo, user]);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,18 +69,16 @@ function Profile({ location, history }) {
     }
   };
 
-  const handlePaswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    setPassword(values.password);
+  const handlePaswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleConfirmPaswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    setConfirmPassword(values.confirmPassword);
+  const handleConfirmPaswordChange = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setShowPassword(!showPassowrd);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -118,14 +110,14 @@ function Profile({ location, history }) {
               />
             </div>
             <TextField
-              value={email}
-              type="email"
+              value={username}
+              type="text"
               variant="outlined"
               autoComplete="username"
-              label="Email"
+              label="Username"
               onChange={(e) => {
-                setEmail(e.target.value);
-                setShopName(e.target.value);
+                setUsername(e.target.value);
+                // setShopName(e.target.value);
               }}
               required
             />
@@ -135,20 +127,21 @@ function Profile({ location, history }) {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={showPassowrd ? "text" : "password"}
                 required
                 autoComplete="new-password"
-                value={values.password}
-                onChange={handlePaswordChange("password")}
+                value={password}
+                onChange={handlePaswordChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
+                      size="small"
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassowrd ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -162,20 +155,21 @@ function Profile({ location, history }) {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
+                type={showPassowrd ? "text" : "password"}
                 required
                 autoComplete="new-password"
-                value={values.confirmPassword}
-                onChange={handleConfirmPaswordChange("confirmPassword")}
+                value={confirmPassword}
+                onChange={handleConfirmPaswordChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
+                      size="small"
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {showPassowrd ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }

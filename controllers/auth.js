@@ -136,6 +136,20 @@ const sendTokenResponse = (user, statusCode, res) => {
     .json({ success: true, user, token });
 };
 
+// @desc    Get user profile
+// @route   GET /api/v1/auth/profile
+// @access  Private
+exports.getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    sendTokenResponse(user, 200, res);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
 // @desc    Update user profile
 // @route   PUT /api/v1/auth/profile
 // @access  Private
@@ -145,6 +159,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.firstName = req.body.firstName || user.firstName;
     user.lastName = req.body.lastName || user.lastName;
+    user.username = req.body.username || user.username;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -152,11 +167,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
 
     const updatedUser = await User.save();
 
-    res.json({
-      _id: updatedUser._id,
-      firstName: updatedUser.firstName,
-      lastName: updatedUser.lastName,
-    });
+    sendTokenResponse(updatedUser, 200, res);
   } else {
     res.status(404);
     throw new Error("User not found");

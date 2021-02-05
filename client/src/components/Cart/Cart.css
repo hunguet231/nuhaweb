@@ -1,9 +1,14 @@
 .cart-wrapper {
-    height: 100vh;
     background-color: white;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px 15px;
+}
+
+.cart-title .MuiSvgIcon-root {
+    color: gray;
+    font-size: 18px;
+    margin-bottom: -2px;
 }
 
 .cart-title p:last-child {
@@ -56,8 +61,12 @@
     -webkit-box-orient: vertical;
 }
 
+.cart-item .text .title:hover {
+    color: dodgerblue;
+}
+
 .cart-item .sub-text .price {
-    color: rgb(228, 65, 54);
+    color: rgb(70, 70, 70);
     font-size: 13px;
     margin-right: 6px;
 }
@@ -69,4 +78,82 @@
 
 .cart-item .delete-icon .MuiSvgIcon-root {
     font-size: 14px;
+}
+
+.total-price-item {
+    font-size: 13px;
+    color: gray;
+}
+
+.total-price-item .price {
+    color: rgb(233, 46, 21);
+}
+
+.order-summary {
+    border: 1px solid rgba(236, 236, 236, 0.986);
+    padding: 6px 15px;
+    font-size: 14px;
+}
+
+.order-summary .title {
+    font-size: 16px;
+}
+
+.order-summary .title .MuiSvgIcon-root {
+    color: gray;
+    font-size: 18px;
+    margin-bottom: -3px;
+    margin-left: -3px;
+}
+
+.order-summary .sub-title {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.order-summary .price span {
+    color: gray;
+}
+
+.order-summary .voucher input {
+    outline: none;
+    border: 1px solid rgb(233, 233, 233);
+    margin-left: 5px;
+    padding-left: 3px;
+    height: 30px;
+}
+
+.order-summary .voucher input:focus {
+    border: 1px solid rgb(122, 182, 241);
+}
+
+.order-summary .price,
+.order-summary .voucher,
+.order-summary .total-price {
+    margin-bottom: 8px;
+}
+
+.order-summary .total-price span {
+    color: rgb(233, 46, 21);
+}
+
+.order-summary .checkout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(122, 182, 241);
+    color: white;
+    padding: 8px 3px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-summary .checkout-btn:hover {
+    background-color: rgb(97, 168, 240);
 }

@@ -30,6 +30,7 @@ app.use(cookieParser());
 app.use("/api/v1/products", require("./routes/products"));
 app.use("/api/v1/users", require("./routes/users"));
 app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/orders", require("./routes/orders"));
 
 var __dirname = path.resolve();
 
