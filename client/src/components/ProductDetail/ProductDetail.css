@@ -64,6 +64,7 @@
     font-size: 20px;
     margin: 0;
     margin-top: 10px;
+    color: #f50057;
 }
 
 .save-fav {
@@ -306,6 +307,53 @@
 
 .link-view-more:hover .MuiSvgIcon-root {
     transform: translateX(5px);
+}
+
+.comment-box {
+    margin-top: 10px !important;
+}
+
+.avt-cmt-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.avt-cmt-box .MuiAvatar-root {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.avt-cmt-box p {
+    font-size: 12px;
+}
+
+.rv-item {
+    margin-bottom: 10px;
+}
+
+.rv-item .name {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.rv-item .name .MuiAvatar-root {
+    width: 25px !important;
+    height: 25px !important;
+    margin-right: 5px;
+}
+
+.rv-item .time {
+    font-size: 12px;
+    color: gray;
+}
+
+.rv-item .cmt {
+    font-size: 14px;
 }
 
 @media (max-width: 510px) {

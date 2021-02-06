@@ -5,9 +5,10 @@ import {
   Tooltip,
   Typography,
   TextField,
-  Button,
   Breadcrumbs,
-  Snackbar,
+  Avatar,
+  InputAdornment,
+  Button,
 } from "@material-ui/core";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import CardTravelOutlinedIcon from "@material-ui/icons/CardTravelOutlined";
@@ -34,7 +35,6 @@ import "react-tabs/style/react-tabs.css";
 import { useSelector, useDispatch } from "react-redux";
 import CarouselPrdsDetail from "../CarouselPrdsDetail";
 import ReactHtmlParser from "react-html-parser";
-import { listProducts } from "../../actions/productActions";
 import Axios from "axios";
 import Category from "../Category/Category";
 import QuantityPicker from "../QuantityPicker/QuantityPicker";
@@ -44,27 +44,37 @@ import Alert from "@material-ui/lab/Alert";
 import { useRef } from "react";
 import Toaster from "../Toaster";
 import { addToCart } from "../../actions/cartActions";
+import { createProductReview } from "../../actions/productActions";
 
 const ProductDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState(null);
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0);
   const qtyRef = useRef(null);
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const googleLogin = useSelector((state) => state.googleLogin);
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  let {
+    success: successProductReview,
+    error: errorProductReview,
+  } = productReviewCreate;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const googleLogin = useSelector((state) => state.googleLogin);
   const userInfo = googleLogin.userInfo
     ? googleLogin.userInfo
     : userLogin.userInfo;
 
   const location = useLocation();
 
+  // fetch products
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
@@ -79,14 +89,19 @@ const ProductDetail = ({ match, history }) => {
       setLoading(false);
     };
     fetchProducts();
-  }, []);
+  }, [productReviewCreate]);
 
+  // get curent product
   useEffect(() => {
     if (products) {
       const product = products.find((prd) => prd.slug == match.params.slug);
       setProduct(product);
     }
-  }, [products]);
+  }, [products, productReviewCreate]);
+
+  useEffect(() => {
+    productReviewCreate.error = null;
+  }, [productReviewCreate]);
 
   useEffect(() => {
     document.addEventListener("fb_init", (e) => window.FB.XFBML.parse());
@@ -128,6 +143,21 @@ const ProductDetail = ({ match, history }) => {
       dispatch(addToCart(product._id, qtyRef.current.defaultValue));
       history.push("/cart");
     }
+  };
+
+  const getRatingValue = (value) => {
+    setRating(value);
+  };
+
+  const handleSubmitReview = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      createProductReview(product._id, {
+        rating,
+        comment,
+      })
+    );
   };
 
   const addToFavorite = () => {};
@@ -217,11 +247,11 @@ const ProductDetail = ({ match, history }) => {
                   <div className="product-description__left">
                     <div className="title">{product.title}</div>
                     <Rating
-                      value={product.numRatings}
+                      readOnly
+                      defaultValue={product.numRatings}
                       text={`(${product.numReviews} đánh giá)`}
-                      // id={_id}
                     />
-                    <div className="prices" style={{ color: " #e74c3c" }}>
+                    <div className="prices">
                       {product.prices
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
@@ -422,7 +452,6 @@ const ProductDetail = ({ match, history }) => {
                 </Grid>
               </Grid>
             </section>
-
             <section>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={8}>
@@ -434,6 +463,9 @@ const ProductDetail = ({ match, history }) => {
                       </TabList>
 
                       <TabPanel>
+                        <Typography color="textSecondary" variant="subtitle2">
+                          Chi tiết sản phẩm:
+                        </Typography>
                         <div className="description">
                           <Typography color="textPrimary" variant="inherit">
                             {ReactHtmlParser(product.description)}
@@ -461,16 +493,89 @@ const ProductDetail = ({ match, history }) => {
 
                   <Typography color="textSecondary" variant="subtitle2">
                     <br />
-                    Bình luận công khai:
+                    Đánh giá sản phẩm
+                    <br />
                   </Typography>
 
-                  <div
-                    className="fb-comments"
-                    data-href={`http://localhost:3000${location.pathname}`}
-                    data-numposts="5"
-                    data-lazy="true"
-                    data-width="100%"
-                  ></div>
+                  {product.reviews.length === 0 && (
+                    <Alert icon={false} severity="info">
+                      Chưa có đánh giá nào
+                    </Alert>
+                  )}
+
+                  {product.reviews.map((rv) => (
+                    <div key={rv._id} className="rv-item">
+                      <Link to={`/users/${rv.user}`} className="name">
+                        <Avatar src={rv.userAvatar} />
+                        <p> {rv.name}</p>
+                      </Link>
+                      <Rating readOnly size="small" defaultValue={rv.rating} />
+                      <p className="time">
+                        {rv.createdAt.substring(0, 10)}{" "}
+                        {rv.createdAt.substring(11, 19)}
+                      </p>
+                      <p className="cmt">{rv.comment}</p>
+                    </div>
+                  ))}
+
+                  <Typography color="textSecondary" variant="subtitle2">
+                    <br />
+                    Để lại đánh giá của bạn
+                    <br />
+                  </Typography>
+
+                  {errorProductReview && (
+                    <Alert severity="error">{errorProductReview}</Alert>
+                  )}
+
+                  {userInfo && (
+                    <>
+                      <form onSubmit={handleSubmitReview}>
+                        <Rating getRatingValue={getRatingValue}></Rating>
+                        <TextField
+                          placeholder="Viết nhận xét ở đây..."
+                          required
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          multiline
+                          rows={2}
+                          className="comment-box"
+                          fullWidth
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment
+                                className="avt-cmt-box"
+                                position="start"
+                              >
+                                <Avatar src={userInfo.user.avatarUser} />
+                                <p>{userInfo.user.firstName}</p>
+                              </InputAdornment>
+                            ),
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <Button
+                                  type="submit"
+                                  size="small"
+                                  variant="contained"
+                                  color="primary"
+                                >
+                                  Gửi
+                                </Button>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </form>
+                    </>
+                  )}
+
+                  {!userInfo && (
+                    <Alert icon={false} severity="info">
+                      <Link to="/login">
+                        <b>Đăng nhập</b> để viết đánh giá
+                      </Link>
+                    </Alert>
+                  )}
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Typography color="textSecondary" variant="subtitle2">
@@ -496,19 +601,6 @@ const ProductDetail = ({ match, history }) => {
                 </Grid>
               </Grid>
             </section>
-            {/* Comment
-            <Typography color="textSecondary" variant="subtitle2">
-              <br />
-              Để lại đánh giá của bạn:
-              <br />
-            </Typography>
-            <AccountCircleOutlinedIcon />
-            <TextField fullWidth label={"Hung Nguyen"} />
-            <Typography color="textSecondary" variant="subtitle2">
-              <br />
-              Tất cả đánh giá:
-              <Link to={`/products/reviews`}> Xem tất cả</Link>
-            </Typography> */}
           </div>
         </>
       )}

@@ -41,8 +41,4 @@
         font-size: 14px;
         transform: translateX(-10px);
     }
-    .icon-button .MuiIconButton-root {
-        width: 24px;
-        height: 24px;
-    }
 }

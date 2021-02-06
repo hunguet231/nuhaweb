@@ -77,6 +77,11 @@
     width: 100%;
 }
 
+a {
+    text-decoration: none;
+    color: #2c2c2c;
+}
+
 @media (max-width: 600px) {
     .app {
         padding-bottom: 300px;

@@ -15,8 +15,6 @@ function Order({ match }) {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  const orderCreate = useSelector((state) => state.orderCreate);
-
   if (!loading) {
     order.itemsPrice = order.orderItems
       .reduce(
@@ -29,10 +27,6 @@ function Order({ match }) {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
-
-    // empty order create
-    orderCreate.order = {};
-    orderCreate.success = false;
   }, [dispatch]);
 
   return (

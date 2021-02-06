@@ -51,10 +51,6 @@ function PlaceOrder({ history }) {
         sellerIds,
       })
     );
-
-    // empty cart
-    localStorage.removeItem("cartItems");
-    cart.cartItems = [];
   };
 
   return (

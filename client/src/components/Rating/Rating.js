@@ -1,82 +1,76 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import StarHalfRoundedIcon from "@material-ui/icons/StarHalfRounded";
+import { withStyles } from "@material-ui/core/styles";
+import { Rating as MuiRating } from "@material-ui/lab";
+import Typography from "@material-ui/core/Typography";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
-import { Typography } from "@material-ui/core";
-import PropTypes from "prop-types";
 import "./Rating.css";
 
-function Rating({ value, text, color, id }) {
+const StyledRating = withStyles({
+  iconFilled: {
+    color: "#f8e825",
+  },
+  iconHover: {
+    color: "#f8e825",
+  },
+})(MuiRating);
+
+const Rating = ({ size, text, defaultValue, readOnly, getRatingValue }) => {
+  const [value, setValue] = React.useState(defaultValue);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    getRatingValue(newValue);
+  };
+
   return (
-    <div className="rating">
-      <div className="star">
-        <span className="num">{value}</span>
-        <span style={{ color }}>
-          {value >= 1 ? (
-            <StarRoundedIcon />
-          ) : value >= 0.5 ? (
-            <StarHalfRoundedIcon />
-          ) : (
-            <StarBorderRoundedIcon />
-          )}
-        </span>
-        <span style={{ color }}>
-          {value >= 2 ? (
-            <StarRoundedIcon />
-          ) : value >= 1.5 ? (
-            <StarHalfRoundedIcon />
-          ) : (
-            <StarBorderRoundedIcon />
-          )}
-        </span>
-        <span style={{ color }}>
-          {value >= 3 ? (
-            <StarRoundedIcon />
-          ) : value >= 2.5 ? (
-            <StarHalfRoundedIcon />
-          ) : (
-            <StarBorderRoundedIcon />
-          )}
-        </span>
-        <span style={{ color }}>
-          {value >= 4 ? (
-            <StarRoundedIcon />
-          ) : value >= 3.5 ? (
-            <StarHalfRoundedIcon />
-          ) : (
-            <StarBorderRoundedIcon />
-          )}
-        </span>
-        <span style={{ color }}>
-          {value >= 5 ? (
-            <StarRoundedIcon />
-          ) : value >= 4.5 ? (
-            <StarHalfRoundedIcon />
-          ) : (
-            <StarBorderRoundedIcon />
-          )}
-        </span>
-      </div>
-      <div className="text">
-        {/* <Link to={`/products/${id}/reviews`}> */}
-        <Typography variant="caption">
-          <span> {text && text}</span>
-        </Typography>
-        {/* </Link> */}
-      </div>
+    <div>
+      {readOnly ? (
+        <>
+          <div className="rating">
+            <StyledRating
+              name="read-only"
+              emptyIcon={
+                <StarBorderRoundedIcon
+                  style={{ color: "#f8e825" }}
+                  fontSize="inherit"
+                />
+              }
+              size={size}
+              value={value}
+              readOnly
+            />
+            {/* <Link to={`/products/${id}/reviews`}> */}
+            <Typography variant="caption">
+              <span> {text && text}</span>
+            </Typography>
+            {/* </Link> */}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="rating">
+            <StyledRating
+              emptyIcon={
+                <StarBorderRoundedIcon
+                  style={{ color: "#f8e825" }}
+                  fontSize="inherit"
+                />
+              }
+              size={size}
+              name="simple-controlled"
+              value={value}
+              onChange={handleChange}
+            />
+            {/* <Link to={`/products/${id}/reviews`}> */}
+            <Typography variant="caption">
+              <span> {text && text}</span>
+            </Typography>
+            {/* </Link> */}
+          </div>
+        </>
+      )}
     </div>
   );
-}
-
-Rating.defaultProps = {
-  color: "#f8e825",
-};
-
-Rating.propTypes = {
-  value: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  color: PropTypes.string,
 };
 
 export default Rating;

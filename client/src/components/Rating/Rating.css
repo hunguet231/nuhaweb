@@ -1,21 +1,9 @@
 .rating {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: center;
 }
 
-.rating .star {
-    display: flex;
-    align-items: center;
-    color: rgb(248, 232, 37);
-}
-
-.rating span .MuiSvgIcon-root {
-    font-size: larger;
-    margin-bottom: -3px;
-}
-
-a {
-    text-decoration: none;
-    color: #2c2c2c;
+.rating .MuiTypography-root {
+    margin-bottom: -2px;
 }

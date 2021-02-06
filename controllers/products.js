@@ -6,14 +6,14 @@ const path = require("path");
 // @route   GET /api/v1/products
 // @route   GET /api/v1/users/:userId/products
 // @access  Public
-exports.getProducts = asyncHandler(async (req, res, next) => {
+exports.getProducts = asyncHandler(async (req, res) => {
   res.status(200).json(res.advancedResults);
 });
 
 // @desc    Get single product
 // @route   GET /api/v1/products/:id
 // @access  Public
-exports.getProduct = asyncHandler(async (req, res, next) => {
+exports.getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id).populate({
     path: "user",
     select: [
@@ -49,7 +49,7 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 // @desc    Create new product
 // @route   POST /api/v1/users/:userId/products
 // @access  Private
-exports.createProduct = asyncHandler(async (req, res, next) => {
+exports.createProduct = asyncHandler(async (req, res) => {
   // Add user to req.body
   req.body.user = req.user.id;
 
@@ -71,7 +71,7 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
 // @desc    Update product
 // @route   PUT /api/v1/products/:id
 // @access  Private
-exports.updateProduct = asyncHandler(async (req, res, next) => {
+exports.updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -103,7 +103,7 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 // @desc    Delete product
 // @route   DELETE /api/v1/products/:id
 // @access  Private
-exports.deleteProduct = asyncHandler(async (req, res, next) => {
+exports.deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -128,37 +128,42 @@ exports.deleteProduct = asyncHandler(async (req, res, next) => {
 // @desc    Create new review
 // @route   POST /api/v1/products/:id/reviews
 // @access  Private
-// exports.createProductReview = asyncHandler(async (req, res, next) => {
-//   const { rating, comment } = req.body;
+exports.createProductReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
 
-//   const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id);
 
-//   if (!product) {
-//     return next(
-//       new ErrorResponse(`Product not found with id of ${req.params.id}`, 404)
-//     );
-//   }
+  if (product) {
+    const alreadyReviewed = product.reviews.find(
+      (rv) => rv.user.toString() === req.user._id.toString()
+    );
 
-//   const review = {
-//     name: req.user.name,
-//     rating: Number(rating),
-//     comment,
-//     user: req.user._id,
-//   };
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Bạn đã đánh giá cho sản phẩm này trước đó!");
+    }
 
-//   product.reviews.push(review);
+    const review = {
+      name: req.user.firstName,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+      userAvatar: req.user.avatarUser,
+    };
 
-//   product.numReviews = product.reviews.length;
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.numRatings =
+      product.reviews.reduce((acc, rv) => acc + rv.rating, 0) /
+      product.reviews.length;
 
-//   product.rating =
-//     product.reviews.reduce((acc, item) => {
-//       item.rating + acc;
-//     }, 0) / product.reviews.length;
+    await product.save();
 
-//   await product.save();
-
-//   res.status(201).json({
-//     success: true,
-//     msg: "Review added",
-//   });
-// });
+    res.status(201).json({
+      message: "Review added",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});

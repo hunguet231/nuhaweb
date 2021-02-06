@@ -29,13 +29,19 @@ function Product({
   return (
     <>
       {user && (
-        <div className="product-item">
+        <div
+          className={quantity > 0 ? `product-item` : `product-item sold-out`}
+        >
           <Link to={`/products/${slug}/${user._id}`}>
             <div className="product-item-header" title={title}>
               <div
                 className="img"
                 style={{ backgroundImage: `url(${photos[0]})` }}
-              ></div>
+              >
+                <div className="sold-out-text">
+                  <p>Hết hàng</p>
+                </div>
+              </div>
             </div>
           </Link>
           <div className="product-item-body">
@@ -72,7 +78,9 @@ function Product({
             </div>
 
             <Rating
-              value={numRatings}
+              readOnly
+              size="small"
+              defaultValue={numRatings}
               text={`(${numReviews} đánh giá)`}
               id={_id}
             />

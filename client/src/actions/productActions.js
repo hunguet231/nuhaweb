@@ -15,6 +15,9 @@ import {
   FILTER_PRODUCTS_CATEGORY_FAIL,
   FILTER_PRODUCTS_CATEGORY_REQUEST,
   FILTER_PRODUCTS_CATEGORY_SUCCESS,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
 } from "../constants/productConstants";
 
 export const listProducts = () => async (dispatch) => {
@@ -108,6 +111,44 @@ export const filterProducts = (filter) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FILTER_PRODUCTS_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createProductReview = (productId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
+
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      `/api/v1/products/${productId}/reviews`,
+      review,
+      config
+    );
+
+    dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEW_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
