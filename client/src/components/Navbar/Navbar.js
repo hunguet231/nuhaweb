@@ -161,6 +161,13 @@ function Navbar({ history }) {
                     open={Boolean(anchorUser)}
                     onClose={handleCloseUser}
                   >
+                    <MenuItem>
+                      <div className="user-inner">
+                        <Avatar src={userInfo.user.avatarUser} />
+                        <p className="user-name">{userInfo.user.firstName}</p>
+                      </div>
+                    </MenuItem>
+                    <hr></hr>
                     <MenuItem onClick={handleCloseUser}>
                       <AccountCircleOutlinedIcon />{" "}
                       <Link to="/profile">

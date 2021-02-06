@@ -5,6 +5,7 @@ import StoreIcon from "@material-ui/icons/Store";
 import Alert from "@material-ui/lab/Alert";
 import "./Order.css";
 import { getOrderDetails } from "../../../actions/orderAction";
+import Spinner from "../../Spinner/Spinner";
 
 function Order({ match }) {
   const orderId = match.params.id;
@@ -36,7 +37,16 @@ function Order({ match }) {
 
   return (
     <div className="order-wrapper">
-      {loading && <p>Đang tải...</p>}
+      {loading && (
+        <>
+          <div className="top-order">
+            <div className="title">
+              <StoreIcon /> CHI TIẾT ĐƠN HÀNG
+            </div>
+          </div>
+          <Spinner />
+        </>
+      )}
       {!loading && order && (
         <>
           <div className="top-order">

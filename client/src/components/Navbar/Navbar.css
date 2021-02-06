@@ -99,16 +99,22 @@
     cursor: pointer;
 }
 
-.user-wrapper .MuiAvatar-root {
+.user-inner .MuiAvatar-root,
+.option .MuiAvatar-root {
     border: 1px solid #3498db;
     width: 32px;
     height: 32px;
 }
 
-.user-wrapper .user-name {
+.user-inner .user-name {
     margin-left: 6px;
     font-size: 14px;
     color: #3498db;
+}
+
+.option .user-name {
+    font-size: 12px;
+    margin-left: 5px;
 }
 
 ::placeholder {
@@ -234,7 +240,7 @@
 
 @media (max-width: 510px) {
     .sell-btn,
-    .option {
+    .navbar-right__top {
         display: none;
     }
     .navbar-right {
