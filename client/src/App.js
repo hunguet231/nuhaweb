@@ -11,8 +11,6 @@ import SliderTop from "./components/SliderTop/SliderTop";
 import "./App.css";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
-import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
-import Review from "./components/Review/Review";
 import Footer from "./components/Footer/Footer";
 import TabsSeller from "./components/pages/TabsSeller";
 import Login from "./components/pages/Login";
@@ -34,6 +32,7 @@ import Shipping from "./components/pages/Shipping/Shipping";
 import Payment from "./components/pages/Payment/Payment";
 import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder";
 import Order from "./components/pages/Order/Order";
+import ScrollUpBtn from "./components/ScrollUpBtn/ScrollUpBtn";
 
 function App() {
   // user info
@@ -190,6 +189,7 @@ function App() {
         />
 
         <div className="footer">
+          <ScrollUpBtn />
           {/* Toaster */}
           {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
             <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />

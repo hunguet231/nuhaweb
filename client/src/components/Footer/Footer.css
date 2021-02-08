@@ -3,7 +3,6 @@
     font-size: 16px;
     background: #3f4140;
     color: #d0d0d0;
-    /* background: url("./bg-repeat.png") repeat; */
     border-top: 1px solid #d8d8d8;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -20,6 +19,7 @@
     font-weight: 300;
     display: block;
     line-height: 1.5;
+    width: fit-content;
 }
 
 .footer-inner .footer-link:hover {
@@ -35,11 +35,25 @@
     margin-right: 5px;
 }
 
+.payment-icons {
+    margin-top: 10px;
+}
+
+.get-app img {
+    width: 85px;
+}
+
 @media (max-width: 510px) {
     .footer .MuiTypography-root {
         font-size: 12px;
     }
     .text-bottom {
         font-size: 11px !important;
+    }
+    .get-app img {
+        width: 65px;
+    }
+    .qrcode {
+        width: 47px;
     }
 }

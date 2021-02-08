@@ -31,6 +31,7 @@
         "react-redux": "^7.2.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.0",
+        "react-scroll-up-button": "^1.6.4",
         "react-simple-dropdown": "^3.2.3",
         "react-slick": "^0.27.14",
         "react-st-modal": "^1.1.3",

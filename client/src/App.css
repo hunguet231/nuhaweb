@@ -46,8 +46,7 @@
     margin-bottom: 81px;
 }
 
-.wrapper,
-.body {
+.app {
     background-color: rgb(244, 244, 244);
 }
 
@@ -68,7 +67,7 @@
 .app {
     position: relative;
     min-height: 100vh;
-    padding-bottom: 200px;
+    padding-bottom: 220px;
 }
 
 .footer {
@@ -82,14 +81,14 @@ a {
     color: #2c2c2c;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 960px) {
     .app {
-        padding-bottom: 300px;
+        padding-bottom: 330px;
     }
 }
 
 @media (max-width: 510px) {
     .app {
-        padding-bottom: 290px;
+        padding-bottom: 350px;
     }
 }

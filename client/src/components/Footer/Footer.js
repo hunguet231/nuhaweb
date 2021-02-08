@@ -10,7 +10,7 @@ function Footer() {
     <div className="footer-wrapper">
       <div className="footer-inner">
         <Grid container spacing={2}>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6} sm={4} md={3}>
             <h5>HỖ TRỢ KHÁCH HÀNG</h5>
             <br />
             <Link to="/help" className="footer-link">
@@ -26,7 +26,7 @@ function Footer() {
               Liên hệ hỗ trợ
             </Link>
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6} sm={4} md={3}>
             <h5>VỀ NUHA</h5>
             <br />
             <Link to="/help/about" className="footer-link">
@@ -36,7 +36,7 @@ function Footer() {
               Blog
             </Link>
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6} sm={4} md={3}>
             <h5>LIÊN KẾT XÃ HỘI</h5>
             <br />
             <div className="socal-icon">
@@ -50,6 +50,19 @@ function Footer() {
               <img width="32" src="/instagram.png" />
               <img width="32" src="/twitter.png" />
             </div>
+          </Grid>
+          <Grid item xs={6} sm={4} md={3}>
+            <h5>TẢI ỨNG DỤNG</h5>
+            <br />
+            <Grid container spacing={0}>
+              <Grid item xs={6}>
+                <img className="qrcode" width="60" src="/qrcode.svg" />
+              </Grid>
+              <Grid item xs={6} className="get-app">
+                <img src="/ios.svg" alt="ios" />
+                <img src="/android.svg" alt="android" />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid container>
