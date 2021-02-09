@@ -1,31 +1,29 @@
 import {
   CircularProgress,
   FormControl,
-  InputLabel,
   LinearProgress,
-  MenuItem,
   Select,
   TextField,
 } from "@material-ui/core";
-import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
-import Alert from "@material-ui/lab/Alert";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
 import PhotoLibraryOutlinedIcon from "@material-ui/icons/PhotoLibraryOutlined";
 import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
-import Axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { listProductCreate } from "../../actions/productActions";
+import Alert from "@material-ui/lab/Alert";
 import swal from "@sweetalert/with-react";
-import ImageUploading from "react-images-uploading";
-import { Editor } from "react-draft-wysiwyg";
+import Axios from "axios";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import editorLabels from "../../ultils/draft-wysiwyg-vi";
+import React, { useEffect, useState } from "react";
+import { Editor } from "react-draft-wysiwyg";
+import ImageUploading from "react-images-uploading";
+import { useDispatch, useSelector } from "react-redux";
 import readNumber from "read-vn-number";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { listProductCreate } from "../../actions/productActions";
 import { categories } from "../../ultils/categories";
+import editorLabels from "../../ultils/draft-wysiwyg-vi";
 import "./AddProduct.css";
 
 function AddProduct({ history }) {
@@ -60,7 +58,7 @@ function AddProduct({ history }) {
   }, [history]);
 
   useEffect(() => {
-    if (photos && images.length == photos.length && !error && category) {
+    if (photos && images.length === photos.length && !error && category) {
       dispatch(
         listProductCreate(
           title,
@@ -270,7 +268,7 @@ function AddProduct({ history }) {
                 {imageList.map((image, index) => (
                   <div key={index} className="image-item">
                     <div className="img">
-                      <img src={image.data_url} width="100" />
+                      <img src={image.data_url} width="100" alt="" />
                       <CloseOutlinedIcon
                         className="remove"
                         onClick={() => onImageRemove(index)}

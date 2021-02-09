@@ -13,7 +13,6 @@ function CarouselPrdsDetail({ photos }) {
         lazyLoad
         showIndex
         showBullets
-        showThumbnails={false}
         items={images}
         showThumbnails
         thumbnailPosition="left"

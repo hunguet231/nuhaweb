@@ -23,52 +23,42 @@ const Rating = ({ size, text, defaultValue, readOnly, getRatingValue }) => {
   };
 
   return (
-    <div>
+    <div className="rating">
+      <Typography variant="caption">
+        {defaultValue ? (defaultValue === 0 ? 0 : defaultValue.toFixed(1)) : ""}
+      </Typography>
+
       {readOnly ? (
-        <>
-          <div className="rating">
-            <StyledRating
-              name="read-only"
-              emptyIcon={
-                <StarBorderRoundedIcon
-                  style={{ color: "#f8e825" }}
-                  fontSize="inherit"
-                />
-              }
-              size={size}
-              value={value}
-              readOnly
+        <StyledRating
+          name="read-only"
+          emptyIcon={
+            <StarBorderRoundedIcon
+              style={{ color: "#f8e825" }}
+              fontSize="inherit"
             />
-            {/* <Link to={`/products/${id}/reviews`}> */}
-            <Typography variant="caption">
-              <span> {text && text}</span>
-            </Typography>
-            {/* </Link> */}
-          </div>
-        </>
+          }
+          size={size}
+          value={value}
+          readOnly
+        />
       ) : (
-        <>
-          <div className="rating">
-            <StyledRating
-              emptyIcon={
-                <StarBorderRoundedIcon
-                  style={{ color: "#f8e825" }}
-                  fontSize="inherit"
-                />
-              }
-              size={size}
-              name="simple-controlled"
-              value={value}
-              onChange={handleChange}
+        <StyledRating
+          emptyIcon={
+            <StarBorderRoundedIcon
+              style={{ color: "#f8e825" }}
+              fontSize="inherit"
             />
-            {/* <Link to={`/products/${id}/reviews`}> */}
-            <Typography variant="caption">
-              <span> {text && text}</span>
-            </Typography>
-            {/* </Link> */}
-          </div>
-        </>
+          }
+          size={size}
+          name="simple-controlled"
+          value={value}
+          onChange={handleChange}
+        />
       )}
+
+      <Typography variant="caption">
+        <span> {text && text}</span>
+      </Typography>
     </div>
   );
 };

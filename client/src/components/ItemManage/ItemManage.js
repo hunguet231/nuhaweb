@@ -5,19 +5,18 @@ import {
   MenuItem,
   Typography,
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArtTrackIcon from "@material-ui/icons/ArtTrack";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import swal from "@sweetalert/with-react";
+import Axios from "axios";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Confirm } from "react-st-modal";
-import swal from "@sweetalert/with-react";
-import React, { useState } from "react";
-
-import "./ItemManage.css";
 import ViewPrdModal from "../ViewPrdModal";
-import Axios from "axios";
-import { useSelector } from "react-redux";
+import "./ItemManage.css";
 
 function ItemManage({ product, history }) {
   const {

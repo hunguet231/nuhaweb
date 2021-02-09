@@ -114,7 +114,7 @@ function Navbar({ history }) {
       <div className="navbar">
         <div className="navbar-left">
           <Link to="/">
-            <h2>NUHA</h2>
+            <img src="/logo.png" alt="logo" className="logo" />
           </Link>
           <div className="search-box">
             <input
@@ -201,6 +201,7 @@ function Navbar({ history }) {
                 </>
               )}
             </div>
+
             <div className="cart" onClick={handleClickCart}>
               <IconButton aria-label="cart">
                 <StyledBadge badgeContent={qty} color="secondary">
@@ -208,6 +209,7 @@ function Navbar({ history }) {
                 </StyledBadge>
               </IconButton>
             </div>
+
             <Menu
               className="cart-modal"
               anchorEl={anchorCart}

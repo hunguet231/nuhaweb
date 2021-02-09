@@ -2,32 +2,31 @@ import {
   CircularProgress,
   FormControl,
   LinearProgress,
-  MenuItem,
   Select,
   TextField,
 } from "@material-ui/core";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import PhotoLibraryOutlinedIcon from "@material-ui/icons/PhotoLibraryOutlined";
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
-import Axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import swal from "@sweetalert/with-react";
-import ImageUploading from "react-images-uploading";
-import { Editor } from "react-draft-wysiwyg";
+import Axios from "axios";
 import {
-  EditorState,
-  convertToRaw,
-  convertFromHTML,
   ContentState,
+  convertFromHTML,
+  convertToRaw,
+  EditorState,
 } from "draft-js";
-import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
-import editorLabels from "../../ultils/draft-wysiwyg-vi";
+import React, { useEffect, useState } from "react";
+import { Editor } from "react-draft-wysiwyg";
+import ImageUploading from "react-images-uploading";
+import { useSelector } from "react-redux";
 import readNumber from "read-vn-number";
+import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { categories } from "../../ultils/categories";
+import editorLabels from "../../ultils/draft-wysiwyg-vi";
 import "./EditProduct.css";
 
 function EditProduct({ history, match }) {

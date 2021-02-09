@@ -7,6 +7,12 @@
     z-index: 999 !important;
 }
 
+.navbar .logo {
+    margin-top: 2px;
+    height: 30px;
+    width: auto;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -21,10 +27,6 @@
     display: flex;
     flex-direction: column;
     flex: 2;
-}
-
-.navbar-left h2 {
-    color: #3498db;
 }
 
 .option {
@@ -58,7 +60,7 @@
 }
 
 .navbar-right__bottom {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .navbar-right__bottom .cart .MuiSvgIcon-root {
@@ -256,12 +258,17 @@
     }
     .navbar-right__bottom {
         justify-content: flex-end;
+        align-items: center;
+    }
+    .navbar-right__bottom .cart .MuiIconButton-root {
+        padding: 5px;
     }
      ::placeholder {
         font-size: 12px;
     }
     .search-box {
-        margin-top: -1px;
+        margin-top: -3px;
+        height: 30px;
     }
     .search-box>input {
         padding: 0;

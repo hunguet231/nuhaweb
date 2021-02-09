@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  withRouter,
-} from "react-router-dom";
-import MessengerCustomerChat from "react-messenger-customer-chat";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+// import MessengerCustomerChat from "react-messenger-customer-chat";
 import Navbar from "./components/Navbar/Navbar";
-import SliderTop from "./components/SliderTop/SliderTop";
+// import SliderTop from "./components/SliderTop/SliderTop";
 import "./App.css";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
@@ -43,7 +38,6 @@ function App() {
     ? googleLogin.userInfo
     : userLogin.userInfo;
 
-  const [online, setOnline] = useState(null);
   const [open, setOpen] = useState(true);
 
   const handleClose = (event, reason) => {

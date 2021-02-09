@@ -1,9 +1,7 @@
-import React from "react";
 import { Grid, Typography } from "@material-ui/core";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import "./Footer.css";
+import React from "react";
 import { Link } from "react-router-dom";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -44,11 +42,12 @@ function Footer() {
                 title="NUHA Page"
                 href="https://www.facebook.com/nguonhang.khoxuong"
                 target="_blank"
+                rel="noreferrer"
               >
-                <img width="32" src="/facebook.png" />
+                <img width="32" src="/facebook.png" alt="facebook" />
               </a>
-              <img width="32" src="/instagram.png" />
-              <img width="32" src="/twitter.png" />
+              <img width="32" src="/instagram.png" alt="instagram" />
+              <img width="32" src="/twitter.png" alt="twitter" />
             </div>
           </Grid>
           <Grid item xs={6} sm={4} md={3}>
@@ -56,7 +55,12 @@ function Footer() {
             <br />
             <Grid container spacing={0}>
               <Grid item xs={6}>
-                <img className="qrcode" width="60" src="/qrcode.svg" />
+                <img
+                  className="qrcode"
+                  width="60"
+                  src="/qrcode.svg"
+                  alt="qrcode"
+                />
               </Grid>
               <Grid item xs={6} className="get-app">
                 <img src="/ios.svg" alt="ios" />
@@ -73,7 +77,11 @@ function Footer() {
               &copy;Copyright 2020 - NUHA. Phiên bản thử nghiệm
               <br />
               Made by{" "}
-              <a target="_blank" href="https://fb.com/hungnguyen2301">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://fb.com/hungnguyen2301"
+              >
                 Hung
               </a>{" "}
               with ❤

@@ -74,10 +74,12 @@ const ProductDetail = ({ match, history }) => {
 
   const location = useLocation();
 
-  // fetch products
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
 
+  // fetch products
+  useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
 
@@ -585,11 +587,11 @@ const ProductDetail = ({ match, history }) => {
                     .filter((prd) => prd._id != product._id)
                     .slice(0, 5)
                     .map((product, index) => (
-                      <Grid item xs={12}>
+                      <Grid key={index} item xs={12}>
                         <a
                           href={`/products/${product.slug}/${product.user._id}`}
                         >
-                          <ProductMini key={index} product={product} />
+                          <ProductMini product={product} />
                         </a>
                       </Grid>
                     ))}
