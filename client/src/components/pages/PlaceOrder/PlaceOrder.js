@@ -6,6 +6,7 @@ import StoreIcon from "@material-ui/icons/Store";
 import { Alert } from "@material-ui/lab";
 import "./PlaceOrder.css";
 import { createOrder } from "../../../actions/orderAction";
+import { Link } from "react-router-dom";
 
 function PlaceOrder({ history }) {
   const cart = useSelector((state) => state.cart);
@@ -87,9 +88,9 @@ function PlaceOrder({ history }) {
                   style={{ backgroundImage: `url(${cartItem.image})` }}
                 ></div>
                 <div className="text">
-                  <a href={`/products/${cartItem.slug}/${cartItem.user}`}>
+                  <Link to={`/products/${cartItem.slug}/${cartItem.user}`}>
                     <div className="title">{cartItem.name}</div>
-                  </a>
+                  </Link>
 
                   <div className="sub-text">
                     <div className="price">

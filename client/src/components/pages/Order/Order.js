@@ -6,6 +6,7 @@ import Alert from "@material-ui/lab/Alert";
 import "./Order.css";
 import { getOrderDetails } from "../../../actions/orderAction";
 import Spinner from "../../Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 function Order({ match }) {
   const orderId = match.params.id;
@@ -101,9 +102,11 @@ function Order({ match }) {
                       style={{ backgroundImage: `url(${orderItem.image})` }}
                     ></div>
                     <div className="text">
-                      <a href={`/products/${orderItem.slug}/${orderItem.user}`}>
+                      <Link
+                        to={`/products/${orderItem.slug}/${orderItem.user}`}
+                      >
                         <div className="title">{orderItem.name}</div>
-                      </a>
+                      </Link>
 
                       <div className="sub-text">
                         <div className="price">

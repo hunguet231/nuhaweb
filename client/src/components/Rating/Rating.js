@@ -14,7 +14,14 @@ const StyledRating = withStyles({
   },
 })(MuiRating);
 
-const Rating = ({ size, text, defaultValue, readOnly, getRatingValue }) => {
+const Rating = ({
+  showFirstNum,
+  size,
+  text,
+  defaultValue,
+  readOnly,
+  getRatingValue,
+}) => {
   const [value, setValue] = React.useState(defaultValue);
 
   const handleChange = (event, newValue) => {
@@ -24,9 +31,17 @@ const Rating = ({ size, text, defaultValue, readOnly, getRatingValue }) => {
 
   return (
     <div className="rating">
-      <Typography variant="caption">
-        {defaultValue ? (defaultValue === 0 ? 0 : defaultValue.toFixed(1)) : ""}
-      </Typography>
+      {showFirstNum ? (
+        <Typography variant="caption">
+          {defaultValue
+            ? defaultValue === 0
+              ? 0
+              : defaultValue.toFixed(1)
+            : ""}
+        </Typography>
+      ) : (
+        ""
+      )}
 
       {readOnly ? (
         <StyledRating

@@ -79,6 +79,7 @@ function Product({
 
             <Rating
               readOnly
+              showFirstNum
               size="small"
               defaultValue={numRatings}
               text={`(${numReviews} đánh giá)`}

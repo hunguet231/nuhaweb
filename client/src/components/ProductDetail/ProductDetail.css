@@ -208,6 +208,8 @@
     margin-left: 5px;
 }
 
+
+/* 
 .phone,
 .mess {
     width: 100%;
@@ -269,28 +271,7 @@
 .facebook img {
     margin-right: 5px;
     width: 23px;
-}
-
-.share {
-    display: flex;
-    justify-items: center;
-}
-
-.share .copy-link-btn {
-    margin-left: 12px;
-    display: flex;
-    align-items: center;
-}
-
-.share .MuiSvgIcon-root {
-    cursor: pointer;
-}
-
-.fb-icon {
-    margin-right: 20px;
-    margin-bottom: -3px;
-    width: 30px;
-}
+} */
 
 .link-view-more {
     display: flex;
@@ -298,6 +279,7 @@
     margin-left: 9px;
     color: dodgerblue;
     font-size: 14px;
+    width: fit-content;
 }
 
 .link-view-more .MuiSvgIcon-root {
@@ -364,13 +346,13 @@
     .product-detail h4 {
         font-size: 16px;
     }
-    .phone,
+    /* .phone,
     .mess,
     .web,
     .zalo,
     .facebook {
         font-size: 12px;
-    }
+    } */
     .description {
         font-size: 14px;
     }
@@ -393,14 +375,14 @@
     .link-view-more .MuiSvgIcon-root {
         font-size: 14px;
     }
-    .web .MuiSvgIcon-root {
+    /* .web .MuiSvgIcon-root {
         width: 16px;
-    }
-    .zalo img,
+    } */
+    /* .zalo img,
     .facebook img {
         width: 14px;
         margin-left: 1px;
-    }
+    } */
     .buy {
         justify-content: space-between;
     }

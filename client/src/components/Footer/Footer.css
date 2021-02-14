@@ -13,17 +13,20 @@
     padding: 26px 15px 3px;
 }
 
-.footer-inner .footer-link {
+.footer-inner .footer-link,
+.footer-inner .contact {
     color: rgb(180, 180, 180);
     font-size: 14px;
     font-weight: 300;
     display: block;
     line-height: 1.5;
     width: fit-content;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .footer-inner .footer-link:hover {
-    text-decoration: underline;
+    color: dodgerblue;
 }
 
 .text-bottom {
@@ -41,6 +44,29 @@
 
 .get-app img {
     width: 85px;
+}
+
+.footer-inner .contact {
+    display: flex;
+    flex-direction: column;
+    margin-left: -5px;
+}
+
+.footer-inner .contact .phone,
+.footer-inner .contact .mail {
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer-inner .contact .phone:hover,
+.footer-inner .contact .mail:hover {
+    color: dodgerblue;
+}
+
+.footer-inner .contact .MuiSvgIcon-root {
+    margin-right: 5px;
+    font-size: 16px;
 }
 
 @media (max-width: 510px) {

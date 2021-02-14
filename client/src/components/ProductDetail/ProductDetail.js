@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import {
   Grid,
   Tooltip,
@@ -74,12 +74,10 @@ const ProductDetail = ({ match, history }) => {
 
   const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
-
   // fetch products
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     const fetchProducts = async () => {
       setLoading(true);
 
@@ -91,7 +89,7 @@ const ProductDetail = ({ match, history }) => {
       setLoading(false);
     };
     fetchProducts();
-  }, [productReviewCreate]);
+  }, [productReviewCreate, match]);
 
   // get curent product
   useEffect(() => {
@@ -99,7 +97,7 @@ const ProductDetail = ({ match, history }) => {
       const product = products.find((prd) => prd.slug == match.params.slug);
       setProduct(product);
     }
-  }, [products, productReviewCreate]);
+  }, [products, productReviewCreate, match]);
 
   useEffect(() => {
     productReviewCreate.error = null;
@@ -168,7 +166,8 @@ const ProductDetail = ({ match, history }) => {
 
   return (
     <>
-      {product && (
+      {loading && <SkeletonPrdDetail />}
+      {!loading && product && (
         <>
           {/* Breadcrumbs */}
           <Breadcrumbs
@@ -250,6 +249,7 @@ const ProductDetail = ({ match, history }) => {
                     <div className="title">{product.title}</div>
                     <Rating
                       readOnly
+                      showFirstNum
                       defaultValue={product.numRatings}
                       text={`(${product.numReviews} đánh giá)`}
                     />
@@ -588,11 +588,11 @@ const ProductDetail = ({ match, history }) => {
                     .slice(0, 5)
                     .map((product, index) => (
                       <Grid key={index} item xs={12}>
-                        <a
-                          href={`/products/${product.slug}/${product.user._id}`}
+                        <Link
+                          to={`/products/${product.slug}/${product.user._id}`}
                         >
                           <ProductMini product={product} />
-                        </a>
+                        </Link>
                       </Grid>
                     ))}
 
@@ -607,7 +607,6 @@ const ProductDetail = ({ match, history }) => {
         </>
       )}
       {open && <Toaster msg={`Đã thêm vào giỏ`} />}
-      {loading && <SkeletonPrdDetail />}
     </>
   );
 };

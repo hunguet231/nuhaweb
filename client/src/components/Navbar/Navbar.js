@@ -245,9 +245,12 @@ function Navbar({ history }) {
                           style={{ backgroundImage: `url(${item.image})` }}
                         ></div>
                         <div className="text">
-                          <a href={`/products/${item.slug}/${item.user}`}>
+                          <Link
+                            to={`/products/${item.slug}/${item.user}`}
+                            onClick={handleCloseCart}
+                          >
                             <div className="title">{item.name}</div>
-                          </a>
+                          </Link>
 
                           <div className="sub-text">
                             <div className="price">{item.price} ₫</div>

@@ -1,6 +1,8 @@
-import { Grid, Typography } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Grid, Typography } from "@material-ui/core";
+import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
+import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined";
 import "./Footer.css";
 
 function Footer() {
@@ -34,9 +36,20 @@ function Footer() {
               Blog
             </Link>
           </Grid>
-          <Grid item xs={6} sm={4} md={3}>
-            <h5>LIÊN KẾT XÃ HỘI</h5>
+          <Grid item xs={12} sm={4} md={3}>
+            <h5>THÔNG TIN LIÊN HỆ</h5>
             <br />
+            <div className="contact">
+              <div className="phone">
+                <PhoneOutlinedIcon />
+                <p>0973.023.427</p>
+              </div>
+              <div className="mail">
+                <EmailOutlinedIcon />
+                <p>nuha.bcs5@gmail.com</p>
+              </div>
+            </div>
+
             <div className="socal-icon">
               <a
                 title="NUHA Page"
@@ -44,10 +57,10 @@ function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <img width="32" src="/facebook.png" alt="facebook" />
+                <img width="25" src="/facebook.png" alt="facebook" />
               </a>
-              <img width="32" src="/instagram.png" alt="instagram" />
-              <img width="32" src="/twitter.png" alt="twitter" />
+              <img width="25" src="/instagram.png" alt="instagram" />
+              <img width="25" src="/twitter.png" alt="twitter" />
             </div>
           </Grid>
           <Grid item xs={6} sm={4} md={3}>
@@ -70,7 +83,7 @@ function Footer() {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid align="center" item xs={12}>
+          <Grid align="center" style={{ marginTop: "10px" }} item xs={12}>
             <Typography variant="caption" className="text-bottom">
               GD Plus Team | UEB Business Challenges
               <br />

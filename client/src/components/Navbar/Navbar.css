@@ -94,6 +94,10 @@
     background-color: transparent;
 }
 
+.search-box .MuiSvgIcon-root {
+    color: #6394F8;
+}
+
 .user-wrapper,
 .user-inner {
     display: flex;
@@ -109,14 +113,9 @@
 }
 
 .user-inner .user-name {
+    color: #3498db;
     margin-left: 6px;
     font-size: 14px;
-    color: #3498db;
-}
-
-.option .user-name {
-    font-size: 12px;
-    margin-left: 5px;
 }
 
 ::placeholder {

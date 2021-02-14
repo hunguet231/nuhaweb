@@ -1,11 +1,10 @@
 import { Grid, IconButton } from "@material-ui/core";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ArrowRightAltOutlinedIcon from "@material-ui/icons/ArrowRightAltOutlined";
-import ReceiptIcon from "@material-ui/icons/Receipt";
 import ClearIcon from "@material-ui/icons/Clear";
-import React from "react";
-import { useEffect } from "react";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeFromCart } from "../../actions/cartActions";
 import QuantityPicker from "../QuantityPicker/QuantityPicker";
 import "./Cart.css";
@@ -56,9 +55,9 @@ function Cart({ history }) {
                     style={{ backgroundImage: `url(${item.image})` }}
                   ></div>
                   <div className="text">
-                    <a href={`/products/${item.slug}/${item.user}`}>
+                    <Link to={`/products/${item.slug}/${item.user}`}>
                       <div className="title">{item.name}</div>
-                    </a>
+                    </Link>
 
                     <div className="sub-text">
                       <div className="price">{item.price} ₫</div>

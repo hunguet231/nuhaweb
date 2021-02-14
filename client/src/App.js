@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-// import MessengerCustomerChat from "react-messenger-customer-chat";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  withRouter,
+} from "react-router-dom";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 import Navbar from "./components/Navbar/Navbar";
-// import SliderTop from "./components/SliderTop/SliderTop";
+import SliderTop from "./components/SliderTop/SliderTop";
 import "./App.css";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
@@ -59,101 +65,104 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
-        <Headroom>
-          <Navbar />
-        </Headroom>
-        <div className="body">
-          <Route
-            path="/"
-            render={(props) => (
-              <>
-                {/* <div className="slider"><SliderTop /></div> */}
-                <div className="wrapper">
-                  <div className="showcase">
-                    <Category />
+      <Switch>
+        <div className="app">
+          <Headroom>
+            <Navbar />
+          </Headroom>
+          <div className="body">
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <>
+                  <div className="slider">
+                    <SliderTop />
                   </div>
-                  <div className="showcase">
-                    <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
+                  <div className="wrapper">
+                    <div className="showcase">
+                      <Category />
+                    </div>
+                    <div className="showcase">
+                      <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
+                    </div>
+                    <div className="showcase">
+                      <ShowList color="#27ae60" title="Top yêu thích" />
+                    </div>
                   </div>
-                  <div className="showcase">
-                    <ShowList color="#27ae60" title="Top yêu thích" />
-                  </div>
-                </div>
-              </>
-            )}
-            exact
-          />
+                </>
+              )}
+            />
 
-          <div className="wrapper">
-            <div className="showcase">
-              <Route path="/login" exact component={Login} />
-            </div>
-            <div className="showcase">
-              <Route path="/register" exact component={Register} />
-            </div>
-            <div className="showcase">
-              <Route path="/products" exact component={FilteredProducts} />
-            </div>
-            <div className="showcase">
-              <PrivateRoute
-                exact
-                path="/me/sell/:page"
-                component={TabsSeller}
-              />
-            </div>
-            <div className="showcase">
-              <PrivateRoute
-                exact
-                path="/products/:slug/edit"
-                component={EditProduct}
-              />
-            </div>
-            <div className="showcase">
-              <Route
-                exact
-                path="/products/:slug/:userId"
-                component={ProductDetail}
-              />
-            </div>
-            <div className="showcase">
-              <Route exact path="/cart" component={Cart} />
-            </div>
-            <div className="showcase">
-              <Route exact path="/shipping" component={Shipping} />
-            </div>
-            <div className="showcase">
-              <Route exact path="/payment" component={Payment} />
-            </div>
-            <div className="showcase">
-              <Route exact path="/place-order" component={PlaceOrder} />
-            </div>
-            <div className="showcase">
-              <Route exact path="/order/:id" component={Order} />
-            </div>
-            <div className="showcase">
-              <Route exact path="/profile" component={Profile} />
-            </div>
-            <div className="showcase">
-              <PrivateRoute
-                exact
-                path="/me/sell/products/add"
-                component={AddProduct}
-              />
-            </div>
+            <div className="wrapper">
+              <div className="showcase">
+                <Route path="/login" exact component={Login} />
+              </div>
+              <div className="showcase">
+                <Route path="/register" exact component={Register} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/products" component={FilteredProducts} />
+              </div>
+              <div className="showcase">
+                <Route
+                  exact
+                  path="/products/:slug/:userId"
+                  component={ProductDetail}
+                />
+              </div>
+              <div className="showcase">
+                <PrivateRoute
+                  exact
+                  path="/products/:slug/edit"
+                  component={EditProduct}
+                />
+              </div>
+              <div className="showcase">
+                <PrivateRoute
+                  exact
+                  path="/me/sell/:page"
+                  component={TabsSeller}
+                />
+              </div>
+              <div className="showcase">
+                <Route exact path="/cart" component={Cart} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/shipping" component={Shipping} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/payment" component={Payment} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/place-order" component={PlaceOrder} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/order/:id" component={Order} />
+              </div>
+              <div className="showcase">
+                <Route exact path="/profile" component={Profile} />
+              </div>
+              <div className="showcase">
+                <PrivateRoute
+                  exact
+                  path="/me/sell/products/add"
+                  component={AddProduct}
+                />
+              </div>
 
-            <div className="showcase">
-              <PrivateRoute
-                path="/me/update-shop"
-                exact
-                component={UpdateShop}
-              />
+              <div className="showcase">
+                <PrivateRoute
+                  path="/me/update-shop"
+                  exact
+                  component={UpdateShop}
+                />
+              </div>
             </div>
+            {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
           </div>
-          {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
-        </div>
 
-        {/* 
+          {/* 
         Messenger Chat Button
         <MessengerCustomerChat
           pageId="103310781374312"
@@ -161,37 +170,38 @@ function App() {
           language="vi_VN"
         /> */}
 
-        {/* Detect Online/Offline */}
-        <Detector
-          render={({ online }) => (
-            <>
-              {!online ? (
-                <Snackbar
-                  open={open}
-                  autoHideDuration={5000}
-                  onClose={handleClose}
-                >
-                  <Alert onClose={handleClose} severity="error">
-                    Mất kết nối mạng
-                  </Alert>
-                </Snackbar>
-              ) : (
-                ""
-              )}
-            </>
-          )}
-        />
+          {/* Detect Online/Offline */}
+          <Detector
+            render={({ online }) => (
+              <>
+                {!online ? (
+                  <Snackbar
+                    open={open}
+                    autoHideDuration={5000}
+                    onClose={handleClose}
+                  >
+                    <Alert onClose={handleClose} severity="error">
+                      Mất kết nối mạng
+                    </Alert>
+                  </Snackbar>
+                ) : (
+                  ""
+                )}
+              </>
+            )}
+          />
 
-        <div className="footer">
-          <ScrollUpBtn />
-          {/* Toaster */}
-          {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
-            <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
-          )}
-          {/* Footer */}
-          <Footer />
+          <div className="footer">
+            <ScrollUpBtn />
+            {/* Toaster */}
+            {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
+              <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
+            )}
+            {/* Footer */}
+            <Footer />
+          </div>
         </div>
-      </div>
+      </Switch>
     </Router>
   );
 }
