@@ -4,36 +4,35 @@ import {
   Route,
   Switch,
   Redirect,
-  withRouter,
 } from "react-router-dom";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import Navbar from "./components/Navbar/Navbar";
 import SliderTop from "./components/SliderTop/SliderTop";
-import "./App.css";
-import ProductDetail from "./components/ProductDetail/ProductDetail";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ShowList from "./components/ShowList/ShowList";
 import Footer from "./components/Footer/Footer";
-import TabsSeller from "./components/pages/TabsSeller";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
+import TabsSeller from "./pages/TabsSeller";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { useSelector } from "react-redux";
-import AddProduct from "./components/AddProduct/AddProduct";
+import AddProduct from "./pages/AddProduct/AddProduct";
 import Toaster from "./components/Toaster";
-import UpdateShop from "./components/pages/UpdateShop";
-import EditProduct from "./components/EditProduct/EditProduct";
+import UpdateShop from "./pages/UpdateShop";
+import EditProduct from "./pages/EditProduct/EditProduct";
 import Category from "./components/Category/Category";
 import { Detector } from "react-detect-offline";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import Headroom from "react-headroom";
-import Profile from "./components/pages/Profile";
-import FilteredProducts from "./components/pages/FilteredProducts";
+import Profile from "./pages/Profile";
+import FilteredProducts from "./pages/FilteredProducts";
 import Cart from "./components/Cart/Cart";
-import Shipping from "./components/pages/Shipping/Shipping";
-import Payment from "./components/pages/Payment/Payment";
-import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder";
-import Order from "./components/pages/Order/Order";
+import Shipping from "./pages/Shipping/Shipping";
+import Payment from "./pages/Payment/Payment";
+import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+import Order from "./pages/Order/Order";
 import ScrollUpBtn from "./components/ScrollUpBtn/ScrollUpBtn";
+import "./App.css";
 
 function App() {
   // user info
@@ -65,104 +64,78 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <div className="app">
-          <Headroom>
-            <Navbar />
-          </Headroom>
-          <div className="body">
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <>
-                  <div className="slider">
-                    <SliderTop />
+      <div className="app">
+        <Headroom>
+          <Navbar />
+        </Headroom>
+        <div className="body">
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <>
+                <div className="slider">
+                  <SliderTop />
+                </div>
+                <div className="wrapper">
+                  <div className="showcase">
+                    <Category />
                   </div>
-                  <div className="wrapper">
-                    <div className="showcase">
-                      <Category />
-                    </div>
-                    <div className="showcase">
-                      <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
-                    </div>
-                    <div className="showcase">
-                      <ShowList color="#27ae60" title="Top yêu thích" />
-                    </div>
+                  <div className="showcase">
+                    <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
                   </div>
-                </>
-              )}
-            />
+                  <div className="showcase">
+                    <ShowList color="#27ae60" title="Top yêu thích" />
+                  </div>
+                </div>
+              </>
+            )}
+          />
 
-            <div className="wrapper">
-              <div className="showcase">
-                <Route path="/login" exact component={Login} />
-              </div>
-              <div className="showcase">
-                <Route path="/register" exact component={Register} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/products" component={FilteredProducts} />
-              </div>
-              <div className="showcase">
-                <Route
-                  exact
-                  path="/products/:slug/:userId"
-                  component={ProductDetail}
-                />
-              </div>
-              <div className="showcase">
+          <div className="wrapper">
+            <div className="showcase">
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+              <Route exact path="/products" component={FilteredProducts} />
+              <Switch>
                 <PrivateRoute
                   exact
                   path="/products/:slug/edit"
                   component={EditProduct}
                 />
-              </div>
-              <div className="showcase">
-                <PrivateRoute
+                <Route
                   exact
-                  path="/me/sell/:page"
-                  component={TabsSeller}
+                  path="/products/:slug/:userId"
+                  component={ProductDetail}
                 />
-              </div>
-              <div className="showcase">
-                <Route exact path="/cart" component={Cart} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/shipping" component={Shipping} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/payment" component={Payment} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/place-order" component={PlaceOrder} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/order/:id" component={Order} />
-              </div>
-              <div className="showcase">
-                <Route exact path="/profile" component={Profile} />
-              </div>
-              <div className="showcase">
-                <PrivateRoute
-                  exact
-                  path="/me/sell/products/add"
-                  component={AddProduct}
-                />
-              </div>
-
-              <div className="showcase">
-                <PrivateRoute
-                  path="/me/update-shop"
-                  exact
-                  component={UpdateShop}
-                />
-              </div>
+              </Switch>
+              <PrivateRoute
+                exact
+                path="/me/sell/:page"
+                component={TabsSeller}
+              />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/shipping" component={Shipping} />
+              <Route exact path="/payment" component={Payment} />
+              <Route exact path="/place-order" component={PlaceOrder} />
+              <Route exact path="/order/:id" component={Order} />
+              <Route exact path="/profile" component={Profile} />
+              <PrivateRoute
+                exact
+                path="/me/sell/products/add"
+                component={AddProduct}
+              />
+              <PrivateRoute
+                path="/me/update-shop"
+                exact
+                component={UpdateShop}
+              />
             </div>
-            {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
           </div>
+          {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}
+        </div>
 
-          {/* 
+        {/* 
         Messenger Chat Button
         <MessengerCustomerChat
           pageId="103310781374312"
@@ -170,38 +143,37 @@ function App() {
           language="vi_VN"
         /> */}
 
-          {/* Detect Online/Offline */}
-          <Detector
-            render={({ online }) => (
-              <>
-                {!online ? (
-                  <Snackbar
-                    open={open}
-                    autoHideDuration={5000}
-                    onClose={handleClose}
-                  >
-                    <Alert onClose={handleClose} severity="error">
-                      Mất kết nối mạng
-                    </Alert>
-                  </Snackbar>
-                ) : (
-                  ""
-                )}
-              </>
-            )}
-          />
+        {/* Detect Online/Offline */}
+        <Detector
+          render={({ online }) => (
+            <>
+              {!online ? (
+                <Snackbar
+                  open={open}
+                  autoHideDuration={5000}
+                  onClose={handleClose}
+                >
+                  <Alert onClose={handleClose} severity="error">
+                    Mất kết nối mạng
+                  </Alert>
+                </Snackbar>
+              ) : (
+                ""
+              )}
+            </>
+          )}
+        />
 
-          <div className="footer">
-            <ScrollUpBtn />
-            {/* Toaster */}
-            {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
-              <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
-            )}
-            {/* Footer */}
-            <Footer />
-          </div>
+        <div className="footer">
+          <ScrollUpBtn />
+          {/* Toaster */}
+          {sessionStorage.getItem("loginMsg") === "1" && userInfo && (
+            <Toaster msg={`🚀 Chào mừng ${userInfo.user.firstName}`} />
+          )}
+          {/* Footer */}
+          <Footer />
         </div>
-      </Switch>
+      </div>
     </Router>
   );
 }

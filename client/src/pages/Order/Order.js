@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import StoreIcon from "@material-ui/icons/Store";
 import Alert from "@material-ui/lab/Alert";
 import "./Order.css";
-import { getOrderDetails } from "../../../actions/orderAction";
-import Spinner from "../../Spinner/Spinner";
+import { getOrderDetails } from "../../actions/orderAction";
+import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
 function Order({ match }) {

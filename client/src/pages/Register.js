@@ -12,7 +12,7 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { google, register } from "../../actions/userActions";
+import { google, register } from "../actions/userActions";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FacebookLogin from "react-facebook-login";

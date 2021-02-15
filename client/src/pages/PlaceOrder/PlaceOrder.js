@@ -1,11 +1,11 @@
 import { Button, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CheckoutStep from "../../CheckoutStep/CheckoutStep";
+import CheckoutStep from "../../components/CheckoutStep/CheckoutStep";
 import StoreIcon from "@material-ui/icons/Store";
 import { Alert } from "@material-ui/lab";
 import "./PlaceOrder.css";
-import { createOrder } from "../../../actions/orderAction";
+import { createOrder } from "../../actions/orderAction";
 import { Link } from "react-router-dom";
 
 function PlaceOrder({ history }) {

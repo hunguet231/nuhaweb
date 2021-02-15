@@ -8,10 +8,10 @@ import { FormControl, Select, InputLabel } from "@material-ui/core";
 import "./FilteredProducts.css";
 import { Breadcrumbs, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { filterProducts } from "../../actions/productActions";
-import Product from "../Product/Product";
-import SkeletonPrdsList from "../skeletons/SkeletonPrdsList";
-import cities from "../../ultils/cities";
+import { filterProducts } from "../actions/productActions";
+import Product from "../components/Product/Product";
+import cities from "../ultils/cities";
+import SkeletonPrdsList from "../components/skeletons/SkeletonPrdsList";
 
 function FilteredProducts({ location }) {
   const [sort, setSort] = useState("");

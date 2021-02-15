@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Grid,
   Tooltip,
@@ -23,7 +23,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import SkeletonPrdDetail from "../skeletons/SkeletonPrdDetail";
+import SkeletonPrdDetail from "../../components/skeletons/SkeletonPrdDetail";
 import PhoneInTalkIcon from "@material-ui/icons/PhoneInTalk";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
@@ -33,16 +33,16 @@ import "./ProductDetail.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useSelector, useDispatch } from "react-redux";
-import CarouselPrdsDetail from "../CarouselPrdsDetail";
+import CarouselPrdsDetail from "../../components/CarouselPrdsDetail";
 import ReactHtmlParser from "react-html-parser";
 import Axios from "axios";
-import Category from "../Category/Category";
-import QuantityPicker from "../QuantityPicker/QuantityPicker";
-import ProductMini from "../ProductMini/ProductMini";
-import Rating from "../Rating/Rating";
+import Category from "../../components/Category/Category";
+import QuantityPicker from "../../components/QuantityPicker/QuantityPicker";
+import ProductMini from "../../components/ProductMini/ProductMini";
+import Rating from "../../components/Rating/Rating";
 import Alert from "@material-ui/lab/Alert";
 import { useRef } from "react";
-import Toaster from "../Toaster";
+import Toaster from "../../components/Toaster";
 import { addToCart } from "../../actions/cartActions";
 import { createProductReview } from "../../actions/productActions";
 
@@ -229,7 +229,7 @@ const ProductDetail = ({ match, history }) => {
                     <div className="share">
                       <div
                         className="fb-share-button"
-                        data-href={`http://localhost:3000${location.pathname}`}
+                        data-href={`https://nuhaweb.herokuapp.com${location.pathname}`}
                         data-layout="button_count"
                         data-size="small"
                       >

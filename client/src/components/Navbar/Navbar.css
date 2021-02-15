@@ -112,7 +112,8 @@
     height: 32px;
 }
 
-.user-inner .user-name {
+.user-inner .user-name,
+.option .user-name {
     color: #3498db;
     margin-left: 6px;
     font-size: 14px;
@@ -257,7 +258,6 @@
     }
     .navbar-right__bottom {
         justify-content: flex-end;
-        align-items: center;
     }
     .navbar-right__bottom .cart .MuiIconButton-root {
         padding: 5px;
@@ -267,9 +267,19 @@
     }
     .search-box {
         margin-top: -3px;
-        height: 30px;
+        height: 35px;
     }
     .search-box>input {
         padding: 0;
+    }
+    .option .user-name {
+        font-size: 12px;
+    }
+    .user-inner {
+        margin-bottom: 3px;
+    }
+    .user-inner .MuiAvatar-root {
+        width: 27px;
+        height: 27px;
     }
 }

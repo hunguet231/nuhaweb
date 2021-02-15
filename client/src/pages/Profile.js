@@ -13,7 +13,7 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails } from "../../actions/userActions";
+import { getUserDetails } from "../actions/userActions";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import "./Profile.css";

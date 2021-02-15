@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-import ItemManage from "../ItemManage/ItemManage";
+import ItemManage from "../components/ItemManage/ItemManage";
 import { Link } from "react-router-dom";
 
 function SellerProducts() {

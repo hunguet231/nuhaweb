@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import "./Shipping.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, MenuItem, TextField } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
-import cities from "../../../ultils/cities";
-import { saveShippingAddress } from "../../../actions/cartActions";
-import CheckoutStep from "../../CheckoutStep/CheckoutStep";
+import cities from "../../ultils/cities";
+import CheckoutStep from "../../components/CheckoutStep/CheckoutStep";
+import { saveShippingAddress } from "../../actions/cartActions";
+import "./Shipping.css";
 
 function Shipping({ history }) {
   const cart = useSelector((state) => state.cart);

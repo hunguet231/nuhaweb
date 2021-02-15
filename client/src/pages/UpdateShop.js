@@ -10,9 +10,9 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Toaster from "../Toaster";
+import Toaster from "../components/Toaster";
 import "./UpdateShop.css";
-import cities from "../../ultils/cities";
+import cities from "../ultils/cities";
 
 function UpdateShop({ history }) {
   const [shopName, setShopName] = useState("");

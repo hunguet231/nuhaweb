@@ -15,7 +15,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, google } from "../../actions/userActions";
+import { login, google } from "../actions/userActions";
 import "./Login.css";
 import Alert from "@material-ui/lab/Alert";
 import FacebookLogin from "react-facebook-login";

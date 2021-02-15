@@ -6,8 +6,8 @@ import { Button, MenuItem, TextField } from "@material-ui/core";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import { savePaymentMethod } from "../../../actions/cartActions";
-import CheckoutStep from "../../CheckoutStep/CheckoutStep";
+import { savePaymentMethod } from "../../actions/cartActions";
+import CheckoutStep from "../../components/CheckoutStep/CheckoutStep";
 
 function Payment({ history }) {
   const cart = useSelector((state) => state.cart);

@@ -2,7 +2,7 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Toaster({ msg }) {
+function Toaster({ msg, open }) {
   return (
     <div className="toaster" style={{ color: "transparent" }}>
       {toast.info(msg, {
