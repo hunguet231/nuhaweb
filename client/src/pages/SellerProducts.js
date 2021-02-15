@@ -6,6 +6,7 @@ import {
   CircularProgress,
   FormControl,
   Grid,
+  InputLabel,
   MenuItem,
   Select,
 } from "@material-ui/core";
@@ -58,20 +59,29 @@ function SellerProducts() {
       </div>
       <div className="action-top">
         <div className="sortBy">
-          <div className="text">
-            <SortIcon /> Sắp xếp theo
+          <div className="filter">
+            <FormControl>
+              <InputLabel shrink>
+                <div className="d-flex-r">
+                  <SortIcon />
+                  <span>Sắp xếp</span>
+                </div>
+              </InputLabel>
+              <Select displayEmpty value={sort} onChange={handleChange}>
+                <MenuItem value="">Mặc định</MenuItem>
+                <MenuItem value="Tên">Tên</MenuItem>
+                <MenuItem value="Thời gian(cũ nhất)">
+                  Thời gian(cũ nhất)
+                </MenuItem>
+                <MenuItem value="Thời gian(mới nhất)">
+                  Thời gian(mới nhất)
+                </MenuItem>
+                <MenuItem value="Yêu thích">Yêu thích</MenuItem>
+              </Select>
+            </FormControl>
           </div>
-          <FormControl>
-            <Select value={sort} onChange={handleChange}>
-              <MenuItem value="Tên">Tên</MenuItem>
-              <MenuItem value="Thời gian(cũ nhất)">Thời gian(cũ nhất)</MenuItem>
-              <MenuItem value="Thời gian(mới nhất)">
-                Thời gian(mới nhất)
-              </MenuItem>
-              <MenuItem value="Yêu thích">Yêu thích</MenuItem>
-            </Select>
-          </FormControl>
         </div>
+
         <div className="searchBox">
           <input type="text" placeholder="Tìm sản phẩm..." />
         </div>

@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   Grid,
   IconButton,
   Menu,
@@ -35,6 +36,11 @@ function ItemManage({ product, history }) {
   let dur = Date.now() - Date.parse(updatedAt);
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -96,6 +102,9 @@ function ItemManage({ product, history }) {
         toggleModal={toggleModal}
       />
       <Grid className="item" item xs={12} md={6}>
+        <div className="check-box">
+          <Checkbox checked={checked} onChange={handleChange} size="small" />
+        </div>
         <Link to={`/products/${slug}/${user._id}`}>
           <div className="photo">
             <div

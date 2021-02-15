@@ -33,6 +33,7 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Order from "./pages/Order/Order";
 import ScrollUpBtn from "./components/ScrollUpBtn/ScrollUpBtn";
 import "./App.css";
+import MyOrders from "./pages/MyOrders/MyOrders";
 
 function App() {
   // user info
@@ -118,6 +119,7 @@ function App() {
               <Route exact path="/shipping" component={Shipping} />
               <Route exact path="/payment" component={Payment} />
               <Route exact path="/place-order" component={PlaceOrder} />
+              <Route exact path="/myorders" component={MyOrders} />
               <Route exact path="/order/:id" component={Order} />
               <Route exact path="/profile" component={Profile} />
               <PrivateRoute

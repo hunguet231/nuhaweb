@@ -8,6 +8,7 @@ const {
   forgotPassword,
   updateUserProfile,
 } = require("../controllers/auth");
+const { getMyOrders } = require("../controllers/orders");
 
 const router = express.Router();
 
@@ -21,6 +22,8 @@ router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
+
+router.route("/myorders").get(protect, getMyOrders);
 
 router.put("/update-shop", protect, updateShop);
 

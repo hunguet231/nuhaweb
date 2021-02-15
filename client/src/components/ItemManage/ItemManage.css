@@ -39,3 +39,10 @@
 .item .text h4:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 510px) {
+    .item .photo {
+        width: 80px;
+        height: 80px;
+    }
+}

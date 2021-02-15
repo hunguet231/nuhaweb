@@ -177,7 +177,7 @@ function Navbar({ history }) {
                     <MenuItem onClick={handleCloseUser}>
                       <ReceiptOutlinedIcon />{" "}
                       <Link to="/myorders">
-                        <Typography variant="subtitle2">Đơn mua</Typography>
+                        <Typography variant="subtitle2">Đơn đã đặt</Typography>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleCloseUser}>

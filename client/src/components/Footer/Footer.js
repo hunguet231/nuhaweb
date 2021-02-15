@@ -95,7 +95,7 @@ function Footer() {
                 rel="noreferrer"
                 href="https://fb.com/hungnguyen2301"
               >
-                Hung
+                Hùng
               </a>{" "}
               with ❤
             </Typography>

@@ -36,6 +36,7 @@
 
 .socal-icon img {
     margin-right: 5px;
+    margin-top: 5px;
 }
 
 .payment-icons {
@@ -47,9 +48,10 @@
 }
 
 .footer-inner .contact {
-    display: flex;
-    flex-direction: column;
     margin-left: -5px;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: fit-content;
 }
 
 .footer-inner .contact .phone,

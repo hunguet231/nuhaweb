@@ -36,18 +36,6 @@
     flex-wrap: wrap;
 }
 
-.sortBy {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.sortBy .text {
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-}
-
 .action-top .searchBox input {
     border: 0;
     outline: none;

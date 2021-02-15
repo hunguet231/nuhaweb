@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema(
   {
     _id: {
       type: mongoose.Schema.Types.ObjectId,
-      default: mongoose.Types.ObjectId(),
+      default: new mongoose.mongo.ObjectId(),
     },
     title: {
       type: String,
