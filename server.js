@@ -32,6 +32,10 @@ app.use("/api/v1/users", require("./routes/users"));
 app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/orders", require("./routes/orders"));
 
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 var __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {

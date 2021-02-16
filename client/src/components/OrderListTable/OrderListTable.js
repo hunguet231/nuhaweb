@@ -1,5 +1,4 @@
-import { Button, Chip } from "@material-ui/core";
-import Checkbox from "@material-ui/core/Checkbox";
+import { Chip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -14,15 +13,14 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
+import TuneRoundedIcon from "@material-ui/icons/TuneRounded";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
-import "./OrderListTable.css";
 import { Link } from "react-router-dom";
+import "./OrderListTable.css";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,7 +66,7 @@ const headCells = [
     id: "delivered",
     numeric: false,
     disablePadding: false,
-    label: "Giao hàng",
+    label: "Trạng thái",
   },
   {
     id: "details",
@@ -125,6 +123,15 @@ const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#74b9ff",
+    color: "#fff",
+  },
+  toolbarLeft: {
+    display: "flex",
+    flexDirection: "column",
   },
   highlight:
     theme.palette.type === "light"
@@ -146,14 +153,36 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar className={clsx(classes.root)}>
-      <Typography
-        className={classes.title}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
-        Đơn hàng của tôi
-      </Typography>
+      <div className={clsx(classes.toolbarLeft)}>
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Đơn hàng của tôi
+        </Typography>
+        <Typography variant="caption">
+          Tổng đơn: {props.orders.length}
+        </Typography>
+        <Typography variant="caption">
+          Tổng tiền:{" "}
+          {props.orders
+            .reduce((acc, item) => {
+              return acc + parseInt(item.totalPrice.replace(/[.]/g, ""));
+            }, 0)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+          ₫
+        </Typography>
+      </div>
+      <div className="toolbar-right">
+        <Tooltip title="Lọc danh sách">
+          <IconButton aria-label="filter list" onClick={props.handleFilterList}>
+            <TuneRoundedIcon style={{ color: "#fff" }} />
+          </IconButton>
+        </Tooltip>
+      </div>
     </Toolbar>
   );
 };
@@ -200,6 +229,15 @@ export default function EnhancedTable({ orders }) {
     )
   );
 
+  const handleFilterList = (filter) => {
+    switch (filter) {
+      case "unpaid":
+      case "paid":
+      case "not delivery":
+      case "delivered":
+    }
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -222,7 +260,10 @@ export default function EnhancedTable({ orders }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar />
+        <EnhancedTableToolbar
+          handleFilterList={handleFilterList}
+          orders={orders}
+        />
         <TableContainer>
           <Table
             className={classes.table}
@@ -257,7 +298,7 @@ export default function EnhancedTable({ orders }) {
                       <TableCell align="left">
                         {row.paid ? (
                           <Chip
-                            color="primary"
+                            style={{ backgroundColor: "#55efc4" }}
                             label="Đã thanh toán"
                             size="small"
                             icon={<DoneRoundedIcon />}
@@ -276,7 +317,7 @@ export default function EnhancedTable({ orders }) {
                       <TableCell align="left">
                         {row.delivered ? (
                           <Chip
-                            color="primary"
+                            style={{ backgroundColor: "#55efc4" }}
                             label="Đã giao"
                             size="small"
                             icon={<DoneRoundedIcon />}

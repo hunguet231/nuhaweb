@@ -6,6 +6,9 @@ import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import "./Rating.css";
 
 const StyledRating = withStyles({
+  root: {
+    zIndex: "0",
+  },
   iconFilled: {
     color: "#f8e825",
   },
@@ -46,6 +49,7 @@ const Rating = ({
       {readOnly ? (
         <StyledRating
           name="read-only"
+          precision={0.5}
           emptyIcon={
             <StarBorderRoundedIcon
               style={{ color: "#f8e825" }}
@@ -66,6 +70,7 @@ const Rating = ({
           }
           size={size}
           name="simple-controlled"
+          precision={0.5}
           value={value}
           onChange={handleChange}
         />

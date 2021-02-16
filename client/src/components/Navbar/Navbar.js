@@ -168,24 +168,24 @@ function Navbar({ history }) {
                       </div>
                     </MenuItem>
                     <hr></hr>
-                    <MenuItem onClick={handleCloseUser}>
-                      <AccountCircleOutlinedIcon />{" "}
-                      <Link to="/profile">
+                    <Link to="/profile">
+                      <MenuItem onClick={handleCloseUser}>
+                        <AccountCircleOutlinedIcon />{" "}
                         <Typography variant="subtitle2">Tài khoản</Typography>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUser}>
-                      <ReceiptOutlinedIcon />{" "}
-                      <Link to="/myorders">
-                        <Typography variant="subtitle2">Đơn đã đặt</Typography>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUser}>
-                      <StorefrontOutlinedIcon />{" "}
-                      <Link to="/me/sell/dashboard">
+                      </MenuItem>
+                    </Link>
+                    <Link to="/myorders">
+                      <MenuItem onClick={handleCloseUser}>
+                        <ReceiptOutlinedIcon />{" "}
+                        <Typography variant="subtitle2">Đơn hàng</Typography>
+                      </MenuItem>
+                    </Link>
+                    <Link to="/me/sell/dashboard">
+                      <MenuItem onClick={handleCloseUser}>
+                        <StorefrontOutlinedIcon />{" "}
                         <Typography variant="subtitle2">Bắt đầu bán</Typography>
-                      </Link>
-                    </MenuItem>
+                      </MenuItem>
+                    </Link>
                     <MenuItem onClick={handleLogout}>
                       <ExitToAppIcon />{" "}
                       <Typography variant="subtitle2">Đăng xuất</Typography>
