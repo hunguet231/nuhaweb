@@ -34,6 +34,7 @@ import Order from "./pages/Order/Order";
 import ScrollUpBtn from "./components/ScrollUpBtn/ScrollUpBtn";
 import "./App.css";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import UserList from "./pages/UserList/UserList";
 
 function App() {
   // user info
@@ -83,10 +84,13 @@ function App() {
                     <Category />
                   </div>
                   <div className="showcase">
-                    <ShowList color="#28b1ff" title="Sản phẩm được tài trợ" />
+                    <ShowList color="#ffbe76" title="Gợi ý cho bạn" />
                   </div>
                   <div className="showcase">
-                    <ShowList color="#27ae60" title="Top yêu thích" />
+                    <img src="/banner-6.jpg" alt="" />
+                  </div>
+                  <div className="showcase">
+                    <ShowList color="#ff7979" title="Top yêu thích" />
                   </div>
                 </div>
               </>
@@ -132,6 +136,7 @@ function App() {
                 exact
                 component={UpdateShop}
               />
+              <Route exact path="/admin/users" component={UserList} />
             </div>
           </div>
           {/* <Route path="/products/:slug/reviews" component={Review} exact /> */}

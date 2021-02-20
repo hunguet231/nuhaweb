@@ -69,7 +69,7 @@ function SellerProducts() {
               </InputLabel>
               <Select displayEmpty value={sort} onChange={handleChange}>
                 <MenuItem value="">Mặc định</MenuItem>
-                <MenuItem value="Tên">Tên</MenuItem>
+                <MenuItem value="Tên">Tên(A-Z)</MenuItem>
                 <MenuItem value="Thời gian(cũ nhất)">
                   Thời gian(cũ nhất)
                 </MenuItem>

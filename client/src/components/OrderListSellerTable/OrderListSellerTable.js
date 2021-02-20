@@ -21,7 +21,7 @@ import { DateTime } from "luxon";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import "./OrderListTable.css";
+import "./OrderListSellerTable.css";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -161,7 +161,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Đơn hàng của tôi
+          Đơn đặt của khách
         </Typography>
         <Typography variant="caption">
           Tổng đơn: {props.orders.length}

@@ -1,4 +1,5 @@
-import { Chip } from "@material-ui/core";
+import { Avatar, Button, Chip } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -13,15 +14,14 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
-import TuneRoundedIcon from "@material-ui/icons/TuneRounded";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import clsx from "clsx";
-import { DateTime } from "luxon";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import "./OrderListTable.css";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -49,25 +49,25 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-function createData(sku, date, total, paid, delivered, details) {
-  return { sku, date, total, paid, delivered, details };
+function createData(id, image, name, username, admin, details) {
+  return { id, image, name, username, admin, details };
 }
 
 const headCells = [
   {
-    id: "sku",
+    id: "id",
     numeric: false,
     disablePadding: true,
-    label: "Mã đơn",
+    label: "ID",
   },
-  { id: "date", numeric: false, disablePadding: false, label: "Ngày đặt hàng" },
-  { id: "total", numeric: true, disablePadding: false, label: "Tổng tiền" },
-  { id: "paid", numeric: false, disablePadding: false, label: "Thanh toán" },
+  { id: "image", numeric: false, disablePadding: false, label: "Avatar" },
+  { id: "name", numeric: false, disablePadding: false, label: "Tên" },
+  { id: "username", numeric: false, disablePadding: false, label: "Username" },
   {
-    id: "delivered",
+    id: "admin",
     numeric: false,
     disablePadding: false,
-    label: "Trạng thái",
+    label: "Admin",
   },
   {
     id: "details",
@@ -78,7 +78,15 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -86,7 +94,14 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell></TableCell>
+        <TableCell padding="checkbox">
+          <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ "aria-label": "select all desserts" }}
+          />
+        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -115,24 +130,18 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    display: "flex",
-    justifyContent: "space-between",
-    backgroundColor: "#74b9ff",
-    color: "#fff",
-  },
-  toolbarLeft: {
-    display: "flex",
-    flexDirection: "column",
   },
   highlight:
     theme.palette.type === "light"
@@ -151,46 +160,68 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
+  const { numSelected, handleDelete } = props;
 
   return (
-    <Toolbar className={clsx(classes.root)}>
-      <div className={clsx(classes.toolbarLeft)}>
+    <Toolbar
+      className={clsx(classes.root, {
+        [classes.highlight]: numSelected > 0,
+      })}
+    >
+      {numSelected > 0 ? (
+        <Typography
+          className={classes.title}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+          {numSelected} đã chọn
+        </Typography>
+      ) : (
         <Typography
           className={classes.title}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          Đơn hàng của tôi
+          Users
         </Typography>
-        <Typography variant="caption">
-          Tổng đơn: {props.orders.length}
-        </Typography>
-        <Typography variant="caption">
-          Tổng tiền:{" "}
-          {props.orders
-            .reduce((acc, item) => {
-              return acc + parseInt(item.totalPrice.replace(/[.]/g, ""));
-            }, 0)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-          ₫
-        </Typography>
-      </div>
-      <div className="toolbar-right">
+      )}
+
+      {numSelected > 0 ? (
+        <Tooltip title="Xoá">
+          <Button
+            className="delete-order-btn"
+            size="small"
+            variant="contained"
+            color="secondary"
+            onClick={handleDelete}
+            startIcon={<DeleteIcon />}
+          >
+            <p>Xoá</p>
+          </Button>
+        </Tooltip>
+      ) : (
         <Tooltip title="Lọc danh sách">
-          <IconButton aria-label="filter list" onClick={props.handleFilterList}>
-            <TuneRoundedIcon style={{ color: "#fff" }} />
+          <IconButton aria-label="filter list">
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
-      </div>
+      )}
     </Toolbar>
   );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+  },
+  selected: {
+    backgroundColor: "rgba(0, 0, 0, 0.04) !important",
   },
   paper: {
     width: "100%",
@@ -212,37 +243,58 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({ orders }) {
+export default function EnhancedTable({ users, ids }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("");
+  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const rows = orders.map((order) =>
+  const rows = users.map((user) =>
     createData(
-      `#${order.sku}`,
-      order.createdAt,
-      parseInt(order.totalPrice.replace(/[.]/g, "")),
-      order.isPaid,
-      order.isDelivered,
-      order._id
+      user._id,
+      user.avatarUser,
+      user.firstName,
+      user.username,
+      user.role,
+      user._id
     )
   );
-
-  const handleFilterList = (filter) => {
-    switch (filter) {
-      case "unpaid":
-      case "paid":
-      case "not delivery":
-      case "delivered":
-    }
-  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.sku);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, sku) => {
+    const selectedIndex = selected.indexOf(sku);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, sku);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -255,15 +307,21 @@ export default function EnhancedTable({ orders }) {
     setPage(0);
   };
 
+  const isSelected = (id) => selected.indexOf(id) !== -1;
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
+  const handleDelete = () => {
+    ids(selected);
+  };
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar
-          handleFilterList={handleFilterList}
-          orders={orders}
+          handleDelete={handleDelete}
+          numSelected={selected.length}
         />
         <TableContainer>
           <Table
@@ -274,8 +332,10 @@ export default function EnhancedTable({ orders }) {
           >
             <EnhancedTableHead
               classes={classes}
+              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
@@ -283,65 +343,47 @@ export default function EnhancedTable({ orders }) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
+                  const isItemSelected = isSelected(row.id);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
                   return (
-                    <TableRow hover key={row.sku}>
-                      <TableCell></TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        {row.sku}
+                    <TableRow
+                      hover
+                      classes={{ selected: classes.selected }}
+                      onClick={(event) => handleClick(event, row.id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isItemSelected}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
+                        {row.id}
                       </TableCell>
                       <TableCell align="left">
-                        {DateTime.fromISO(row.date).toLocaleString(
-                          DateTime.DATETIME_MED
-                        )}
+                        <Avatar src={row.image} />
                       </TableCell>
+                      <TableCell align="left">{row.name}</TableCell>
+
+                      <TableCell align="left">{row.username}</TableCell>
                       <TableCell align="left">
-                        {row.total
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                        ₫
-                      </TableCell>
-                      <TableCell align="left">
-                        {row.paid ? (
-                          <Chip
-                            style={{ backgroundColor: "#55efc4" }}
-                            label="Đã thanh toán"
-                            size="small"
-                            icon={<DoneRoundedIcon />}
-                            tex
-                          />
-                        ) : (
-                          <Chip
-                            color="secondary"
-                            label="Chưa thanh toán"
-                            size="small"
-                            icon={<CloseRoundedIcon />}
-                            tex
-                          />
-                        )}
-                      </TableCell>
-                      <TableCell align="left">
-                        {row.delivered ? (
-                          <Chip
-                            style={{ backgroundColor: "#55efc4" }}
-                            label="Đã giao"
-                            size="small"
-                            icon={<DoneRoundedIcon />}
-                            tex
-                          />
-                        ) : (
-                          <Chip
-                            color="secondary"
-                            label="Chưa giao"
-                            size="small"
-                            icon={<CloseRoundedIcon />}
-                            tex
-                          />
-                        )}
+                        {row.admin === "publisher" ? "❌" : "✔"}
                       </TableCell>
                       <TableCell align="left">
                         <Link
                           style={{ color: "dodgerblue" }}
-                          to={`/order/${row.details}`}
+                          to={`/users/${row.details}`}
                         >
                           Xem
                         </Link>

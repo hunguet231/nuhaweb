@@ -93,3 +93,31 @@ exports.getMyOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.json(orders);
 });
+
+// @desc    Get all my orders's customers
+// @route   GET /api/v1/auth/customers/orders
+// @access  Private
+exports.getOrdersOfCustomers = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ sellerIds: req.user._id });
+  res.json(orders);
+});
+
+// @desc    Get all product orders's customers
+// @route   GET /api/v1/auth/customers/orders/products
+// @access  Private
+// todo
+exports.getProductOrdersOfCustomers = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ sellerIds: req.user._id });
+
+  const filterOrder = (orderItems) => {
+    return orderItems.filter((order) => order.user === req.user._id);
+  };
+
+  if (orders.length) {
+    const products = orders.map((order) => {
+      return { ...order._doc, orderItems: filterOrder(order._doc.orderItems) };
+    });
+
+    res.json(products);
+  }
+});

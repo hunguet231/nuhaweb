@@ -1,17 +1,17 @@
-import { Breadcrumbs, Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Breadcrumbs, Grid, Typography } from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import StoreIcon from "@material-ui/icons/Store";
 import Alert from "@material-ui/lab/Alert";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import HomeIcon from "@material-ui/icons/Home";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { PayPalButton } from "react-paypal-button-v2";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getOrderDetails, payOrder } from "../../actions/orderAction";
 import Spinner from "../../components/Spinner/Spinner";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import { PayPalButton } from "react-paypal-button-v2";
 import { ORDER_PAY_RESET } from "../../constants/orderConstants";
+import { DateTime } from "luxon";
 import "./Order.css";
 
 function Order({ match }) {
@@ -28,7 +28,7 @@ function Order({ match }) {
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  if (!loading) {
+  if (!loading && order) {
     order.itemsPrice = order.orderItems
       .reduce(
         (acc, item) => acc + item.qty * parseInt(item.price.replace(".", "")),
@@ -39,6 +39,8 @@ function Order({ match }) {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     const getCurrencyRate = async () => {
       const { data } = await axios.get(
         "https://openexchangerates.org/api/latest.json?app_id=366e9723bbee458e9a834ade5362c352&symbols=VND"
@@ -75,7 +77,6 @@ function Order({ match }) {
   }, [dispatch, orderId, successPay, order]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -158,7 +159,10 @@ function Order({ match }) {
                   {order.isPaid ? (
                     <Alert severity="success">
                       <small>
-                        Đã thanh toán vào: {order.updatedAt.substring(0, 10)}
+                        Đã thanh toán vào:{" "}
+                        {DateTime.fromISO(order.updatedAt).toLocaleString(
+                          DateTime.DATETIME_MED
+                        )}
                       </small>
                     </Alert>
                   ) : (

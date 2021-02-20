@@ -1,32 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  IconButton,
-  Button,
-  Typography,
-  Menu,
-  MenuItem,
   Avatar,
   Badge,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import ArrowDropDownOutlinedIcon from "@material-ui/icons/ArrowDropDownOutlined";
-import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-import StorefrontOutlinedIcon from "@material-ui/icons/StorefrontOutlined";
-import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
-import ReceiptOutlinedIcon from "@material-ui/icons/ReceiptOutlined";
-import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
-import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
-import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import { logout } from "../../actions/userActions";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import ArrowDropDownOutlinedIcon from "@material-ui/icons/ArrowDropDownOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
+import PostAddRoundedIcon from "@material-ui/icons/PostAddRounded";
+import ReceiptOutlinedIcon from "@material-ui/icons/ReceiptOutlined";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import AllInboxIcon from "@material-ui/icons/AllInbox";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import SearchIcon from "@material-ui/icons/Search";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import StorefrontOutlinedIcon from "@material-ui/icons/StorefrontOutlined";
+import React, { useState } from "react";
 import { useGoogleLogout } from "react-google-login";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../../actions/userActions";
+import "./Navbar.css";
 
 const useStyles = makeStyles({
   root: {
@@ -152,7 +153,10 @@ function Navbar({ history }) {
                 <>
                   <div className="user-inner" onClick={handleClickUser}>
                     <Avatar src={userInfo.user.avatarUser} />
-                    <p className="user-name">{userInfo.user.firstName}</p>
+                    <p className="user-name">
+                      {userInfo.user.firstName}
+                      {userInfo.user.role === "admin" && "(Admin)"}
+                    </p>
                     <ArrowDropDownOutlinedIcon />
                   </div>
                   <Menu
@@ -165,6 +169,9 @@ function Navbar({ history }) {
                       <div className="user-inner">
                         <Avatar src={userInfo.user.avatarUser} />
                         <p className="user-name">{userInfo.user.firstName}</p>
+                        {userInfo.user.role === "admin" && (
+                          <small>(Admin)</small>
+                        )}
                       </div>
                     </MenuItem>
                     <hr></hr>
@@ -174,6 +181,34 @@ function Navbar({ history }) {
                         <Typography variant="subtitle2">Tài khoản</Typography>
                       </MenuItem>
                     </Link>
+                    {userInfo.user.role === "admin" && (
+                      <>
+                        <Link to="/admin/users">
+                          <MenuItem onClick={handleCloseUser}>
+                            <SupervisedUserCircleIcon />{" "}
+                            <Typography variant="subtitle2">
+                              Admin Users
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link to="/admin/products">
+                          <MenuItem onClick={handleCloseUser}>
+                            <AllInboxIcon />{" "}
+                            <Typography variant="subtitle2">
+                              Admin Products
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                        <Link to="/admin/orders">
+                          <MenuItem onClick={handleCloseUser}>
+                            <ListAltIcon />{" "}
+                            <Typography variant="subtitle2">
+                              Admin Orders
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                      </>
+                    )}
                     <Link to="/myorders">
                       <MenuItem onClick={handleCloseUser}>
                         <ReceiptOutlinedIcon />{" "}

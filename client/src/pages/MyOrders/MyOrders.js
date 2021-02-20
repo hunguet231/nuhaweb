@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { listMyOrder } from "../../actions/orderAction";
 import OrderListTable from "../../components/OrderListTable/OrderListTable";
 import Spinner from "../../components/Spinner/Spinner";
+import { ORDER_DETAILS_RESET } from "../../constants/orderConstants";
 import "./MyOrders.css";
 
 function MyOrders({ history }) {
@@ -29,6 +30,8 @@ function MyOrders({ history }) {
     if (!userInfo) {
       history.push("/login");
     } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      dispatch({ type: ORDER_DETAILS_RESET });
       dispatch(listMyOrder());
     }
   }, [dispatch, history, userInfo]);

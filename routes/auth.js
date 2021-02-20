@@ -8,7 +8,11 @@ const {
   forgotPassword,
   updateUserProfile,
 } = require("../controllers/auth");
-const { getMyOrders } = require("../controllers/orders");
+const {
+  getMyOrders,
+  getOrdersOfCustomers,
+  getProductOrdersOfCustomers,
+} = require("../controllers/orders");
 
 const router = express.Router();
 
@@ -24,6 +28,12 @@ router
   .put(protect, updateUserProfile);
 
 router.route("/myorders").get(protect, getMyOrders);
+
+router
+  .route("/customers/orders/products")
+  .get(protect, getProductOrdersOfCustomers);
+
+router.route("/customers/orders").get(protect, getOrdersOfCustomers);
 
 router.put("/update-shop", protect, updateShop);
 

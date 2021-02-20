@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ORDER_SELLER_RESET } from "../constants/orderConstants";
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -14,6 +15,13 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_SUCCESS,
   GOOGLE_LOGOUT,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
 } from "../constants/userConstants";
 
 export const login = (username, password) => async (dispatch) => {
@@ -93,6 +101,7 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: GOOGLE_LOGOUT });
+  dispatch({ type: USER_LIST_RESET });
 };
 
 export const register = (
@@ -160,8 +169,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       ? googleLogin.userInfo
       : userLogin.userInfo;
 
-    console.log(userInfo);
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -178,6 +185,75 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_LIST_REQUEST,
+    });
+
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/users`, config);
+
+    dispatch({
+      type: USER_LIST_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+    });
+
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`/api/v1/users/${id}`, config);
+
+    dispatch({
+      type: USER_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

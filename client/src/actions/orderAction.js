@@ -1,19 +1,25 @@
 import axios from "axios";
 import { CART_RESET } from "../constants/cartConstants";
 import {
-  ORDER_CREATE_REQUEST,
-  ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_CREATE_REQUEST,
+  ORDER_CREATE_RESET,
+  ORDER_CREATE_SUCCESS,
+  ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
-  ORDER_DETAILS_FAIL,
-  ORDER_PAY_REQUEST,
-  ORDER_PAY_SUCCESS,
-  ORDER_PAY_FAIL,
+  ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
-  ORDER_LIST_MY_FAIL,
-  ORDER_CREATE_RESET,
+  ORDER_PAY_FAIL,
+  ORDER_PAY_REQUEST,
+  ORDER_PAY_SUCCESS,
+  ORDER_SELLER_FAIL,
+  ORDER_SELLER_REQUEST,
+  ORDER_SELLER_SUCCESS,
+  PRODUCT_ORDER_SELLER_FAIL,
+  PRODUCT_ORDER_SELLER_REQUEST,
+  PRODUCT_ORDER_SELLER_SUCCESS,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -165,6 +171,79 @@ export const listMyOrder = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_LIST_MY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const orderListSellerAct = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_SELLER_REQUEST,
+    });
+
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/auth/customers/orders`, config);
+
+    dispatch({
+      type: ORDER_SELLER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_SELLER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const productOrderListSellerAct = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_ORDER_SELLER_REQUEST,
+    });
+
+    const { userLogin, googleLogin } = getState();
+
+    const userInfo = googleLogin.userInfo
+      ? googleLogin.userInfo
+      : userLogin.userInfo;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/v1/auth/customers/orders/products`,
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_ORDER_SELLER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ORDER_SELLER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

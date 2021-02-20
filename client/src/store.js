@@ -14,6 +14,8 @@ import {
   googleLoginReducer,
   updateShopReducer,
   userDetailsReducer,
+  userListReducer,
+  userDeleteReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
@@ -21,6 +23,8 @@ import {
   orderDetailsReducer,
   orderListMyReducer,
   orderPayReducer,
+  orderListSellerReducer,
+  productOrderListSellerReducer,
 } from "./reducers/orderReducers";
 
 const rootReducer = combineReducers({
@@ -39,6 +43,10 @@ const rootReducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
+  orderListSeller: orderListSellerReducer,
+  productOrderListSeller: productOrderListSellerReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

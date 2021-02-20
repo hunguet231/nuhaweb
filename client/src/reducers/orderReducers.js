@@ -13,6 +13,15 @@ import {
   ORDER_LIST_MY_SUCCESS,
   ORDER_LIST_MY_FAIL,
   ORDER_CREATE_RESET,
+  ORDER_DETAILS_RESET,
+  ORDER_SELLER_REQUEST,
+  ORDER_SELLER_SUCCESS,
+  ORDER_SELLER_FAIL,
+  ORDER_SELLER_RESET,
+  PRODUCT_ORDER_SELLER_REQUEST,
+  PRODUCT_ORDER_SELLER_SUCCESS,
+  PRODUCT_ORDER_SELLER_FAIL,
+  PRODUCT_ORDER_SELLER_RESET,
 } from "../constants/orderConstants";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -59,6 +68,8 @@ export const orderDetailsReducer = (
         loading: false,
         error: action.payload,
       };
+    case ORDER_DETAILS_RESET:
+      return {};
     default:
       return state;
   }
@@ -104,6 +115,55 @@ export const orderListMyReducer = (state = { orders: [] }, action) => {
         error: action.payload,
       };
     case ORDER_PAY_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const orderListSellerReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_SELLER_REQUEST:
+      return {
+        loading: true,
+      };
+    case ORDER_SELLER_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+    case ORDER_SELLER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case ORDER_SELLER_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const productOrderListSellerReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_ORDER_SELLER_REQUEST:
+      return {
+        loading: true,
+      };
+    case PRODUCT_ORDER_SELLER_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload,
+      };
+    case PRODUCT_ORDER_SELLER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case PRODUCT_ORDER_SELLER_RESET:
       return {};
     default:
       return state;

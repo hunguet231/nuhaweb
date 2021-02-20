@@ -8,6 +8,7 @@
 .product-detail section {
     background-color: white;
     padding: 25px 15px;
+    border-radius: 5px;
 }
 
 .product-detail section:last-child {

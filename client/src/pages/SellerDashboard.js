@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import Axios from "axios";
-import { Link } from "react-router-dom";
 import { Avatar, Badge, CircularProgress, Typography } from "@material-ui/core";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
+import AmpStoriesIcon from "@material-ui/icons/AmpStories";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import EditIcon from "@material-ui/icons/Edit";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { orderListSellerAct } from "../actions/orderAction";
 import "./SellerDashboard.css";
 
 function SellerDashboard() {
+  const dispatch = useDispatch();
+
   // user info
   const userLogin = useSelector((state) => state.userLogin);
   const googleLogin = useSelector((state) => state.googleLogin);
@@ -21,11 +24,18 @@ function SellerDashboard() {
 
   const { firstName, lastName, _id } = userInfo.user;
 
+  const {
+    loading: orderListSellerLoading,
+    error: orderListSellerError,
+    orders,
+  } = useSelector((state) => state.orderListSeller);
+
   const [loading, setLoading] = useState(false);
   const [countPrds, setCountPrds] = useState("");
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     const fetchProducts = async () => {
       setLoading(true);
       const { data } = await Axios.get(`/api/v1/users/${_id}/products`);
@@ -33,7 +43,10 @@ function SellerDashboard() {
       setLoading(false);
     };
     fetchProducts();
-  }, []);
+
+    // fetch cusomers
+    dispatch(orderListSellerAct());
+  }, [dispatch, _id]);
 
   return (
     <div className="dashboard">
@@ -55,7 +68,7 @@ function SellerDashboard() {
             khách hàng của bạn.
           </p>
         </div>
-        <img src="/ecommerce-banner.svg" />
+        <img src="/ecommerce-banner.svg" alt="" />
       </div>
 
       <div className="over-view">
@@ -73,9 +86,11 @@ function SellerDashboard() {
               horizontal: "right",
             }}
           >
-            <Avatar alt="Shop Avatar" src={userInfo.user.avatarShop} />
+            <Avatar alt="Shop Avatar" src={userInfo.user.avatarUser} />
           </Badge>
-          <Typography variant="body2">{userInfo.user.shopName}</Typography>
+          <Typography variant="body2">
+            Shop: {userInfo.user.shopName}
+          </Typography>
         </div>
 
         {/* Boxes */}
@@ -90,11 +105,34 @@ function SellerDashboard() {
               </div>
             </div>
           </a>
-          <div className="box customer">
-            <SupervisedUserCircleIcon />
-            <p>Khách hàng</p>
-            <p className="num">N/A</p>
-          </div>
+          <a href="/me/sell/customers">
+            <div className="box customer">
+              <SupervisedUserCircleIcon />
+              <p>Khách hàng</p>
+              <p className="num">
+                {orderListSellerLoading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : (
+                  <>
+                    {orders && new Set(orders.map((order) => order.user)).size}
+                  </>
+                )}
+              </p>
+            </div>
+          </a>
+          <a href="/me/sell/customers">
+            <div className="box order">
+              <AmpStoriesIcon />
+              <p>Đơn mua</p>
+              <p className="num">
+                {orderListSellerLoading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : (
+                  <>{orders && orders.length}</>
+                )}
+              </p>
+            </div>
+          </a>
           <div className="box view">
             <VisibilityIcon />
             <p>Lượt xem shop</p>
@@ -113,6 +151,18 @@ function SellerDashboard() {
         <h4>
           Chi tiết <Link to="/me/update-shop">Chỉnh sửa</Link>
         </h4>
+        <p>Tên shop: {userInfo.user.shopName}</p>
+        <p>SĐT: {userInfo.user.phoneNumber}</p>
+        <p>Địa chỉ: {userInfo.user.address}</p>
+        <p>Thành phố: {userInfo.user.city}</p>
+        <p>Số lượt đánh giá: {userInfo.user.numReviews}</p>
+        <p>
+          Số lượt yêu thích:{" "}
+          {userInfo.user.lovedBy ? userInfo.user.lovedBy : "0"}
+        </p>
+        {userInfo.user.zalo && <p>Zalo: {userInfo.user.zalo} </p>}
+        {userInfo.user.facebook && <p>Facebook: {userInfo.user.facebook} </p>}
+        {userInfo.user.website && <p>Website: {userInfo.user.website} </p>}
       </div>
     </div>
   );

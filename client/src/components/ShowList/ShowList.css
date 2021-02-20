@@ -2,16 +2,31 @@
     margin: 20px 0;
     padding: 20px 5px;
     background-color: #fff;
+    border-radius: 5px;
 }
 
 .title-top {
     font-size: 16px;
-    color: #2e2e2e;
+    color: #fff;
     font-weight: 500;
-    margin-bottom: 15px;
-    padding-left: 15px;
+    margin-bottom: 6px;
+    margin-left: 15px;
+    padding: 3px 20px 5px 3px;
+    width: fit-content;
+    position: relative;
+}
+
+.title-top::after {
+    content: "";
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -15px;
+    top: 1px;
+    transform: rotate(45deg);
 }
 
 .list-items {
-    margin-top: 10px;
+    margin-top: 0 !important;
 }

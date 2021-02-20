@@ -87,6 +87,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    lovedBy: {
+      type: Number,
+      default: 0,
+    },
     reviews: [reviewSchema],
     website: {
       type: String,

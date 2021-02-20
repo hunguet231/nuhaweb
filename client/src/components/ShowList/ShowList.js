@@ -21,10 +21,7 @@ function ShowList({ title, color }) {
     <div className="products-list">
       {!loading && (
         <>
-          <div
-            style={{ borderLeft: `5px solid ${color}` }}
-            className="title-top"
-          >
+          <div style={{ background: `${color}` }} className="title-top">
             {title}
           </div>
           <div className="list-items">
